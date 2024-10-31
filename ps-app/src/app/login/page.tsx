@@ -8,6 +8,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { IUser } from "@/utils/types/types";
 import axios from "axios";
 import { useUserContext } from "@/context/UserContext";
+import { redirect } from "next/navigation";
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -126,7 +127,8 @@ const Page = () => {
       </div>
       <div className={"flex flex-col gap-2 items-center"}>
         <button
-          type={"submit"}
+          // type={"submit"}
+          onClick={() => redirect("/")}
           disabled={!formData.username || !formData.password || loading}
           className={`${formData.username && formData.password && !loading ? "hover:bg-emerald-700" : "bg-opacity-40"} transition w-full py-2 bg-emerald-600 text-white rounded-lg`}
         >

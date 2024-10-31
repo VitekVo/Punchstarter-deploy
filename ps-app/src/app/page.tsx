@@ -1,11 +1,10 @@
-import Image from "next/image";
-import ProjectCard from "@/components/projectCard";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
+import ProjectCarousel from "@/components/projectCard/projectCarousel";
 export default function Home() {
   return (
     <>
       <Navbar />
-      <ProjectCard />;
+      <ProjectCarousel />
     </>
   );
 }

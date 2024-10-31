@@ -3,7 +3,7 @@ import React from "react";
 const ProjectCard = () => {
   return (
     <div>
-      <div className="card bg-base-100 w-96 shadow-xl">
+      <div className="card bg-base-100 w-64 shadow-xl">
         <figure>
           <img
             src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
@@ -12,7 +12,7 @@ const ProjectCard = () => {
         </figure>
         <div className="card-body">
           <h2 className="card-title text-2xl font-bold">Project Title</h2>
-          <p>
+          <p className="max-h-24 overflow-x-scroll">
             Description ipsum, dolor sit amet consectetur adipisicing elit.
             Voluptate vero delectus natus tenetur voluptas nisi accusamus aut
             unde corrupti animi eos aperiam maxime deleniti, id sunt assumenda
