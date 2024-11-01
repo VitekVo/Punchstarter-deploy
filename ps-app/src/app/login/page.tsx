@@ -9,6 +9,7 @@ import { IUser } from "@/utils/types/types";
 import axios from "axios";
 import { useUserContext } from "@/context/UserContext";
 import { redirect } from "next/navigation";
+import { TbArrowBack } from "react-icons/tb";
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -48,10 +49,11 @@ const Page = () => {
     <form
       onSubmit={handleSubmit}
       className={
-        "flex flex-col gap-8 justify-center rounded-3xl border border-neutral-200 bg-neutral-100 shadow-lg p-16"
+        "flex flex-col gap-8 justify-center rounded-3xl border border-neutral-200 bg-neutral-100 shadow-lg p-16 relative"
       }
     >
       <h2 className={"text-3xl"}>Přihlášení</h2>
+
       <label className={"flex flex-col text-sm gap-2"}>
         Váš Email
         <div
@@ -185,7 +187,7 @@ const Page = () => {
             />
           </div>
         </div>
-        <div className={"flex flex-col gap-2 items-center w-full mt-8"}>
+        <div className={"flex flex-col gap-2 items-center w-full mt-4"}>
           <h3>Ještě nemáte účet?</h3>
           <Link
             className={
