@@ -24,7 +24,6 @@ const ProjectCard = ({
   const timeDifference: number = deadline.getTime() - today.getTime();
   const days: number = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  console.log(categoryColor("Art"));
   return (
     <div>
       <div className="card bg-base-100 w-64 shadow-xl h-full">
