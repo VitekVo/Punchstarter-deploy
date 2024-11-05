@@ -5,6 +5,9 @@ import { MdDateRange } from "react-icons/md";
 import { Redirect } from "next";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import { useState } from "react";
+import { IProject } from "@/utils/types/types";
+import { barColor } from "./helpers/barColor";
+import { categoryColor } from "./helpers/categoryColor";
 const ProjectCard = ({
   id,
   title,
@@ -15,33 +18,13 @@ const ProjectCard = ({
   targetBudget,
   supporters,
   deadline,
-}: {
-  id: number;
-  title: string;
-
-  description: string;
-  category: string;
-  currentBudget: number;
-  targetBudget: number;
-  supporters: number;
-  deadline: Date;
-}) => {
+}: IProject) => {
   //calculate remaining days
   const today: Date = new Date();
   const timeDifference: number = deadline.getTime() - today.getTime();
   const days: number = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  function barColor(): string {
-    let percentage = (currentBudget / targetBudget) * 100;
-
-    if (percentage < 33.33) {
-      return "error";
-    } else if (percentage >= 33.33 && percentage < 66.66) {
-      return "warning";
-    } else {
-      return "success";
-    }
-  }
+  console.log(categoryColor("Art"));
   return (
     <div>
       <div className="card bg-base-100 w-64 shadow-xl h-full">
@@ -59,14 +42,19 @@ const ProjectCard = ({
         <div className="card-body">
           <h2 className="card-title text-2xl font-bold">{title}</h2>
           <p className="max-h-24 overflow-x-none">{description}</p>
-          <div className="badge badge-primary p-4 ">{category}</div>
+          <div className={`badge badge-${categoryColor(category)} p-4 `}>
+            {category}
+          </div>
           <div>
             <div className="flex justify-start text-black text-lg font-bold">
               CZK
             </div>
             <div className="grid grid-cols-2">
               <div
-                className={`flex justify-start text-${barColor()} text-lg font-bold`}
+                className={`flex justify-start text-${barColor(
+                  currentBudget,
+                  targetBudget
+                )} text-lg font-bold`}
               >
                 {currentBudget}
               </div>
@@ -75,7 +63,10 @@ const ProjectCard = ({
               </div>
             </div>
             <progress
-              className={`progress bg-gray-700 progress-${barColor()} w-full h-3`}
+              className={`progress bg-gray-700 progress-${barColor(
+                currentBudget,
+                targetBudget
+              )} w-full h-3`}
               value={currentBudget}
               max={targetBudget}
             />
