@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-    *,
-    ::before,
-    ::after {
-        @apply border-neutral-300;
-    ;
-    }
+  *,
+  ::before,
+  ::after {
+    @apply border-neutral-300;
+  }
 }

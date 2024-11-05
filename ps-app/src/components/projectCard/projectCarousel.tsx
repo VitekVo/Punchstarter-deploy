@@ -39,7 +39,7 @@ const mockProjects = [
     description:
       "A role-playing game that adapts based on player choices and actions.",
     category: "Gaming",
-    currentBudget: 20000,
+    currentBudget: 9000,
     targetBudget: 30000,
     supporters: 450,
     deadline: new Date("2024-12-10"),
