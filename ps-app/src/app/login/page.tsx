@@ -9,7 +9,6 @@ import { IUser } from "@/utils/types/types";
 import axios from "axios";
 import { useUserContext } from "@/context/UserContext";
 import { redirect } from "next/navigation";
-import { TbArrowBack } from "react-icons/tb";
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -102,7 +101,7 @@ const Page = () => {
             }
           >
             <div
-              className={`flex items-center justify-center aspect-square border rounded-md ${formData.remember ? "bg-emerald-600 border-emerald-600" : ""}`}
+              className={`flex items-center justify-center aspect-square border rounded-md ${formData.remember ? "bg-primary border-primary" : ""}`}
             >
               <input
                 type={"checkbox"}
@@ -120,7 +119,7 @@ const Page = () => {
             Zapamatovat
           </label>
           <Link
-            className={"transition text-sm hover:text-emerald-600"}
+            className={"transition text-sm hover:text-primary"}
             href={"/reset"}
           >
             Zapomněli jste heslo?
@@ -132,7 +131,7 @@ const Page = () => {
           // type={"submit"}
           onClick={() => redirect("/")}
           disabled={!formData.username || !formData.password || loading}
-          className={`${formData.username && formData.password && !loading ? "hover:bg-emerald-700" : "bg-opacity-40"} transition w-full py-2 bg-emerald-600 text-white rounded-lg`}
+          className={`${formData.username && formData.password && !loading ? "hover:bg-emerald-700" : "bg-opacity-40"} transition w-full py-2 bg-primary text-white rounded-lg`}
         >
           Přihlásit se
         </button>
