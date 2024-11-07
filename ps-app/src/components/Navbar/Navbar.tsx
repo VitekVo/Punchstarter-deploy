@@ -1,6 +1,7 @@
 import React from "react";
 import LinkButton from "@/components/button/LinkButton";
 import { CiSearch } from "react-icons/ci";
+import { GiPunch } from "react-icons/gi";
 
 const Navbar = () => {
   return (
@@ -17,7 +18,9 @@ const Navbar = () => {
           <CiSearch size={24} className={"mx-3"} />
         </div>
       </label>
+
       <a className="btn btn-ghost text-4xl font-bold ">PunchStarter</a>
+
       <div className="grid grid-cols-2 gap-4">
         <LinkButton text={"Nový projekt"} href={"/novy"} />
         <LinkButton text={"Přihlásit se"} href={"/login"} />
