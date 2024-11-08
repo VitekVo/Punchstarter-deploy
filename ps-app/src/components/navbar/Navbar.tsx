@@ -1,11 +1,11 @@
 import React from "react";
 import LinkButton from "@/components/button/LinkButton";
 import { CiSearch } from "react-icons/ci";
-import { GiPunch } from "react-icons/gi";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center bg-base-100 border-b px-16 py-4 mb-12">
+    <div className="flex justify-between items-center bg-base-100 border-b px-16 py-4 mb-8">
       <label className={"flex flex-col text-sm gap-2"}>
         <div
           className={`w-full flex rounded-md border pl-4 py-2 focus-within:border-neutral-400`}
@@ -19,9 +19,11 @@ const Navbar = () => {
         </div>
       </label>
 
-      <a className="btn btn-ghost text-4xl font-bold ">PunchStarter</a>
+      <Link href={"/"} className="btn btn-ghost text-4xl font-bold ">
+        PunchStarter
+      </Link>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="flex gap-4">
         <LinkButton text={"Nový projekt"} href={"/novy"} />
         <LinkButton text={"Přihlásit se"} href={"/login"} />
       </div>

@@ -18,7 +18,7 @@ const Button = ({
       onClick={onClick}
       disabled={isDisabled}
       type={type}
-      className={`${!isDisabled ? "hover:bg-emerald-700" : "bg-opacity-40"} transition w-full py-2 bg-emerald-600 text-white rounded-lg`}
+      className={`${!isDisabled ? "hover:bg-emerald-700" : "bg-opacity-40"} transition w-full py-2 bg-primary text-white rounded-lg`}
     >
       {text}
     </button>
