@@ -2,14 +2,16 @@ import mongoose from 'mongoose';
 
 const UserSchema = mongoose.Schema(
     {
-        userID: {
+        user_id: {
           type: String,
           required: true,
+            unique: true
         },
 
         username: {
             type: String,
             required: true,
+            unique: true
         },
 
         name: {
@@ -24,7 +26,9 @@ const UserSchema = mongoose.Schema(
 
         email:{
             type: String,
-            required: true
+            required: true,
+            unique: true,
+            match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.']
         },
 
         bDate:{
@@ -33,12 +37,13 @@ const UserSchema = mongoose.Schema(
         },
 
         pNumber:{
-            type: Number,
-            required: true
+            type: String,
+            required: true,
+            match: [/^\d+$/, 'Phone number should contain only digits.'],
         }
     }
 
 );
 
 const User = mongoose.model('User', UserSchema);
-module.exports = User;
+export default User;
