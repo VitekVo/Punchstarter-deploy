@@ -19,7 +19,9 @@ const createUser = (req, res) => {
             userId: Date.now().toString(),
             username: req.body.username,
             email: req.body.email,
-            createdAt:  new Date(Date.now()).toISOString()
+            createdAt:  new Date(Date.now()).toISOString(),
+            followingProjects: [],
+            contributions: []
         };
 
         const { error: outputError } = createUserDtoOutSchema.validate(newUser);

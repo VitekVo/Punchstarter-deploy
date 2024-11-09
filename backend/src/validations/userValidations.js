@@ -10,7 +10,10 @@ export const createUserDtoOutSchema = Joi.object({
     userId: Joi.string().required(),
     username: Joi.string().required(),
     email: Joi.string().email().required(),
-    createdAt: Joi.date().iso().required()
+    createdAt: Joi.date().iso().required(),
+    followingProjects: Joi.array().required(),
+    contributions: Joi.array().required()
+
 });
 
 // dtoIn,dtoOut schema for getting user by id

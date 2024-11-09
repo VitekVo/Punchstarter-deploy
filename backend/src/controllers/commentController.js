@@ -1,5 +1,5 @@
 import { createCommentDtoInSchema, createCommentDtoOutSchema, getCommentsByProjectIdDtoInSchema, getCommentsByProjectIdDtoOutSchema,
-    updateCommentdtoInSchema, updateCommentdtoOutSchema
+    updateCommentdtoInSchema, updateCommentdtoOutSchema, deleteCommentdtoInSchema, deleteCommentdtoOutSchema
 } from '../validations/commentValidation.js';
 
 const mockComments = [
@@ -137,8 +137,36 @@ const updateComment = (req, res) => {
         return res.status(500).json({ error: outputError.details[0].message });
     }
 
-    // Odpověď s aktualizovanými daty
+
     res.status(200).json(outputData);
 };
 
-export { createComment, getCommentsByProjectId, updateComment };
+const deleteComment = (req, res) => {
+    const { commentId } = req.query;
+
+
+    const { error } = deleteCommentdtoInSchema.validate({ commentId });
+    if (error) return res.status(400).json({ error: error.details[0].message });
+
+
+    const index = mockComments.findIndex(comment => comment._id === commentId);
+    if (index === -1) return res.status(404).json({ error: "Comment not found" });
+
+
+    mockComments.splice(index, 1);
+
+
+    const dtoOut = {
+        message: "Comment deleted successfully",
+        deletedAt: new Date().toISOString()
+    };
+
+
+    const { error: outputError } = deleteCommentdtoOutSchema.validate(dtoOut);
+    if (outputError) return res.status(500).json({ error: outputError.details[0].message });
+
+    return res.status(200).json(dtoOut);
+};
+
+
+export { createComment, getCommentsByProjectId, updateComment, deleteComment };

@@ -5,9 +5,9 @@ import { createUser, getUserById, updateUser, deleteUser, followProject } from '
 const router = express.Router();
 
 router.post('/', createUser);
-router.get('/:id', getUserById);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.get('/:userid', getUserById);
+router.put('/:userid', updateUser);
+router.delete('/:userid', deleteUser);
 router.post('/:userid/follow/:projectId', followProject);
 
 export default router;
