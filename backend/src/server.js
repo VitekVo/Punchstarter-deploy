@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 dotenv.config();
 const app = express();
 mongoose.set('strictQuery', false);
@@ -21,6 +22,7 @@ const CONNECTION = process.env.CONNECTION;
 app.use('/users', userRoutes);
 app.use('/projects', projectRoutes);
 app.use('/comments', commentRoutes);
+app.use('/payments', paymentRoutes);
 
 // Basic endpoint to verify app is running
 app.get('/test', (req, res) => {
