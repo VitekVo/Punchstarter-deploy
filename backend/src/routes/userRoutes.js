@@ -1,9 +1,10 @@
 
 import express from  'express';
-import { createUser, getUserById, updateUser, deleteUser, followProject } from '../controllers/userController.js';
+import { createUser, getUserById, updateUser, deleteUser, followProject, loginUser } from '../controllers/userController.js';
 
 const router = express.Router();
 
+router.post('/login', loginUser)
 router.post('/', createUser);
 router.get('/:userid', getUserById);
 router.put('/:userid', updateUser);

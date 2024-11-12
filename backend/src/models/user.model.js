@@ -1,33 +1,33 @@
 import mongoose from 'mongoose';
+import bcrypt from "bcrypt"
 
 const UserSchema = mongoose.Schema(
     {
-        id: {
-          type: String,
-          required: true,
-            unique: true
-        },
-
         username: {
             type: String,
             required: true,
-            unique: true
+            unique: false
+        },
+
+        password: {
+            type: String,
+            required: false,
         },
 
         name: {
             type: String,
-            required: true
+            required: false
         },
 
         surname:{
             type: String,
-            required: true
+            required: false
         },
 
         email:{
             type: String,
-            required: true,
-            unique: true,
+            required: false,
+            unique: false,
             match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.']
         },
 
@@ -38,17 +38,36 @@ const UserSchema = mongoose.Schema(
 
         bDate:{
             type: Date,
-            required: true
+            required: false
         },
 
         pNumber:{
             type: String,
-            required: true,
+            required: false,
             match: [/^\d+$/, 'Phone number should contain only digits.'],
         }
     }
 
 );
 
-const User = mongoose.model('User', UserSchema);
+UserSchema.pre("save", function (next) {
+    const salt = bcrypt.genSaltSync();
+    this.password = bcrypt.hashSync(this.password, salt);
+    next();
+  });
+  
+  UserSchema.statics.login = async function (username, password) {
+    const user = await this.findOne({ username });
+    if (user) {
+      const auth = await bcrypt.compare(password, user.password);
+      if (auth) {
+        return user;
+      }
+      throw Error("incorrect password");
+    }
+    throw Error("incorrect password");
+  };
+  
+  const User = mongoose.model("User", UserSchema);
+
 export default User;

@@ -7,7 +7,6 @@ export const createUserDtoInSchema = Joi.object({
     password: Joi.string().min(6).required()
 });
 export const createUserDtoOutSchema = Joi.object({
-    userId: Joi.string().required(),
     username: Joi.string().required(),
     email: Joi.string().email().required(),
     createdAt: Joi.date().iso().required(),

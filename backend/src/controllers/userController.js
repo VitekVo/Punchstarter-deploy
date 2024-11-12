@@ -2,35 +2,60 @@ import { createUserDtoInSchema, createUserDtoOutSchema, getUserByIdDtoInSchema, 
     DeleteUserDtoInSchema, DeleteUserDtoOutSchema, followProjectDtoInSchema, followProjectDtoOutSchema
  } from '../validations/userValidations.js';
 
+ import {createToken, maxAge} from '../services/authService.js'
+ import User from '../models/user.model.js'
+
 // Mock data for testing
 const mockUsers = [
     { userId: '1', username: 'First', email: 'first@example.com', createdAt: new Date(Date.now()).toISOString() , followingProjects: [], contributions: [] },
     { userId: '2', username: 'Second', email: 'second@example.com', createdAt: new Date(Date.now()).toISOString(), followingProjects: [], contributions: [] }
 ];
 
-// Create a new user
-const createUser = (req, res) => {
-    const { error } = createUserDtoInSchema.validate(req.body);
-    if(error)
-    {
-        return res.status(400).json({ message: error.details[0].message });
+const loginUser = async (req, res) => {
+    const { username, password } = req.body;
+    const isProd = process.env.NODE_ENV === "production";
+  
+    try {
+      const user = await User.login(username, password);
+      const token = createToken(user._id);
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        maxAge: maxAge * 1000,
+        sameSite: isProd ? "none" : "lax",
+        secure: isProd,
+      });
+  
+      res.status(201).json(user);
+    } catch (err) {
+      res.status(400).json({ message: "Invalid data", errors: err });
     }
-        const newUser = { 
-            userId: Date.now().toString(),
+  };
+
+// Create a new user
+const createUser = async (req, res) => {
+    // const { error } = createUserDtoInSchema.validate(req.body);
+    const isProd = process.env.NODE_ENV === 'production'
+
+        const newUser = new User({ 
             username: req.body.username,
+            password: req.body.password,
             email: req.body.email,
             createdAt:  new Date(Date.now()).toISOString(),
             followingProjects: [],
             contributions: []
-        };
+        })
 
-        const { error: outputError } = createUserDtoOutSchema.validate(newUser);
-        if (outputError) {
-            return res.status(500).json({ message: 'Error in response format', error: outputError.details[0].message });
-        }
+        await newUser.save()
+
+        const token = createToken(newUser.userId)
+
+        res.cookie("jwt", token, {
+            httpOnly: true,
+            maxAge: maxAge * 1000,
+            sameSite: isProd ? "none" : "lax",
+            secure: isProd
+        })
         
-        mockUsers.push(newUser);
-
         res.status(201).json({ message: 'User created', user: newUser });
 };
 
@@ -157,4 +182,4 @@ const followProject = (req, res) => {
     }
 };
 
-export { createUser, getUserById, updateUser, deleteUser, followProject };
+export { createUser, getUserById, updateUser, deleteUser, followProject, loginUser };
