@@ -1,13 +1,14 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose, {Schema, SchemaTypes} from 'mongoose';
 import {date, number} from "joi";
 
 const ProjectSchema = new Schema(
     {
-        project_id: {
-            type: String,
-            required: true,
-            unique: true
-        },
+        donations: [
+            {
+                type: SchemaTypes.ObjectId,
+                ref: "Donation"
+            }
+        ],
         title: {
             type: String,
             required: true

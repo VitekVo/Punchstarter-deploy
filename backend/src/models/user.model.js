@@ -9,11 +9,6 @@ const UserSchema = mongoose.Schema(
             unique: false
         },
 
-        password: {
-            type: String,
-            required: false,
-        },
-
         name: {
             type: String,
             required: false
@@ -52,14 +47,14 @@ const UserSchema = mongoose.Schema(
 
 UserSchema.pre("save", function (next) {
     const salt = bcrypt.genSaltSync();
-    this.password = bcrypt.hashSync(this.password, salt);
+    this.passwordHash = bcrypt.hashSync(this.passwordHash, salt);
     next();
   });
   
-  UserSchema.statics.login = async function (username, password) {
+  UserSchema.statics.login = async function (username, passwordHash) {
     const user = await this.findOne({ username });
     if (user) {
-      const auth = await bcrypt.compare(password, user.password);
+      const auth = await bcrypt.compare(passwordHash, user.passwordHash);
       if (auth) {
         return user;
       }
