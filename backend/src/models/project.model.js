@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
+import {date, number} from "joi";
 
-const ProjectSchema = mongoose.Schema(
+const ProjectSchema = new Schema(
     {
         project_id: {
             type: String,
@@ -15,12 +16,18 @@ const ProjectSchema = mongoose.Schema(
             type: String,
             required: false
         },
-        created: {
+        created_at: {
+            type: Date,
+            required: true
+        },
+        deadline:{
             type: Date,
             required: true
         },
         goal_amount: {
-            type: mongoose.Schema.Types.Decimal128,
+            type: Number,
             required: true
         }
     });
+const Project = mongoose.model('Project', ProjectSchema);
+export default Project;
