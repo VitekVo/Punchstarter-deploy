@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import {Schema} from 'mongoose';
 import bcrypt from "bcrypt"
 
-const UserSchema = mongoose.Schema(
+const UserSchema = new Schema(
     {
         username: {
             type: String,
