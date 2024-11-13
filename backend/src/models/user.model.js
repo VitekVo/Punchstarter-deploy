@@ -40,7 +40,15 @@ const UserSchema = new Schema(
             type: String,
             required: false,
             match: [/^\d+$/, 'Phone number should contain only digits.'],
-        }
+        },
+
+        projects_followed: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Project',
+                required: false,
+            }
+        ]
     }
 
 );

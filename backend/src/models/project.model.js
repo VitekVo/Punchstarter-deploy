@@ -29,6 +29,14 @@ const ProjectSchema = new Schema(
             }
         ],
 
+        follow_count:[
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+                required: false,
+            }
+        ],
+
         description: {
             type: String,
             required: false
