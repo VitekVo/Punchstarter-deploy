@@ -1,5 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
+import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/footer";
 
 export const metadata: Metadata = {
   title: "PunchStarter | Login",

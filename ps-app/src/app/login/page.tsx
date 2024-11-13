@@ -131,7 +131,7 @@ const Page = () => {
           // type={"submit"}
           onClick={() => redirect("/")}
           disabled={!formData.username || !formData.password || loading}
-          className={`${formData.username && formData.password && !loading ? "hover:bg-emerald-700" : "bg-opacity-40"} transition w-full py-2 bg-primary text-white rounded-lg`}
+          className={`${formData.username && formData.password && !loading ? "hover:bg-primary-dark" : "bg-opacity-40"} transition w-full py-2 bg-primary text-white rounded-lg`}
         >
           Přihlásit se
         </button>
