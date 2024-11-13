@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useParams } from "next/navigation";
 import { mockProjects } from "@/utils/data/mockProjectData";
 import ProjectHeader from "@/app/(main)/detail/[projectID]/projectHeader/projectHeader";
-import ScrollableContainer from "@/app/(main)/detail/[projectID]/scrollableBox";
+import ScrollBox from "@/app/(main)/detail/[projectID]/projectContent/scrollBox";
 
 const Page = () => {
   const params = useParams();
@@ -26,7 +26,7 @@ const Page = () => {
     <div className="flex flex-col pb-24 px-16 w-full">
       <ProjectHeader project={project} />
       <div className="h-[1px] w-full bg-gray-300 my-12" />
-      <ScrollableContainer
+      <ScrollBox
         setDisplayedContent={setDisplayedContent}
         displayedContent={displayedContent}
         project={project}
