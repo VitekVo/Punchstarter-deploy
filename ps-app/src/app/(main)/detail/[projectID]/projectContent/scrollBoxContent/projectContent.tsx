@@ -1,26 +1,40 @@
 import React from "react";
 import { IProject } from "@/utils/types/types";
-import { IoPersonSharp } from "react-icons/io5";
+import Image from "next/image";
 const ProjectContent = ({ project }: { project: IProject }) => {
   return (
-    <div className="grid h-fit  lg:grid-cols-3 grid-cols-1 grid-rows-2 lg:grid-rows-1 gap-8 h-full carousel-item w-full max-w-">
-      <div className="rounded-lg overflow-clip flex-grow border col-span-2">
-        <div className="m-8">
-          <h1 className="text-4xl font-bold mb-5 text-center">Story</h1>
-          <div className="flex items-stretch">
-            <p className="py-12 p-10">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. In libero
-              illo cupiditate repellendus sequi, ab et a, repellat hic corporis
-              dolorum velit facere minus dolores at quae dolore aspernatur nemo.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam
-              magnam magni sapiente aperiam similique architecto dignissimos
-              nostrum, itaque dolorem illum neque soluta sed quisquam fuga
-              consequuntur minus officiis nihil qui. Lorem, ipsum dolor sit amet
-              consectetur adipisicing elit. Fugit aperiam maxime neque?
-              Consectetur iure, quis corporis dignissimos alias aperiam libero
-              itaque accusamus molestiae deleniti sint a nisi ducimus nemo quas.
-            </p>
-          </div>
+    <div className="grid lg:grid-cols-3 grid-cols-1 grid-rows-2 lg:grid-rows-1 gap-8 h-full carousel-item w-full max-w-">
+      <div className="rounded-lg overflow-clip flex-grow border col-span-2 flex flex-col gap-8">
+        <h1 className="text-2xl uppercase font-bold pt-6 px-8">Story</h1>
+        <div
+          className={"relative w-full overflow-hidden flex items-center h-52"}
+        >
+          <Image
+            className={"object-cover w-full h-auto"}
+            alt={"Shoes"}
+            src={
+              "https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+            }
+            layout="responsive"
+            width={100}
+            height={100}
+            objectFit="cover"
+          />
+        </div>
+
+        <div className="flex items-stretch">
+          <p className="px-8 pb-12">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. In libero
+            illo cupiditate repellendus sequi, ab et a, repellat hic corporis
+            dolorum velit facere minus dolores at quae dolore aspernatur nemo.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam
+            magnam magni sapiente aperiam similique architecto dignissimos
+            nostrum, itaque dolorem illum neque soluta sed quisquam fuga
+            consequuntur minus officiis nihil qui. Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Fugit aperiam maxime neque?
+            Consectetur iure, quis corporis dignissimos alias aperiam libero
+            itaque accusamus molestiae deleniti sint a nisi ducimus nemo quas.
+          </p>
         </div>
       </div>
       <div className="flex flex-col h-fit  border rounded-lg gap-4 pt-16 p-8">
