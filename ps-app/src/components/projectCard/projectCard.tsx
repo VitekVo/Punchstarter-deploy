@@ -47,7 +47,7 @@ const ProjectCard = ({
         </figure>
         <div className="card-body p-4">
           <h2 className="card-title text-2xl font-bold">{title}</h2>
-          <p className="max-h-20 overflow-x-none overflow-y-scroll">
+          <p className="max-h-20 overflow-x-none overflow-hidden">
             {description}
           </p>
           <ProjectProgress
