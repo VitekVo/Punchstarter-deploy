@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import "../styles/globals.css";
 import React from "react";
-import { UserContextProvider } from "@/context/UserContext";
+import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/footer";
 
 export const metadata: Metadata = {
   title: "PunchStarter | Home",
@@ -14,10 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <UserContextProvider>
-        <body className={"flex-grow"}>{children}</body>
-      </UserContextProvider>
-    </html>
+    <main className={"flex flex-col min-h-screen w-screen"}>
+      <Navbar />
+      <section className={"flex-grow"}>{children}</section>
+      <Footer />
+    </main>
   );
 }

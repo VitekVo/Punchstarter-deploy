@@ -20,7 +20,7 @@ const Button = ({
       onClick={() => redirect(href)}
       disabled={isDisabled}
       type={type}
-      className={`${!isDisabled ? "hover:bg-emerald-700" : "bg-opacity-40"} transition w-fit px-4 py-2 bg-primary text-white rounded-lg`}
+      className={`${!isDisabled ? "hover:bg-primary-dark" : "bg-opacity-40"} transition w-fit px-4 py-2 bg-primary text-white rounded-lg`}
     >
       {text}
     </button>
