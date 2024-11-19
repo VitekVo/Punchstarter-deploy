@@ -36,15 +36,15 @@ const createUser = async (req, res) => {
     // const { error } = createUserDtoInSchema.validate(req.body);
     const isProd = process.env.NODE_ENV === 'production'
 
-        const newUser = new User({ 
+        
+        const newUser = new User({
             username: req.body.username,
-            password: req.body.password,
+            passwordHash: req.body.password,
             email: req.body.email,
             createdAt:  new Date(Date.now()).toISOString(),
             followingProjects: [],
             contributions: []
         })
-
         await newUser.save()
 
         const token = createToken(newUser.userId)
