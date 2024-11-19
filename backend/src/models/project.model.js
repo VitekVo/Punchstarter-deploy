@@ -10,7 +10,7 @@ const ProjectSchema = new Schema(
             }
         ],
 
-        user_id:{
+        owner_id:{
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true
@@ -21,7 +21,7 @@ const ProjectSchema = new Schema(
             required: true
         },
 
-        categories: [ // Array of categories for the project
+        categories: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Category',

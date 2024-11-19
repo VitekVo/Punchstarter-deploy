@@ -9,44 +9,28 @@ const UserSchema = new Schema(
             unique: false
         },
 
-        name: {
-            type: String,
-            required: false
-        },
-
-        surname:{
-            type: String,
-            required: false
-        },
-
-        email:{
-            type: String,
-            required: false,
-            unique: false,
-            match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.']
-        },
-
         passwordHash: {
             type: String,
             required: true,
         },
 
-        bDate:{
+        createdAt: {
             type: Date,
-            required: false
+            value: Date.now(),
         },
 
-        pNumber:{
-            type: String,
-            required: false,
-            match: [/^\d+$/, 'Phone number should contain only digits.'],
-        },
-
-        projects_followed: [
+        followingProjects: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Project',
                 required: false,
+            }
+        ],
+        contributions: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Donations',
+                required: false
             }
         ]
     }
