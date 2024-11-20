@@ -14,11 +14,6 @@ const UserSchema = new Schema(
             required: true,
         },
 
-        createdAt: {
-            type: Date,
-            value: Date.now(),
-        },
-
         followingProjects: [
             {
                 type: Schema.Types.ObjectId,
@@ -26,13 +21,19 @@ const UserSchema = new Schema(
                 required: false,
             }
         ],
+
         contributions: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Donations',
                 required: false
             }
-        ]
+        ],
+
+        images: {
+            type: [Buffer],
+            required: false
+        }
     }
 
 );

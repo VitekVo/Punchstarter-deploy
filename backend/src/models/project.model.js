@@ -2,15 +2,7 @@ import mongoose, {Schema, SchemaTypes} from 'mongoose';
 
 const ProjectSchema = new Schema(
     {
-        donations: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Donation',
-                required: true
-            }
-        ],
-
-        owner_id:{
+        creatorId:{
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true
@@ -21,20 +13,25 @@ const ProjectSchema = new Schema(
             required: true
         },
 
-        categories: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Category',
+        category: {
+                type: String,
                 required: false
-            }
-        ],
+        },
 
-        follow_count:[
+        followCount:[
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
                 unique: true,
                 required: false,
+            }
+        ],
+
+        donations: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Donation',
+                required: true
             }
         ],
 
@@ -48,20 +45,23 @@ const ProjectSchema = new Schema(
             required: true
         },
 
-        updated_at: {
-            type: Date,
-            required: false
-        },
-
         deadline:{
             type: Date,
             required: true
         },
 
-        goal_amount: {
+        goalAmount: {
             type: Number,
             required: true
         },
+
+        comments: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Comments',
+                required: false
+            }
+        ],
 
         images: {
             type: [Buffer],
