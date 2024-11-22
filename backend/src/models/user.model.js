@@ -44,10 +44,10 @@ UserSchema.pre("save", function (next) {
     next();
   });
   
-  UserSchema.statics.login = async function (username, passwordHash) {
+  UserSchema.statics.login = async function (username, password) {
     const user = await this.findOne({ username });
     if (user) {
-      const auth = await bcrypt.compare(passwordHash, user.passwordHash);
+      const auth = await bcrypt.compare(password, user.passwordHash);
       if (auth) {
         return user;
       }

@@ -18,20 +18,11 @@ const ProjectSchema = new Schema(
                 required: false
         },
 
-        followCount:[
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-                unique: true,
-                required: false,
-            }
-        ],
-
         donations: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Donation',
-                required: true
+                default: []
             }
         ],
 
@@ -42,7 +33,7 @@ const ProjectSchema = new Schema(
 
         created_at: {
             type: Date,
-            required: true
+            default: Date.now
         },
 
         deadline:{
@@ -58,8 +49,8 @@ const ProjectSchema = new Schema(
         comments: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Comments',
-                required: false
+                ref: 'Comment',
+                default: []
             }
         ],
 
