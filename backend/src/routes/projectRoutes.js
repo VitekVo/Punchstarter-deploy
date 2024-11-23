@@ -1,5 +1,5 @@
 import express from  'express';
-import createProject from '../controllers/projectController/createProject.js';
+import { createProject } from '../controllers/projectController/createProject.js';
 import getProjectById from '../controllers/projectController/getProjectByProjectId.js';
 import updateProject from '../controllers/projectController/updateProject.js';
 import deleteProject from '../controllers/projectController/deleteProject.js';

@@ -1,7 +1,8 @@
 import Project from '../../models/project.model.js';
 import { createProjectDtoInSchema } from '../../validations/projectValidation/createProjectValidation.js';
+import { uploadImages } from '../../services/uploadService.js';
 
-const createProject = async (req, res) => {
+const createNewProject = async (req, res) => {
     try {
 
         const { error, value } = createProjectDtoInSchema.validate(req.body, { abortEarly: false });
@@ -20,7 +21,9 @@ const createProject = async (req, res) => {
         }
 
 
-        const { title, description, goalAmount, deadline, category, images } = value;
+        const { title, description, goalAmount, deadline, category } = value;
+
+        const images = req.files?.map(file => file.buffer) || [];
 
         const newProject = new Project({
             creatorId: res.locals.user._id,
@@ -45,4 +48,4 @@ const createProject = async (req, res) => {
     }
 };
 
-export default createProject;
+export const createProject = [uploadImages, createNewProject];
