@@ -11,6 +11,10 @@ export const mockProjects: IProject[] = [
     targetBudget: 20000,
     supporters: 150,
     deadline: new Date("2024-12-01"),
+    comments: [
+      { text: "Paráda." },
+      { text: "Horší věc sem neviděl a to jsem slepý." },
+    ],
   },
   {
     id: 2,
@@ -22,6 +26,7 @@ export const mockProjects: IProject[] = [
     targetBudget: 25000,
     supporters: 220,
     deadline: new Date("2024-11-15"),
+    comments: [],
   },
   {
     id: 3,
@@ -33,6 +38,7 @@ export const mockProjects: IProject[] = [
     targetBudget: 15000,
     supporters: 300,
     deadline: new Date("2024-12-20"),
+    comments: [],
   },
   {
     id: 4,
@@ -44,6 +50,7 @@ export const mockProjects: IProject[] = [
     targetBudget: 30000,
     supporters: 450,
     deadline: new Date("2024-12-10"),
+    comments: [],
   },
   {
     id: 5,
@@ -55,6 +62,7 @@ export const mockProjects: IProject[] = [
     targetBudget: 40000,
     supporters: 180,
     deadline: new Date("2024-12-05"),
+    comments: [],
   },
   {
     id: 6,
@@ -66,6 +74,7 @@ export const mockProjects: IProject[] = [
     targetBudget: 20000,
     supporters: 270,
     deadline: new Date("2024-11-30"),
+    comments: [],
   },
   {
     id: 7,
@@ -77,6 +86,7 @@ export const mockProjects: IProject[] = [
     targetBudget: 20000,
     supporters: 270,
     deadline: new Date("2024-11-30"),
+    comments: [],
   },
   {
     id: 8,
@@ -88,5 +98,6 @@ export const mockProjects: IProject[] = [
     targetBudget: 20000,
     supporters: 270,
     deadline: new Date("2024-11-30"),
+    comments: [],
   },
 ];

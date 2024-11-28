@@ -17,6 +17,7 @@ const ProjectCard = ({
   targetBudget,
   supporters,
   deadline,
+  comments,
 }: IProject) => {
   //calculate remaining days
   //mělo by vracet api, ne se počítat na fe #reportJarda
