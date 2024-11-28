@@ -14,4 +14,11 @@ export interface IProject {
   targetBudget: number;
   supporters: number;
   deadline: Date;
+  comments: IComment[];
+}
+
+export interface IComment {
+  //id: number;
+  text: string;
+  //author: IUser;
 }
