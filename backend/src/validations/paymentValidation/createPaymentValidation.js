@@ -18,6 +18,6 @@ export const createPaymentdtoInSchema = Joi.object({
   amount: Joi.number().min(10).max(50000).required().messages({
     "number.base": "Payment must be a number.",
     "number.min": "Payment must be at least 10.",
-    "number.min": "Payment can not exceed 50 000.",
+    "number.max": "Payment can not exceed 50 000.",
   }),
 });

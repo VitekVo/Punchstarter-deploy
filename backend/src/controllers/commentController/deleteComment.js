@@ -1,5 +1,5 @@
-import Comment from "../../models/comment.model";
-import { CommentIdFromQuerySchema } from "../../validations/commentValidation/commentValidation";
+import Comment from "../../models/comment.model.js";
+import { CommentIdFromQuerySchema } from "../../validations/commentValidation/commentValidation.js";
 
 const deleteComment = async (req, res) => {
   try {

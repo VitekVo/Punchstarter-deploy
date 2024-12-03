@@ -6,11 +6,14 @@ import projectRoutes from "./routes/projectRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import cookieParser from "cookie-parser"
+import cors from 'cors';
 import { checkUser } from "./services/authService.js";
 
 dotenv.config();
 const app = express();
 mongoose.set('strictQuery', false);
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,7 +24,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const PORT = process.env.PORT || 3000;
-const CONNECTION = process.env.CONNECTION;
+const CONNECTION   = process.env.CONNECTION;
 
 app.use('*',checkUser);
 

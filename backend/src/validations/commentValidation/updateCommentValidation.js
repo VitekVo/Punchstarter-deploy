@@ -15,7 +15,7 @@ export const updateCommentDtoInSchema = Joi.object({
       "string.pattern.base": "User ID must be a valid MongoDB ObjectId.",
       "any.required": "User ID is required.",
     }),
-  content: Joi.string().min(1).max(500).required().message({
+  content: Joi.string().min(1).max(500).required().messages({
     "string.min": "Content must be at least 1 character long.",
     "string.max": "Content must be at most 500 characters long.",
   }),

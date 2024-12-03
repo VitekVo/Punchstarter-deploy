@@ -1,6 +1,6 @@
-import Comment from "../../models/comment.model";
-import { updateCommentDtoInSchema } from "../../validations/commentValidation/updateCommentValidation";
-import { CommentIdFromQuerySchema } from "../../validations/commentValidation/commentValidation";
+import Comment from "../../models/comment.model.js";
+import { updateCommentDtoInSchema } from "../../validations/commentValidation/updateCommentValidation.js";
+import { CommentIdFromQuerySchema } from "../../validations/commentValidation/commentValidation.js";
 
 const updateComment = async (req, res) => {
   try {

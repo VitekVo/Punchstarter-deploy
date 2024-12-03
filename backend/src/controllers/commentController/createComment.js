@@ -1,9 +1,9 @@
-import Comment from "../../models/comment.model";
-import { createCommentDtoInSchema } from "../../validations/commentValidation/commentValidation";
+import Comment from "../../models/comment.model.js";
+import { CommentIdFromQuerySchema } from "../../validations/commentValidation/commentValidation.js";
 
 const createComment = async (req, res) => {
   try {
-    const { error, value } = createCommentDtoInSchema.validate(req.body, {
+    const { error, value } = CommentIdFromQuerySchema.validate(req.body, {
       abortEarly: false,
     });
 
