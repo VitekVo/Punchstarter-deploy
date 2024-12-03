@@ -1,7 +1,7 @@
 import Comment from "../../models/comment.model";
 import { createCommentDtoInSchema } from "../../validations/commentValidation/commentValidation";
 
-const createNewComment = async (req, res) => {
+const createComment = async (req, res) => {
   try {
     const { error, value } = createCommentDtoInSchema.validate(req.body, {
       abortEarly: false,
@@ -38,4 +38,4 @@ const createNewComment = async (req, res) => {
   }
 };
 
-export const createComment = createNewComment;
+export default createComment;
