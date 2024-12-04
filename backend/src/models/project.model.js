@@ -15,6 +15,7 @@ const ProjectSchema = new Schema(
 
         category: {
                 type: String,
+                enum: "Tech" | "Art" | "Film" | "Music" | "Food" | "Game" | "Other",
                 required: false
         },
 
@@ -23,6 +24,18 @@ const ProjectSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'Donation',
                 default: []
+            }
+        ],
+
+        followCount: {
+            type: Number,
+            default: 0
+        },
+
+        followList: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
             }
         ],
 
