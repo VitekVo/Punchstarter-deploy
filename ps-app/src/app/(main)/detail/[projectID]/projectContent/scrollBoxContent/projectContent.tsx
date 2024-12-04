@@ -23,18 +23,7 @@ const ProjectContent = ({ project }: { project: IProject }) => {
         </div>
 
         <div className="flex items-stretch">
-          <p className="px-8 pb-12">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. In libero
-            illo cupiditate repellendus sequi, ab et a, repellat hic corporis
-            dolorum velit facere minus dolores at quae dolore aspernatur nemo.
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam
-            magnam magni sapiente aperiam similique architecto dignissimos
-            nostrum, itaque dolorem illum neque soluta sed quisquam fuga
-            consequuntur minus officiis nihil qui. Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Fugit aperiam maxime neque?
-            Consectetur iure, quis corporis dignissimos alias aperiam libero
-            itaque accusamus molestiae deleniti sint a nisi ducimus nemo quas.
-          </p>
+          <p className="px-8 pb-12">{project.description}</p>
         </div>
       </div>
       <div className="flex flex-col h-fit  border rounded-lg gap-4 pt-16 p-8">
@@ -46,15 +35,17 @@ const ProjectContent = ({ project }: { project: IProject }) => {
               </div>
             </div>
           </div>
-          <h3 className="text-xl font-bold">Candice Ligma</h3>
+          <h3 className="text-xl font-bold">{project.creatorId.username}</h3>
           <h4 className="text-lg">Project Founder</h4>
         </header>
         <div className="flex flex-col border rounded-md py-4 xl:py-6 px-4 xl:px-8 gap-4 flex-grow">
-          <h3 className="text-lg font-bold">About Candice Ligma</h3>
+          <h3 className="text-lg font-bold">
+            About {project.creatorId.username}
+          </h3>
           <p className="leading-7">
-            Candice Ligma is an eco-innovator and adventurer at heart, with a
-            passion for creating solutions that blend sustainability with
-            everyday practicality.
+            {project.creatorId.username} is an eco-innovator and adventurer at
+            heart, with a passion for creating solutions that blend
+            sustainability with everyday practicality.
           </p>
         </div>
       </div>

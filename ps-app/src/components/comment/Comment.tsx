@@ -1,6 +1,6 @@
 import React from "react";
 import { IComment } from "@/utils/types/types";
-export const Comment = ({ text }: IComment) => {
+export const Comment = ({ comment, user_id }: IComment) => {
   return (
     <div className="mb-10">
       <div className="chat chat-start">
@@ -12,8 +12,8 @@ export const Comment = ({ text }: IComment) => {
             />
           </div>
         </div>
-        <div className="chat-header">Candice Ligma</div>
-        <div className="chat-bubble">{text}</div>
+        <div className="chat-header">{user_id.username}</div>
+        <div className="chat-bubble">{comment}</div>
       </div>
     </div>
   );
