@@ -17,7 +17,6 @@ const getProjectById = async (req, res) => {
 
         const project = await Project.findById(projectId)
             .populate('creatorId', 'username')
-            .populate('comments', 'comment')
             .exec();
 
         const comments = await Comment.find({ project_id: projectId }).populate('user_id', 'username');
