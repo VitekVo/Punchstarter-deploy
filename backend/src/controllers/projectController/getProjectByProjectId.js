@@ -18,7 +18,9 @@ const getProjectById = async (req, res) => {
         const project = await Project.findById(projectId)
             .populate('creatorId', 'username email')
             .populate('comments')
-            .populate('donations');
+            .populate('donations')
+            .exec();
+
 
         if (!project) {
             return res.status(404).json({ message: "Project not found." });
