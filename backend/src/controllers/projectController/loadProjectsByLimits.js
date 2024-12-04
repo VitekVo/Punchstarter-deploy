@@ -16,7 +16,11 @@ const loadProjectsByLimit = async (req, res) => {
         const { limit } = value;
 
 
-        const projects = await Project.find().limit(limit);
+        const projects = await Project.find()
+            .limit(limit)
+            .populate('comments')
+            .exec();
+
 
         if (!projects || projects.length === 0) {
             return res.status(404).json({ message: "No projects found." });

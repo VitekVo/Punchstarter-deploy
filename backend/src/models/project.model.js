@@ -58,6 +58,7 @@ const ProjectSchema = new Schema({
     required: true,
   },
 
+  /*
   comments: [
     {
       type: Schema.Types.ObjectId,
@@ -65,11 +66,22 @@ const ProjectSchema = new Schema({
       default: [],
     },
   ],
+   */
 
   images: {
     type: [Buffer],
     required: false,
   },
 });
+
+ProjectSchema.virtual('comments', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'project_id'
+});
+
+ProjectSchema.set('toObject', { virtuals: true });
+ProjectSchema.set('toJSON', { virtuals: true });
+
 const Project = mongoose.model("Project", ProjectSchema);
 export default Project;
