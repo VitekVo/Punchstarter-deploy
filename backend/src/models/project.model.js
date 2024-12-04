@@ -14,7 +14,7 @@ const ProjectSchema = new Schema({
 
   category: {
     type: String,
-    enum: "Tech" | "Art" | "Film" | "Music" | "Food" | "Game" | "Other",
+    enum: ["Tech", "Art", "Film", "Music", "Food", "Game", "Other"],
     required: false,
   },
 

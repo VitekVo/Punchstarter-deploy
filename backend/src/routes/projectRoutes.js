@@ -14,6 +14,6 @@ router.get('/:projectId', getProjectById);
 router.get('/load/:limit',loadProjectsByLimit );
 router.put('/:projectId', updateProject);
 router.delete('/:projectId', deleteProject);
-router.post('/:projectId/comments/:commentId', addCommentToProject);
+router.post('/addComment', addCommentToProject);
 
 export default router;

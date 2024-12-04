@@ -1,41 +1,42 @@
-import Comment from "../../models/comment.model.js";
-import { CommentIdFromQuerySchema } from "../../validations/commentValidation/commentValidation.js";
+import Comment from '../../models/comment.model.js';
+import Project from '../../models/project.model.js';
 
 const createComment = async (req, res) => {
   try {
-    const { error, value } = CommentIdFromQuerySchema.validate(req.body, {
-      abortEarly: false,
-    });
+    const { text, projectId, userId } = req.body;
 
-    if (error) {
-      return res.status(400).json({
-        message: "Validation errors.",
-        errors: error.details.map((err) => err.message),
-      });
+    // Validation
+    if (!text || !projectId || !userId) {
+      return res.status(400).json({ message: "Text, Project ID, and User ID are required." });
     }
 
-    if (!res.locals.user) {
-      return res.status(401).json({ message: "Unauthorized. User not found." });
+    // Check if the project exists
+    const project = await Project.findById(projectId);
+    if (!project) {
+      return res.status(404).json({ message: "Project not found." });
     }
 
-    const { projectId, content } = value;
-
-    const newComment = new Comment({
-      projectId,
-      userId: res.locals.user._id,
-      content,
+    // Create and save the comment
+    const comment = new Comment({
+      comment: text,
+      project_id: projectId,
+      user_id: userId,
     });
+    await comment.save();
 
-    const savedComment = await newComment.save();
+    // Add the comment to the project
+    project.comments.push(comment._id);
+    await project.save();
 
     res.status(201).json({
-      message: "Comment created successfully",
-      content: savedComment,
+      message: "Comment created and added to project successfully.",
+      comment,
     });
   } catch (error) {
-    console.error("Error in createProject:", error.message);
+    console.error("Error in createComment:", error.message);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
 export default createComment;
+
