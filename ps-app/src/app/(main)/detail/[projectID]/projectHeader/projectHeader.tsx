@@ -5,16 +5,23 @@ import { IProject } from "@/utils/types/types";
 import Button from "@/components/button/Button";
 
 const ProjectHeader = ({ project }: { project: IProject }) => {
+  const imgUrl =
+    project.images.length > 0
+      ? `data:image/png;base64,${Buffer.from(project.images[0]).toString(
+          "base64"
+        )}`
+      : "/path/to/placeholder-image.png";
   return (
     <div className="flex lg:flex-row flex-col gap-8 h-full">
       <div className="flex flex-col lg:w-1/3 border rounded-lg p-4 justify-between">
         <div className={"flex flex-col gap-4"}>
           <h2 className={"text-xl font-bold uppercase"}>{project.title}</h2>
+
           <ProjectProgress
             variant={"detail"}
             currentBudget={project.currentBudget}
-            targetBudget={project.targetBudget}
-            backers={project.supporters}
+            goalAmount={project.goalAmount}
+            backers={project.followCount}
             deadline={project.deadline}
           />
         </div>
@@ -22,9 +29,7 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
       </div>
       <div className="rounded-lg overflow-clip flex-grow">
         <Image
-          src={
-            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-          }
+          src={imgUrl}
           alt={"Shoes"}
           layout="responsive"
           width={100}

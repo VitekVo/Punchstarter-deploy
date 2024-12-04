@@ -4,12 +4,12 @@ import React from "react";
 
 const ProgressBar = ({
   currentBudget,
-  targetBudget,
+  goalAmount,
 }: {
   currentBudget: number;
-  targetBudget: number;
+  goalAmount: number;
 }) => {
-  const progress = (currentBudget / targetBudget) * 100;
+  const progress = (currentBudget / goalAmount) * 100;
 
   return (
     <div className={"flex-grow h-3 rounded-full bg-gray-200 relative"}>
