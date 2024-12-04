@@ -75,7 +75,9 @@ const ProjectCard = ({
         <div className="card-body p-4">
           <h2 className="card-title text-2xl font-bold">{title}</h2>
           <p className="max-h-20 overflow-x-none overflow-hidden">
-            {description}
+            {description.length > 50
+              ? `${description.slice(0, 50)}...`
+              : description}
           </p>
           <ProjectProgress sum={sum} goalAmount={goalAmount} />
           <div className="grid grid-cols-2 ">

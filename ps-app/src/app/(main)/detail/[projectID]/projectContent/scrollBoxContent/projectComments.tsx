@@ -10,7 +10,7 @@ const ProjectComments = ({ project }: { project: IProject }) => {
   const [showAddComment, setShowAddComment] = useState(false);
   const [comments, setComments] = useState(project.comments); // TODO: je to příšerný řešení, dělal jsem to rychle na hodinu PM :)
   function handleAddComment(newComment: string) {
-    setComments([...comments, { text: newComment }]);
+    setComments([...comments, { comment: newComment }]);
   }
   return (
     <div id={"comments"} className={"carousel-item w-full"}>
@@ -35,9 +35,10 @@ const ProjectComments = ({ project }: { project: IProject }) => {
           {project.comments.length > 0 ? (
             project.comments.map((comment) => (
               <Comment
-                key={Math.random() * 1000}
-                id={comment.id}
-                author={comment.author}
+                key={comment._id}
+                _id={comment._id}
+                projectId={comment._id}
+                user_id={comment.user_id}
                 comment={comment.comment}
               ></Comment> // TODO: dát tam id commentu místo Math random xd
             ))

@@ -19,10 +19,16 @@ export interface IProject {
   sum: number;
   donations: Array<Object>;
   followList: Array<Object>;
+  creatorId: ICreator;
 }
 
 export interface IComment {
-  id: number;
+  _id: string;
+  projectId: string;
   comment: string;
-  author: string;
+  user_id: ICreator;
+}
+export interface ICreator {
+  _id: string; // The unique identifier of the creator
+  username: string; // The creator's username
 }
