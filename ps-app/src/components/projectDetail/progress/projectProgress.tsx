@@ -5,13 +5,13 @@ import dayjs from "dayjs";
 
 const ProjectProgress = ({
   currentBudget,
-  targetBudget,
+  goalAmount,
   variant = "bar",
   backers,
   deadline,
 }: {
   currentBudget: number;
-  targetBudget: number;
+  goalAmount: number;
   variant?: "bar" | "detail";
   backers?: number;
   deadline?: Date;
@@ -19,17 +19,14 @@ const ProjectProgress = ({
   return (
     <section className={"flex flex-col gap-6"}>
       <div className="flex flex-col gap-1">
-        <ProgressBar
-          currentBudget={currentBudget}
-          targetBudget={targetBudget}
-        />
+        <ProgressBar currentBudget={currentBudget} goalAmount={goalAmount} />
         {variant === "detail" ? (
           <div className={"flex w-full gap-1 items-baseline"}>
             Celkem vybráno
             <h3 className={"font-bold text-primary text-xl"}>
-              {getFormattedNumber(currentBudget)}
+              {currentBudget}
             </h3>
-            z<h3>{getFormattedNumber(targetBudget)} Kč</h3>
+            z<h3>{goalAmount} Kč</h3>
           </div>
         ) : null}
       </div>

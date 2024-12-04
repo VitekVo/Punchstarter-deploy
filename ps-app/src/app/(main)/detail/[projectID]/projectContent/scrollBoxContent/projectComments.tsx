@@ -5,6 +5,7 @@ import { Comment } from "@/components/comment/Comment";
 import { AddComment } from "@/components/comment/AddComment";
 import { useState } from "react";
 import { comment } from "postcss";
+import { RiH1 } from "react-icons/ri";
 const ProjectComments = ({ project }: { project: IProject }) => {
   const [showAddComment, setShowAddComment] = useState(false);
   const [comments, setComments] = useState(project.comments); // TODO: je to příšerný řešení, dělal jsem to rychle na hodinu PM :)
@@ -31,9 +32,21 @@ const ProjectComments = ({ project }: { project: IProject }) => {
           {showAddComment && (
             <AddComment handleAddComment={handleAddComment}></AddComment>
           )}
-          {comments.map((comment) => (
-            <Comment key={Math.random() * 1000} text={comment.text}></Comment> // TODO: dát tam id commentu místo Math random xd
-          ))}
+          {project.comments.length > 0 ? (
+            project.comments.map((comment) => (
+              <Comment
+                key={Math.random() * 1000}
+                id={comment.id}
+                author={comment.author}
+                comment={comment.comment}
+              ></Comment> // TODO: dát tam id commentu místo Math random xd
+            ))
+          ) : (
+            <h1 className="text-2xl black text-center mt-10">
+              Zatím se k projektu nikdo nevyjádřil. <br />
+              Nestyď se a buď první!
+            </h1>
+          )}
         </div>
       </div>
     </div>

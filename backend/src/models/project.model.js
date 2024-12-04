@@ -1,76 +1,75 @@
-import mongoose, {Schema, SchemaTypes} from 'mongoose';
+import mongoose, { Schema, SchemaTypes } from "mongoose";
 
-const ProjectSchema = new Schema(
+const ProjectSchema = new Schema({
+  creatorId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+
+  title: {
+    type: String,
+    required: true,
+  },
+
+  category: {
+    type: String,
+    enum: "Tech" | "Art" | "Film" | "Music" | "Food" | "Game" | "Other",
+    required: false,
+  },
+
+  donations: [
     {
-        creatorId:{
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
-        },
+      type: Schema.Types.ObjectId,
+      ref: "Donation",
+      default: [],
+    },
+  ],
 
-        title: {
-            type: String,
-            required: true
-        },
+  followCount: {
+    type: Number,
+    default: 0,
+  },
 
-        category: {
-                type: String,
-                enum: "Tech" | "Art" | "Film" | "Music" | "Food" | "Game" | "Other",
-                required: false
-        },
+  followList: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 
-        donations: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Donation',
-                default: []
-            }
-        ],
+  description: {
+    type: String,
+    required: false,
+  },
 
-        followCount: {
-            type: Number,
-            default: 0
-        },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
 
-        followList: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
+  deadline: {
+    type: Date,
+    required: true,
+  },
 
-        description: {
-            type: String,
-            required: false
-        },
+  goalAmount: {
+    type: Number,
+    required: true,
+  },
 
-        created_at: {
-            type: Date,
-            default: Date.now
-        },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
+      default: [],
+    },
+  ],
 
-        deadline:{
-            type: Date,
-            required: true
-        },
-
-        goalAmount: {
-            type: Number,
-            required: true
-        },
-
-        comments: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Comment',
-                default: []
-            }
-        ],
-
-        images: {
-            type: [Buffer],
-            required: false
-        }
-    });
-const Project = mongoose.model('Project', ProjectSchema);
+  images: {
+    type: [Buffer],
+    required: false,
+  },
+});
+const Project = mongoose.model("Project", ProjectSchema);
 export default Project;

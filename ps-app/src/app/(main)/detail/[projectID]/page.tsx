@@ -2,24 +2,32 @@
 
 import React, { useState } from "react";
 import { useParams } from "next/navigation";
-import { mockProjects } from "@/utils/data/mockProjectData";
 import ProjectHeader from "@/app/(main)/detail/[projectID]/projectHeader/projectHeader";
 import ScrollBox from "@/app/(main)/detail/[projectID]/projectContent/scrollBox";
+import {
+  useListContext,
+  ListProvider,
+} from "@/components/providers/ProjectProvider";
 
-const Page = () => {
+const PageContent = () => {
   const params = useParams();
   const { projectID } = params;
-
-  const project = mockProjects.find(
-    (project) => String(project.id) === projectID,
+  const { listsData } = useListContext();
+  console.log(listsData);
+  const project = listsData?.projects.find(
+    (project) => String(project._id) === projectID
   );
 
   const [displayedContent, setDisplayedContent] = useState<
     "campaign" | "comments"
   >("campaign");
 
+  if (!listsData) {
+    return <p>Loading...</p>; // Add a loading state for when data is null
+  }
+
   if (!project) {
-    return null;
+    return <p>Project not found</p>; // Handle the case where the project is not found
   }
 
   return (
@@ -34,5 +42,12 @@ const Page = () => {
     </div>
   );
 };
+
+// Wrap the PageContent with ListProvider
+const Page = () => (
+  <ListProvider>
+    <PageContent />
+  </ListProvider>
+);
 
 export default Page;
