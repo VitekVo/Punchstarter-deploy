@@ -19,7 +19,7 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
 
           <ProjectProgress
             variant={"detail"}
-            currentBudget={project.currentBudget}
+            sum={project.sum}
             goalAmount={project.goalAmount}
             backers={project.followCount}
             deadline={project.deadline}
@@ -27,14 +27,18 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
         </div>
         <Button onClick={() => {}} text={"PODPOŘIT"}></Button>
       </div>
-      <div className="rounded-lg overflow-clip flex-grow">
-        <Image
-          src={imgUrl}
-          alt={"Shoes"}
-          layout="responsive"
-          width={100}
-          height={100}
-        />
+      <div className="rounded-lg overflow-clip flex-grow aspect-[16/9]">
+        {project.images.length > 0 ? (
+          <img
+            className="h-full w-full object-contain"
+            src={imgUrl} // Dynamically display the image
+          />
+        ) : (
+          <img
+            className="h-full w-full object-contain"
+            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+          />
+        )}
       </div>
     </div>
   );
