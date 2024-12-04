@@ -11,7 +11,7 @@ const ProjectCard = ({
   title,
   description,
   category,
-  currentBudget,
+
   goalAmount,
   followCount,
   deadline,
@@ -38,7 +38,7 @@ const ProjectCard = ({
       className={"cursor-pointer"}
       onClick={() => redirect(`/detail/${_id}`)}
     >
-      <div className="card bg-base-100 w-52 shadow-xl">
+      <div className="card bg-base-100 w-52 shadow-xl ">
         <figure className={"relative"}>
           {images.length > 0 ? (
             <img
@@ -77,7 +77,7 @@ const ProjectCard = ({
           <p className="max-h-20 overflow-x-none overflow-hidden">
             {description}
           </p>
-          <ProjectProgress currentBudget={sum} goalAmount={goalAmount} />
+          <ProjectProgress sum={sum} goalAmount={goalAmount} />
           <div className="grid grid-cols-2 ">
             <div className="flex justify-start font-bold">
               {followCount} <FaUserFriends size={20} className="mx-1 pt-1" />
