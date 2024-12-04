@@ -17,7 +17,13 @@ const getProjectById = async (req, res) => {
 
         const project = await Project.findById(projectId)
             .populate('creatorId', 'username')
-            .populate('comments')
+            .populate({
+                path: 'comments', // Populate the comments array
+                populate: {
+                    path: 'user_id', // Populate the userId within each comment
+                    select: 'username' // Select only the fields you need
+                }
+            })
             .exec();
 
 
