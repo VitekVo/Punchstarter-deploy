@@ -17,7 +17,7 @@ const getProjectById = async (req, res) => {
 
         const project = await Project.findById(projectId)
             .populate('creatorId', 'username email')
-            .populate('comments', "comment")
+            .populate('comments')
             .populate('donations')
             .exec();
 
