@@ -16,15 +16,17 @@ const getProjectById = async (req, res) => {
         const { projectId } = value;
 
         const project = await Project.findById(projectId)
-            .populate('creatorId', 'username email')
-            .populate('comments')
-            .populate('donations')
+            .populate('creatorId', 'username')
+            .populate('comments', 'comment')
             .exec();
 
+        const comments = await Comment.find({ project_id: projectId }).populate('user_id', 'username');
+        project.comments = comments;
 
         if (!project) {
             return res.status(404).json({ message: "Project not found." });
         }
+
 
         res.status(200).json(project);
     } catch (error) {
