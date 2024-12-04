@@ -18,6 +18,7 @@ const loadProjectsByLimit = async (req, res) => {
 
         const projects = await Project.find()
             .limit(limit)
+            .populate('creatorId', 'username')
             .populate('comments')
             .exec();
 
