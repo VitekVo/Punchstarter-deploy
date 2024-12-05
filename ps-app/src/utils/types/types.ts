@@ -9,7 +9,7 @@ export interface IProject {
   _id: number;
   title: string;
   description: string;
-  category: "Tech" | "Art" | "Film" | "Music" | "Food" | "Game" | "Other";
+  category: ProjectCategory;
   currentBudget: number;
   goalAmount: number;
   followCount: number;
@@ -20,6 +20,15 @@ export interface IProject {
   donations: Array<Object>;
   followList: Array<Object>;
   creatorId: ICreator;
+}
+export enum ProjectCategory {
+  Tech = "Tech",
+  Art = "Art",
+  Film = "Film",
+  Music = "Music",
+  Food = "Food",
+  Game = "Game",
+  Other = "Other",
 }
 
 export interface IComment {

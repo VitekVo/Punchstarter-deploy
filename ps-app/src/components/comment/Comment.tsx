@@ -11,8 +11,8 @@ export const Comment = ({ comment, user_id }: IComment) => {
               src="/CandiceLigma.jpg"
             />
           </div>
-        </div>
-        <div className="chat-header">{user_id.username}</div>
+        </div>{" "}
+        <div className="chat-header">Candice Ligma</div>
         <div className="chat-bubble">{comment}</div>
       </div>
     </div>

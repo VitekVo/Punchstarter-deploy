@@ -14,7 +14,7 @@ const ProjectComments = ({ project }: { project: IProject }) => {
     const commentData = {
       project_id: project._id,
       comment: newComment,
-      user_id: "6750a2d0999e49b6f5713d48", //TODO: add current logged in user when userProvider is ready
+      user_id: "6751a8ae09159e32822b4c4d", //TODO: add current logged in user when userProvider is ready
     };
 
     console.log(commentData);
