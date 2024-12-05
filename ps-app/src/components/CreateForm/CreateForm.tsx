@@ -9,6 +9,10 @@ export const CreateForm = () => {
     if (step === 3) return;
     setStep(step + 1);
   }
+  function handleBackStep() {
+    if (step === 1) return;
+    setStep(step - 1);
+  }
   return (
     <>
       <div>
@@ -146,14 +150,37 @@ export const CreateForm = () => {
                 </div>
               </div>
             )}
-            <div className="mt-8">
-              <div className="flex w-48 justify-end">
-                <Button
-                  type="button"
-                  onClick={handleNextStep}
-                  text={"Pokračovat"}
-                ></Button>
+            <div className="grid grid-cols-2 gap-10">
+              <div className="mt-8">
+                <div className="flex  justify-center">
+                  <Button
+                    type="button"
+                    onClick={handleBackStep}
+                    text={"Zpět"}
+                  ></Button>
+                </div>
               </div>
+              {step === 3 ? (
+                <div className="mt-8">
+                  <div className="flex  justify-center">
+                    <Button
+                      type="button"
+                      onClick={handleNextStep}
+                      text={"Vytvořit"}
+                    ></Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-8">
+                  <div className="flex  justify-center">
+                    <Button
+                      type="button"
+                      onClick={handleNextStep}
+                      text={"Dalši"}
+                    ></Button>
+                  </div>
+                </div>
+              )}
             </div>
           </form>
         </div>
