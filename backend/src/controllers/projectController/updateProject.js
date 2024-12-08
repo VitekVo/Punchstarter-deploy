@@ -1,41 +1,52 @@
 import Project from '../../models/project.model.js';
-import  { updateProjectDtoInSchema  } from "../../validations/projectValidation/updateProjectValidation.js";
+import { updateProjectDtoInSchema } from "../../validations/projectValidation/updateProjectValidation.js";
 import { ProjectIdFromQuerySchema } from "../../validations/projectValidation/projectValidation.js";
+import { uploadImages } from "../../services/uploadService.js";
+
 const updateProject = async (req, res) => {
     try {
+        // Získání ID projektu z query
         const { projectId } = req.query;
-        const updates = req.body;
 
-
-        const { projectIdError, projectIdErrorValue } = ProjectIdFromQuerySchema.validate(updates, { abortEarly: false });
-
-
+        // Validace ID projektu
+        const { error: projectIdError, value: projectIdValue } = ProjectIdFromQuerySchema.validate({ projectId });
         if (projectIdError) {
             return res.status(400).json({
-                message: "Project ID is invalid.",
-                errors: projectIdErrorValue.details.map(err => err.message)
+                message: "Invalid Project ID.",
+                errors: projectIdError.details.map(err => err.message),
             });
         }
 
-
-        const { error, value } = updateProjectDtoInSchema.validate(updates, { abortEarly: false });
-
+        // Validace aktualizovaných dat (req.body)
+        const { error, value } = updateProjectDtoInSchema.validate(req.body, { abortEarly: false });
         if (error) {
             return res.status(400).json({
                 message: "Validation errors.",
-                errors: error.details.map(err => err.message)
+                errors: error.details.map(err => err.message),
             });
         }
 
+        // Zpracování nových obrázků (req.files)
+        const newImages = req.files?.map(file => file.buffer) || [];
 
-        const updatedProject = await Project.findByIdAndUpdate(projectId, value, {
+        // Najít projekt v databázi
+        const project = await Project.findById(projectIdValue.projectId);
+        if (!project) {
+            return res.status(404).json({ message: "Project not found." });
+        }
+
+        // Pokud jsou nahrány nové obrázky, přepsat je, jinak zachovat stávající
+        if (newImages.length > 0) {
+            value.images = newImages; // Přepsání stávajících obrázků
+        } else {
+            value.images = project.images; // Zachování stávajících obrázků
+        }
+
+        // Aktualizace projektu
+        const updatedProject = await Project.findByIdAndUpdate(projectIdValue.projectId, value, {
             new: true,
             runValidators: true,
         });
-
-        if (!updatedProject) {
-            return res.status(404).json({ message: "Project not found." });
-        }
 
         res.status(200).json({
             message: "Project updated successfully",
@@ -47,4 +58,4 @@ const updateProject = async (req, res) => {
     }
 };
 
-export default updateProject;
+export const updateProjectHandler = [uploadImages, updateProject];

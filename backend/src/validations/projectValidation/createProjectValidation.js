@@ -56,5 +56,7 @@ export const createProjectDtoInSchema =  Joi.object({
         .optional()
         .messages({
             "array.base": "Images must be an array of binary data."
-        })
+        }),
+    sum: Joi.number()
+        .optional()
 });

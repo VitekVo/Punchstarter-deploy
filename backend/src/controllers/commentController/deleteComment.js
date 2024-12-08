@@ -3,7 +3,7 @@ import { CommentIdFromQuerySchema } from "../../validations/commentValidation/co
 
 const deleteComment = async (req, res) => {
   try {
-    const { error, value } = CommentIdFromQuerySchema.validate(req.body, {
+    const { error, value } = CommentIdFromQuerySchema.validate(req.query, {
       abortEarly: false,
     });
 

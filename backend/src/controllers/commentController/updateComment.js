@@ -7,13 +7,12 @@ const updateComment = async (req, res) => {
     const { commentId } = req.query;
     const updates = req.body;
 
-    const { commentIdError, commentIdErrorValue } =
-      CommentIdFromQuerySchema.validate(updates, { abortEarly: false });
 
+    const { error: commentIdError } = CommentIdFromQuerySchema.validate({ commentId }, { abortEarly: false });
     if (commentIdError) {
       return res.status(400).json({
-        message: "Project ID is invalid.",
-        errors: commentIdErrorValue.details.map((err) => err.message),
+        message: "Comment ID is invalid.",
+        errors: commentIdError.details.map((err) => err.message),
       });
     }
 

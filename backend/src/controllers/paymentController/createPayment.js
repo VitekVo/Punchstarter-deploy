@@ -21,10 +21,9 @@ const createPayment = async (req, res) => {
     const { projectId, amount } = value;
 
     const newPayment = new Donation({
-      userId: res.locals.user._id,
-      projectId,
-      amount,
-      createdAt: new Date(),
+      user_id: res.locals.user._id,
+      project_id: projectId,
+      amount
     });
 
     const savedPayment = await newPayment.save();

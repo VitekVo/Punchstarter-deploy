@@ -1,9 +1,9 @@
 import Comment from "../../models/comment.model.js";
-import { CommentIdFromQuerySchema } from "../../validations/commentValidation/commentValidation.js";
+import { projectIdFromQuerySchema } from "../../validations/commentValidation/commentValidation.js";
 
 const getCommentsByProjectId = async (req, res) => {
   try {
-    const { error, value } = CommentIdFromQuerySchema.validate(req.query, {
+    const { error, value } = projectIdFromQuerySchema.validate(req.query, {
       abortEarly: false,
     });
 
@@ -16,7 +16,7 @@ const getCommentsByProjectId = async (req, res) => {
 
     const { projectId } = value;
 
-    const comment = await Comment.findById({ project_id: projectId });
+    const comment = await Comment.find({ project_id: projectId });
 
     if (!comment) {
       return res.status(404).json({ message: "Comment not found." });
