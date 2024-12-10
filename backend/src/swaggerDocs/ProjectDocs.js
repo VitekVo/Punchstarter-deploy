@@ -7,7 +7,7 @@
 
 /**
  * @swagger
- * /api/projects:
+ * /projects:
  *   post:
  *     summary: Vytvoření nového projektu
  *     description: Vytvoří nový projekt s daty poskytnutými v těle požadavku.
@@ -148,7 +148,7 @@
  *       500:
  *         description: Chyba serveru
  *
- * /api/projects/{id}:
+ * /projects/{id}:
  *   get:
  *     summary: Získání projektu podle ID
  *     description: Vrátí detail projektu na základě poskytnutého ID.

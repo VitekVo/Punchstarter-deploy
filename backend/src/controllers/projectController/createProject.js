@@ -15,16 +15,16 @@ const createNewProject = async (req, res) => {
       });
     }
 
-    if (!res.locals.user) {
+   /* if (!res.locals.user) {
       return res.status(401).json({ message: "Unauthorized. User not found." });
     }
-
+*/
     const { title, description, goalAmount, deadline, category } = value;
 
     const images = req.files?.map((file) => file.buffer) || [];
 
     const newProject = new Project({
-      creatorId: res.locals.user._id,
+      creatorId: "6751a8ae09159e32822b4c4d" /*res.locals.user._id */,
       title,
       description,
       goalAmount,
