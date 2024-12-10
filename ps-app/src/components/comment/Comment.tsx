@@ -13,7 +13,7 @@ export const Comment = ({ comment, user_id }: IComment) => {
           </div>
         </div>{" "}
         <div className="chat-header">Candice Ligma</div>
-        <div className="chat-bubble">{comment}</div>
+        <div className="chat-bubble chat-bubble-primary">{comment}</div>
       </div>
     </div>
   );

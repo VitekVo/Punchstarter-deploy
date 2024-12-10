@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import Donation from "./models/donation.model.js";  // Cesta k vašemu modelu
+import Donation from "./models/donation.model.js"; // Cesta k vašemu modelu
 import userRoutes from "./routes/userRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
@@ -10,8 +10,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { checkUser } from "./services/authService.js";
 
-import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from './services/swaggerService.js';
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./services/swaggerService.js";
 
 dotenv.config();
 const app = express();
