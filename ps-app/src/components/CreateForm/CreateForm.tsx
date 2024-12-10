@@ -60,34 +60,40 @@ export const CreateForm = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const formData = {
-      //Prej na to náš BE nemá budget
-      //title: formState.name,
-      //location: formState.location,
-      category: formState.category,
-      goalAmount: formState.goal,
-      deadline: formState.end,
-      title: formState.title,
-      description: formState.about,
-      images: formState.img,
-      creatorId: "675215e111db830fc224cf0d", //TODO: add current logged in user when userProvider is ready
-    };
-    console.log(formData);
-    const response = await fetch("http://localhost:2580/projects/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    // Create a FormData instance
+    const formData = new FormData();
 
-      body: JSON.stringify(formData),
+    // Append other fields
+    //formData.append("name", formState.name);
+    //formData.append("location", formState.location);
+    formData.append("category", formState.category);
+    formData.append("goalAmount", formState.goal?.toString() || "");
+    formData.append("deadline", formState.end);
+    formData.append("title", formState.title);
+    formData.append("description", formState.about);
+    formData.append("creatorId", "675215e111db830fc224cf0d"); // Replace with actual user ID
+
+    // Append images
+    formState.img.forEach((file, index) => {
+      formData.append(`images`, file, file.name); // `images` matches the expected field on your backend
     });
 
-    const json = await response.json();
-    if (!response.ok) {
-      console.log(json.error);
-    }
-    if (response.ok) {
-      console.log("new project created", json);
+    // Send the request
+    try {
+      const response = await fetch("http://localhost:2580/projects/", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error("Error creating project:", error);
+      } else {
+        const json = await response.json();
+        console.log("Project created successfully:", json);
+      }
+    } catch (err) {
+      console.error("An error occurred:", err);
     }
   }
 
