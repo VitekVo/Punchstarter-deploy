@@ -88,6 +88,7 @@
  *       500:
  *         description: Chyba serveru
  *
+ * /projects/load?limit={number}:
  *   get:
  *     summary: Získání projektů podle limitu
  *     description: Vrátí seznam projektů podle daného limitu.
