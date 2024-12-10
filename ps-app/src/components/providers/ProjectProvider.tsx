@@ -27,7 +27,9 @@ export function ListProvider({ children }: ListProviderProps) {
 
   const fetchLists = async () => {
     try {
-      const response = await fetch("http://localhost:2580/projects/load/10");
+      const response = await fetch(
+        "http://localhost:2580/projects/load?limit=1",
+      );
       const json = await response.json();
       if (response.ok) {
         setListsData(json);

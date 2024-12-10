@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { IUser } from "@/utils/types/types";
+import axiosInstance from "../../config/axiosInstance";
 
 // Define the shape of the context
 type UserContextType = {
@@ -17,6 +18,12 @@ type Props = {
 
 export const UserContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<IUser | null>(null); // Initial state is null
+
+  axiosInstance.post("/users/me").then((res) => {
+    if (res.status === 200) {
+      setUser(res.data);
+    }
+  });
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

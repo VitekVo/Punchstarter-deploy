@@ -1,9 +1,14 @@
+"use client";
+
 import React from "react";
 import LinkButton from "@/components/button/LinkButton";
 import { CiSearch } from "react-icons/ci";
 import Link from "next/link";
+import { useUserContext } from "@/context/UserContext";
 
 const Navbar = () => {
+  const { user } = useUserContext();
+
   return (
     <div className="flex justify-between items-center bg-base-100 border-b px-16 py-4 mb-8">
       <label className={"flex flex-col text-sm gap-2"}>
@@ -25,7 +30,11 @@ const Navbar = () => {
 
       <div className="flex gap-4">
         <LinkButton text={"Nový projekt"} href={"/createProject"} />
-        <LinkButton text={"Přihlásit se"} href={"/login"} />
+        {!user ? (
+          <LinkButton text={"Přihlásit se"} href={"/login"} />
+        ) : (
+          <LinkButton text={user.username} href={"/account"} />
+        )}
       </div>
     </div>
   );

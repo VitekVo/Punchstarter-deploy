@@ -5,10 +5,9 @@ import { IoMdCheckmark } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { IUser } from "@/utils/types/types";
-import axios from "axios";
 import { useUserContext } from "@/context/UserContext";
-import { redirect } from "next/navigation";
+import axiosInstance from "../../../config/axiosInstance";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +20,7 @@ const Page = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
   const { setUser } = useUserContext();
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,13 +35,24 @@ const Page = () => {
 
     setLoading(true);
 
-    axios
-      .post<IUser>("/auth", formData)
+    console.log(process.env.NEXT_PUBLIC_DB_URL + "/users/login");
+
+    axiosInstance
+      .post("/users/login", formData)
       .then((res) => {
-        if (res.status === 201) setUser(res.data);
+        console.log(res.data);
+        if (res.status === 201) {
+          setUser(res.data);
+          router.push("/");
+        }
       })
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .catch((e) => {
+        console.error(e);
+        setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -128,8 +139,7 @@ const Page = () => {
       </div>
       <div className={"flex flex-col gap-2 items-center"}>
         <button
-          // type={"submit"}
-          onClick={() => redirect("/")}
+          type={"submit"}
           disabled={!formData.username || !formData.password || loading}
           className={`${formData.username && formData.password && !loading ? "hover:bg-primary-dark" : "bg-opacity-40"} transition w-full py-2 bg-primary text-white rounded-lg`}
         >
