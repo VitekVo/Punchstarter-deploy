@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \"username\": \"John Mock\", \"email\": \"johnsmith@example.com\", \"password\" : \"123456\" }\r\n",
+							"raw": "{ \"username\": \"sdssdddssd\", \"password\" : \"123456\" }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,12 +24,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users",
-							"protocol": "http",
+							"raw": "{{local}}/users",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"users"
 							]
@@ -43,12 +41,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/{userId}?userId=1",
-							"protocol": "http",
+							"raw": "{{local}}/users/{userId}?userId=67521a0845f4c6791c35c9ff",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								"{userId}"
@@ -56,7 +52,7 @@
 							"query": [
 								{
 									"key": "userId",
-									"value": "1"
+									"value": "67521a0845f4c6791c35c9ff"
 								}
 							]
 						}
@@ -78,12 +74,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/{userId}?userId=1",
-							"protocol": "http",
+							"raw": "{{local}}/users/{userId}?userId=1",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								"{userId}"
@@ -104,12 +98,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/{userId}?userId=1",
-							"protocol": "http",
+							"raw": "{{local}}/users/{userId}?userId=67521a0845f4c6791c35c9ff",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								"{userId}"
@@ -117,7 +109,7 @@
 							"query": [
 								{
 									"key": "userId",
-									"value": "1"
+									"value": "67521a0845f4c6791c35c9ff"
 								}
 							]
 						}
@@ -130,12 +122,10 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/{userId}/follow/{projectId}?userId=1&projectId=project123",
-							"protocol": "http",
+							"raw": "{{local}}/users/{userId}/follow/{projectId}?userId=1&projectId=project123",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								"{userId}",
@@ -155,6 +145,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \"username\": \"TEST\", \r\n     \"password\" : \"123456\"\r\n  }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/users/login",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -167,21 +184,50 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"new project 3\",\r\n    \"description\": \"this is my new project\",\r\n    \"goalAmount\": 150000,\r\n    \"createdBy\": \"userThatCreatedProject\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/C:/Users/jerrd/OneDrive/Obrázky/Saved Pictures/testImg.jpg"
+								},
+								{
+									"key": "creatorId",
+									"value": "6751a8ae09159e32822b4c4d",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Martin",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Tech",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "martin mi muze visco",
+									"type": "text"
+								},
+								{
+									"key": "deadline",
+									"value": "2025-12-31T23:59:59.000Z",
+									"type": "text"
+								},
+								{
+									"key": "goalAmount",
+									"value": "80000",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/projects",
-							"protocol": "http",
+							"raw": "{{local}}/projects",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"projects"
 							]
@@ -195,12 +241,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/projects/{projectId}?projectId=1",
-							"protocol": "http",
+							"raw": "{{local}}/projects/{projectId}?projectId=6741fc473ac88ee0717f58da",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"projects",
 								"{projectId}"
@@ -208,7 +252,7 @@
 							"query": [
 								{
 									"key": "projectId",
-									"value": "1"
+									"value": "6741fc473ac88ee0717f58da"
 								}
 							]
 						}
@@ -221,21 +265,20 @@
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"new title\",\r\n    \"description\": \"new desc(9696966969969969696969 lol)\",\r\n    \"goalAmount\": 2568\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/C:/Users/jerrd/OneDrive/Obrázky/Saved Pictures/kocourVBotach.jpg"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/projects/{projectId}?projectId=1",
-							"protocol": "http",
+							"raw": "{{local}}/projects/{projectId}?projectId=67489ff91fefc0a8a4f2399e",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"projects",
 								"{projectId}"
@@ -243,7 +286,7 @@
 							"query": [
 								{
 									"key": "projectId",
-									"value": "1"
+									"value": "67489ff91fefc0a8a4f2399e"
 								}
 							]
 						}
@@ -256,12 +299,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/projects/{projectId}?projectId=1",
-							"protocol": "http",
+							"raw": "{{local}}/projects/{projectId}?projectId=673f14efe3e029c45ffb2dab",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"projects",
 								"{projectId}"
@@ -269,7 +310,7 @@
 							"query": [
 								{
 									"key": "projectId",
-									"value": "1"
+									"value": "673f14efe3e029c45ffb2dab"
 								}
 							]
 						}
@@ -277,31 +318,24 @@
 					"response": []
 				},
 				{
-					"name": "addCommentToProject",
+					"name": "loadProjects",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/projects/{projectId}/comments/{commentId}?projectId=1&commentId=12345",
-							"protocol": "http",
+							"raw": "{{local}}/projects/load/{limit}?limit=10",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"projects",
-								"{projectId}",
-								"comments",
-								"{commentId}"
+								"load",
+								"{limit}"
 							],
 							"query": [
 								{
-									"key": "projectId",
-									"value": "1"
-								},
-								{
-									"key": "commentId",
-									"value": "12345"
+									"key": "limit",
+									"value": "10"
 								}
 							]
 						}
@@ -328,12 +362,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/comments",
-							"protocol": "http",
+							"raw": "{{local}}/comments",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"comments"
 							]
@@ -347,12 +379,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/comments/{projectId}?projectId=2",
-							"protocol": "http",
+							"raw": "{{local}}/comments/{projectId}?projectId=673f267096c4a1969e72761e",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"comments",
 								"{projectId}"
@@ -360,7 +390,7 @@
 							"query": [
 								{
 									"key": "projectId",
-									"value": "2"
+									"value": "673f267096c4a1969e72761e"
 								}
 							]
 						}
@@ -374,7 +404,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"updating message of comment\"\r\n}",
+							"raw": "{\r\n    \"content\": \"updating message of comment \"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -382,12 +412,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/comments/{commentId}?commentId=3",
-							"protocol": "http",
+							"raw": "{{local}}/comments/{commentId}?commentId=6752254fa06f5f61341a9a9b",
 							"host": [
-								"localhost"
+								"{{local}}"
 							],
-							"port": "3000",
 							"path": [
 								"comments",
 								"{commentId}"
@@ -395,7 +423,31 @@
 							"query": [
 								{
 									"key": "commentId",
-									"value": "3"
+									"value": "6752254fa06f5f61341a9a9b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteComment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/comments/{commentId}?commentId=673f14efe3e029c45ffb2dab",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"comments",
+								"{commentId}"
+							],
+							"query": [
+								{
+									"key": "commentId",
+									"value": "673f14efe3e029c45ffb2dab"
 								}
 							]
 						}
@@ -403,6 +455,167 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Payment_API",
+			"item": [
+				{
+					"name": "createPayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"673f267096c4a1969e72761e\",\r\n    \"projectId\": \"6751a8ae09159e32822b4c4d\",\r\n    \"amount\": 102\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/payments",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPaymentsByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/payments/user/{userId}?userId=6751a8ae09159e32822b4c4d",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"payments",
+								"user",
+								"{userId}"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "6751a8ae09159e32822b4c4d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPaymentsByProjectId",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/payments/project/{projectId}?projectId=673f267096c4a1969e72761e",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"payments",
+								"project",
+								"{projectId}"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "673f267096c4a1969e72761e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePaymentStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paymentStatus\":\"Cancelled\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/payments/{paymentId}?paymentId=1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"payments",
+								"{paymentId}"
+							],
+							"query": [
+								{
+									"key": "paymentId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "",
+			"type": "default"
 		}
 	]
 }
