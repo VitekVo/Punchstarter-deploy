@@ -4,32 +4,33 @@ import { getFormattedNumber } from "@/utils/getFormattedNumber";
 import dayjs from "dayjs";
 
 const ProjectProgress = ({
-  currentBudget,
-  targetBudget,
+  goalAmount,
   variant = "bar",
   backers,
   deadline,
+  sum,
 }: {
-  currentBudget: number;
-  targetBudget: number;
+  goalAmount: number;
   variant?: "bar" | "detail";
   backers?: number;
   deadline?: Date;
+  sum: number;
 }) => {
+  const today: Date = new Date();
+
+  // Calculate remaining days
+  const timeDifference: number =
+    new Date(String(deadline)).getTime() - today.getTime();
+  const days: number = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   return (
     <section className={"flex flex-col gap-6"}>
       <div className="flex flex-col gap-1">
-        <ProgressBar
-          currentBudget={currentBudget}
-          targetBudget={targetBudget}
-        />
+        <ProgressBar currentBudget={sum} goalAmount={goalAmount} />
         {variant === "detail" ? (
           <div className={"flex w-full gap-1 items-baseline"}>
             Celkem vybráno
-            <h3 className={"font-bold text-primary text-xl"}>
-              {getFormattedNumber(currentBudget)}
-            </h3>
-            z<h3>{getFormattedNumber(targetBudget)} Kč</h3>
+            <h3 className={"font-bold text-primary text-xl"}>{sum}</h3>z
+            <h3>{goalAmount} Kč</h3>
           </div>
         ) : null}
       </div>
@@ -43,9 +44,7 @@ const ProjectProgress = ({
       {deadline ? (
         <div className={"flex w-full gap-1 items-baseline"}>
           Do konce zbývá
-          <h3 className={"font-bold text-primary text-xl"}>
-            {dayjs(deadline).format("D")}
-          </h3>
+          <h3 className={"font-bold text-primary text-xl"}>{days}</h3>
           dní
         </div>
       ) : null}

@@ -6,12 +6,38 @@ export interface IUser {
 }
 
 export interface IProject {
-  id: number;
+  _id: number;
   title: string;
   description: string;
-  category: "Tech" | "Art" | "Film" | "Music" | "Food" | "Game" | "Other";
+  category: ProjectCategory;
   currentBudget: number;
-  targetBudget: number;
-  supporters: number;
+  goalAmount: number;
+  followCount: number;
   deadline: Date;
+  comments: IComment[];
+  images: Buffer[];
+  sum: number;
+  donations: Array<Object>;
+  followList: Array<Object>;
+  creatorId: ICreator;
+}
+export enum ProjectCategory {
+  Tech = "Tech",
+  Art = "Art",
+  Film = "Film",
+  Music = "Music",
+  Food = "Food",
+  Game = "Game",
+  Other = "Other",
+}
+
+export interface IComment {
+  _id: string;
+  projectId: string;
+  comment: string;
+  user_id: ICreator;
+}
+export interface ICreator {
+  _id: string; // The unique identifier of the creator
+  username: string; // The creator's username
 }

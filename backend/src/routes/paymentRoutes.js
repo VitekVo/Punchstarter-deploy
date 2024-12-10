@@ -1,12 +1,13 @@
-import express from  'express';
+import express from "express";
 
-import { createPayment, getPaymentsByUserId, getPaymentsByProjectId, updatePaymentStatus } from '../controllers/paymentController.js';
+import createPayment from "../controllers/paymentController/createPayment.js";
+import getPaymentByProjectId from "../controllers/paymentController/getPaymentByProjectId.js";
+import getPaymentByUserId from "../controllers/paymentController/getPaymentByUserId.js";
 
 const router = express.Router();
 
- router.post('/', createPayment);
- router.get('/user/:userId', getPaymentsByUserId);
- router.get('/project/:projectId', getPaymentsByProjectId);
- router.put('/:paymentId', updatePaymentStatus);
+router.post("/", createPayment);
+router.get("/project/:projectId", getPaymentByProjectId);
+router.get("/user/:userId", getPaymentByUserId);
 
 export default router;

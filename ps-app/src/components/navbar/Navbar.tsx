@@ -24,7 +24,7 @@ const Navbar = () => {
       </Link>
 
       <div className="flex gap-4">
-        <LinkButton text={"Nový projekt"} href={"/novy"} />
+        <LinkButton text={"Nový projekt"} href={"/createProject"} />
         <LinkButton text={"Přihlásit se"} href={"/login"} />
       </div>
     </div>
