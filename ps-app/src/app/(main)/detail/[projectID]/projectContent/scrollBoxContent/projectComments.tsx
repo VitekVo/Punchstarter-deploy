@@ -6,20 +6,24 @@ import { AddComment } from "@/components/comment/AddComment";
 import { useState } from "react";
 import { comment } from "postcss";
 import { RiH1 } from "react-icons/ri";
+import { UserContextProvider, useUserContext } from "@/context/UserContext";
 const ProjectComments = ({ project }: { project: IProject }) => {
   const [showAddComment, setShowAddComment] = useState(false);
   const [comments, setComments] = useState(project.comments);
+  const { user } = useUserContext();
+
+  console.log(user);
 
   async function handleAddComment(newComment: string) {
     const commentData = {
-      project_id: project._id,
-      comment: newComment,
-      user_id: "6751a8ae09159e32822b4c4d", //TODO: add current logged in user when userProvider is ready
+      projectId: project._id,
+      text: newComment,
+      userId: user?.id,
     };
 
     console.log(commentData);
 
-    const response = await fetch("http://localhost:2580/projects/addComment", {
+    const response = await fetch("http://localhost:2580/comments", {
       method: "POST",
       body: JSON.stringify(commentData),
       headers: { "Content-Type": "application/json" },
@@ -32,9 +36,16 @@ const ProjectComments = ({ project }: { project: IProject }) => {
     if (response.ok) {
       console.log("new list created", json);
     }
-    console.log(comments);
-    console.log(json.comment);
-    setComments([...comments, json.comment]);
+    const newCommentWithUser = {
+      ...json.comment,
+      user_id: {
+        id: user?.id,
+        username: user?.username, // Add the username under the user_id field
+      },
+    };
+
+    // Update the comments state to include the new comment
+    setComments([...comments, newCommentWithUser]);
     setShowAddComment(false);
   }
   return (
@@ -65,7 +76,8 @@ const ProjectComments = ({ project }: { project: IProject }) => {
                 projectId={comment._id}
                 user_id={comment.user_id}
                 comment={comment.comment}
-              ></Comment> // TODO: dát tam id commentu místo Math random xd
+                username={comment.user_id.username}
+              ></Comment>
             ))
           ) : (
             <h1 className="text-2xl black text-center mt-10">
