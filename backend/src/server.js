@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
-  }),
+  })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,7 +31,7 @@ if (process.env.NODE_ENV !== "development") {
   dotenv.config({ path: "./src/config/.env" });
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const CONNECTION = process.env.CONNECTION;
 
 app.use("*", checkUser);
