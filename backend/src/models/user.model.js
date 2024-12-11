@@ -21,9 +21,11 @@
 
     // Před uložením hashuje heslo
     UserSchema.pre("save", function (next) {
-        const salt = bcrypt.genSaltSync();
-        this.passwordHash = bcrypt.hashSync(this.passwordHash, salt);
-        next();
+        if (this.isModified('passwordHash')) {
+            const salt = bcrypt.genSaltSync();
+            this.passwordHash = bcrypt.hashSync(this.passwordHash, salt);
+            next();
+        }
     });
 
     // Statická metoda pro přihlášení
