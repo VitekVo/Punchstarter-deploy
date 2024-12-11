@@ -1,6 +1,8 @@
 import React from "react";
 import { IComment } from "@/utils/types/types";
-export const Comment = ({ comment, user_id }: IComment) => {
+import { useUserContext } from "@/context/UserContext";
+export const Comment = ({ comment, user_id, username }: IComment) => {
+  const { user } = useUserContext();
   return (
     <div className="mb-10">
       <div className="chat chat-start">
@@ -12,7 +14,7 @@ export const Comment = ({ comment, user_id }: IComment) => {
             />
           </div>
         </div>{" "}
-        <div className="chat-header">Candice Ligma</div>
+        <div className="chat-header">{username}</div>
         <div className="chat-bubble chat-bubble-primary">{comment}</div>
       </div>
     </div>

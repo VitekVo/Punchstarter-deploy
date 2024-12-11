@@ -35,6 +35,7 @@ export interface IComment {
   _id: string;
   projectId: string;
   comment: string;
+  username: string;
   user_id: ICreator;
 }
 export interface ICreator {
