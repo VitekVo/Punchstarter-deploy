@@ -9,6 +9,12 @@ const updateUser = async (req, res) => {
 
     const user = await User.findById(req.query.userId);
     if (user) {
+
+        if (value.password) {
+            value.passwordHash = value.password;
+            delete value.password;
+        }
+
         Object.assign(user, value);
         user.updatedAt = new Date().toISOString();
 

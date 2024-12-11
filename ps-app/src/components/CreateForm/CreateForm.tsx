@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ProjectCategory } from "@/utils/types/types";
 import Button from "../button/Button";
+import { useUserContext } from "@/context/UserContext";
 
 interface FormState {
   name: string;
@@ -16,7 +17,8 @@ interface FormState {
 
 export const CreateForm = () => {
   const [step, setStep] = useState(1);
-
+  const { user } = useUserContext();
+  console.log(user);
   const [formState, setFormState] = useState<FormState>({
     name: "",
     location: "",
@@ -27,6 +29,10 @@ export const CreateForm = () => {
     about: "",
     img: [],
   });
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   function handleNextStep() {
     if (step === 3) return;
@@ -56,33 +62,31 @@ export const CreateForm = () => {
     }));
   }
 
-  // Handle form submission
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // Create a FormData instance
-    const formData = new FormData();
+    if (!user || !user.id) {
+      console.error("User data is not available.");
+      return;
+    }
 
-    // Append other fields
-    //formData.append("name", formState.name);
-    //formData.append("location", formState.location);
+    const formData = new FormData();
     formData.append("category", formState.category);
     formData.append("goalAmount", formState.goal?.toString() || "");
     formData.append("deadline", formState.end);
     formData.append("title", formState.title);
     formData.append("description", formState.about);
-    formData.append("creatorId", "675215e111db830fc224cf0d"); // Replace with actual user ID
+    formData.append("creatorId", String(user.id));
 
-    // Append images
-    formState.img.forEach((file, index) => {
-      formData.append(`images`, file, file.name); // `images` matches the expected field on your backend
+    formState.img.forEach((file) => {
+      formData.append("images", file, file.name);
     });
 
-    // Send the request
     try {
       const response = await fetch("http://localhost:2580/projects/", {
         method: "POST",
         body: formData,
+        credentials: "include", // vem to z cookies
       });
 
       if (!response.ok) {
