@@ -5,6 +5,9 @@ import LinkButton from "@/components/button/LinkButton";
 import { CiSearch } from "react-icons/ci";
 import Link from "next/link";
 import { useUserContext } from "@/context/UserContext";
+import Avatar from "@/components/navbar/navElements/avatar";
+import Button from "@/components/button/Button";
+import LinkBtn from "@/components/button/LinkButton";
 
 const Navbar = () => {
   const { user } = useUserContext();
@@ -28,12 +31,16 @@ const Navbar = () => {
         PunchStarter
       </Link>
 
-      <div className="flex gap-4">
-        <LinkButton text={"Nový projekt"} href={"/createProject"} />
+      <div className="flex items-stretch gap-4">
+        <LinkBtn
+          variant={"outlined"}
+          text={"Nový projekt"}
+          href={"/createProject"}
+        />
         {!user ? (
           <LinkButton text={"Přihlásit se"} href={"/login"} />
         ) : (
-          <LinkButton text={user.username} href={"/account"} />
+          <Avatar />
         )}
       </div>
     </div>
