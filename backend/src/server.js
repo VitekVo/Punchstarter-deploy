@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 if (process.env.NODE_ENV !== "development") {
-  dotenv.config({ path: "config/.env" });
+  dotenv.config({ path: "./src/config/.env" });
 }
 
 const PORT = process.env.PORT || 3000;

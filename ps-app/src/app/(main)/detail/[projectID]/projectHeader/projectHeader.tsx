@@ -3,8 +3,19 @@ import ProjectProgress from "@/components/projectDetail/progress/projectProgress
 import React from "react";
 import { IProject } from "@/utils/types/types";
 import Button from "@/components/button/Button";
-
+import { useRef } from "react";
+import { DonateWindow } from "@/components/donateWindow/donateWindow";
 const ProjectHeader = ({ project }: { project: IProject }) => {
+  const modalRef = useRef<{ openModal: () => void; closeModal: () => void }>(
+    null
+  );
+
+  const handleOpenModal = () => {
+    if (modalRef.current) {
+      modalRef.current.openModal();
+    }
+  };
+
   const imgUrl =
     project.images.length > 0
       ? `data:image/png;base64,${Buffer.from(project.images[0]).toString(
@@ -25,7 +36,8 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
             deadline={project.deadline}
           />
         </div>
-        <Button onClick={() => {}} text={"PODPOŘIT"}></Button>
+        <Button onClick={handleOpenModal} text={"PODPOŘIT"}></Button>
+        <DonateWindow ref={modalRef} projectId={project._id} />
       </div>
       <div className="rounded-lg overflow-clip flex-grow aspect-[16/9]">
         {project.images.length > 0 ? (
