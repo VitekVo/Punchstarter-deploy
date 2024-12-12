@@ -38,22 +38,21 @@ const ProjectCard = ({
       className={"cursor-pointer"}
       onClick={() => redirect(`/detail/${_id}`)}
     >
-      <div className="card bg-base-100 w-52 shadow-xl ">
-        <figure className={"relative"}>
+      <div className="card bg-base-100 w-60 shadow-xl h-[400px] flex flex-col justify-between">
+        <figure className="relative">
           {images.length > 0 ? (
             <img
-              className="h-48 w-full object-fill"
-              src={imgUrl} // Dynamically display the image
+              className="w-full h-[150px] object-cover"
+              src={imgUrl}
               alt={title || "Project Image"}
             />
           ) : (
             <img
-              className="h-48 w-full object-fill"
+              className="w-full h-[150px] object-cover"
               src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
               alt={title || "Project Image"}
             />
           )}
-
           <div className="absolute top-0 right-0 p-2">
             <button
               onClick={(e) => {
@@ -65,16 +64,14 @@ const ProjectCard = ({
             </button>
           </div>
           <div className="absolute bottom-0 right-0 p-2">
-            <div
-              className={`badge uppercase font-bold text-gray-500 px-2 py-1.5`}
-            >
+            <div className="badge uppercase font-bold text-gray-500 px-2 py-1.5">
               {category}
             </div>
           </div>
         </figure>
-        <div className="card-body p-4">
+        <div className="card-body p-4 flex flex-col justify-between">
           <h2 className="card-title text-2xl font-bold">{title}</h2>
-          <p className="max-h-20 overflow-x-none overflow-hidden">
+          <p className="text-sm text-gray-600 max-h-[50px] overflow-hidden text-ellipsis">
             {description.length > 50
               ? `${description.slice(0, 50)}...`
               : description}
