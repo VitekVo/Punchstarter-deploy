@@ -35,8 +35,6 @@ if (process.env.NODE_ENV !== "development") {
 const PORT = process.env.PORT || 3000;
 const CONNECTION = process.env.CONNECTION;
 
-console.log(CONNECTION);
-
 app.use("*", checkUser);
 
 app.use("/users", userRoutes);
