@@ -29,10 +29,13 @@ app.use(cookieParser());
 
 if (process.env.NODE_ENV !== "development") {
   dotenv.config({ path: "./src/config/.env" });
+  console.log("neco");
 }
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 const CONNECTION = process.env.CONNECTION;
+
+console.log(CONNECTION);
 
 app.use("*", checkUser);
 
