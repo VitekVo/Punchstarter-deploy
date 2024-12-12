@@ -42,7 +42,7 @@ app.use("/comments", commentRoutes);
 app.use("/payments", paymentRoutes);
 
 // Basic endpoint to verify app is running
-app.get("/test", (req, res) => {
+app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
