@@ -29,7 +29,6 @@ app.use(cookieParser());
 
 if (process.env.NODE_ENV !== "development") {
   dotenv.config({ path: "./src/config/.env" });
-  console.log("neco");
 }
 
 const PORT = process.env.PORT || 3000;
