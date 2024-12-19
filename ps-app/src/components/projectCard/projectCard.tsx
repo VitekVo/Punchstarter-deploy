@@ -1,9 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FaUserFriends } from "react-icons/fa";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import { IProject } from "@/utils/types/types";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import { IoTrashBin } from "react-icons/io5";
+import { DeleteWindow } from "../deleteWindow/deleteWindow";
+
 import ProjectProgress from "@/components/projectDetail/progress/projectProgress";
 
 const ProjectCard = ({
@@ -20,7 +23,17 @@ const ProjectCard = ({
   sum,
 }: IProject) => {
   const today: Date = new Date();
+  const pathname = usePathname();
 
+  const modalRef = useRef<{ openModal: () => void; closeModal: () => void }>(
+    null
+  );
+
+  const handleOpenModal = () => {
+    if (modalRef.current) {
+      modalRef.current.openModal();
+    }
+  };
   // Calculate remaining days
   const timeDifference: number = new Date(deadline).getTime() - today.getTime();
   const days: number = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
@@ -54,14 +67,29 @@ const ProjectCard = ({
             />
           )}
           <div className="absolute top-0 right-0 p-2">
-            <button
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent click from triggering redirect
-                setIsLiked(!isLiked);
-              }}
-            >
-              {isLiked ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
-            </button>
+            {pathname === "/" && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent click from triggering redirect
+                  setIsLiked(!isLiked);
+                }}
+              >
+                {isLiked ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
+              </button>
+            )}
+            {pathname === "/userAcc" && (
+              <>
+                <button
+                  onClick={(e) => {
+                    handleOpenModal();
+                    e.stopPropagation(); // Prevent click from triggering redirect
+                  }}
+                >
+                  <IoTrashBin size={40} className="bg-red-400 rounded p-2" />
+                </button>
+                <DeleteWindow ref={modalRef} projectId={_id} />
+              </>
+            )}
           </div>
           <div className="absolute bottom-0 right-0 p-2">
             <div className="badge uppercase font-bold text-gray-500 px-2 py-1.5">
