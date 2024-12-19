@@ -17,6 +17,6 @@ router.post("/me", getCurrentUser);
 router.get("/:userid", getUserById);
 router.put("/:userid", updateUser);
 router.delete("/:userid", deleteUser);
-router.post("/:userid/follow/:projectId", followProject);
+router.post("/:userId/follow/:projectId", followProject);
 
 export default router;
