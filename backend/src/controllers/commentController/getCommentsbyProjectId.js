@@ -3,7 +3,7 @@ import { projectIdFromQuerySchema } from "../../validations/commentValidation/co
 
 const getCommentsByProjectId = async (req, res) => {
   try {
-    const { error, value } = projectIdFromQuerySchema.validate(req.query, {
+    const { error, value } = projectIdFromQuerySchema.validate(req.params, {
       abortEarly: false,
     });
 

@@ -4,7 +4,7 @@ import { CommentIdFromQuerySchema } from "../../validations/commentValidation/co
 
 const updateComment = async (req, res) => {
   try {
-    const { commentId } = req.query;
+    const { commentId } = req.params;
     const updates = req.body;
 
 

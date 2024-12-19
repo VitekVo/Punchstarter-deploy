@@ -87,13 +87,10 @@
  *     Donation:
  *       type: object
  *       properties:
- *         _id:
- *           type: string
- *           description: Unikátní identifikátor platby
- *         user_id:
+ *         userId:
  *           type: string
  *           description: ID uživatele, který provedl platbu
- *         project_id:
+ *         projectId:
  *           type: string
  *           description: ID projektu, do kterého byla platba provedena
  *         amount:

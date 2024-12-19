@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 const loadPaymentsByUserId = async (req, res) => {
   try {
-    const { error, value } = getPaymentByUserIdDtoInSchema.validate(req.query, {
+    const { error, value } = getPaymentByUserIdDtoInSchema.validate(req.params, {
       abortEarly: false,
     });
 

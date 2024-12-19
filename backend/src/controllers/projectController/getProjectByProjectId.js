@@ -4,7 +4,7 @@ import Donation from '../../models/donation.model.js';
 import { ProjectIdFromQuerySchema } from "../../validations/projectValidation/projectValidation.js";
 const getProjectById = async (req, res) => {
     try {
-        const { error, value } = ProjectIdFromQuerySchema.validate(req.query, { abortEarly: false });
+        const { error, value } = ProjectIdFromQuerySchema.validate(req.params, { abortEarly: false });
 
         if (error) {
             return res.status(400).json({

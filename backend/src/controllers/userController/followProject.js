@@ -2,7 +2,7 @@ import { followProjectDtoInSchema, followProjectDtoOutSchema } from '../../valid
 import User from '../../models/user.model.js';
 
 const followProject = async (req, res) => {
-    const { error } = followProjectDtoInSchema.validate(req.query);
+    const { error } = followProjectDtoInSchema.validate(req.params);
     if (error) {
         return res.status(400).json({ message: 'Invalid request data', error: error.details });
     }
