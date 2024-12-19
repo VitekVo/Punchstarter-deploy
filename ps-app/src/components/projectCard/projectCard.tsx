@@ -6,7 +6,7 @@ import { IProject } from "@/utils/types/types";
 import { redirect, usePathname } from "next/navigation";
 import { IoTrashBin } from "react-icons/io5";
 import { DeleteWindow } from "../deleteWindow/deleteWindow";
-
+import { useUserContext } from "@/context/UserContext";
 import ProjectProgress from "@/components/projectDetail/progress/projectProgress";
 
 const ProjectCard = ({
@@ -14,7 +14,7 @@ const ProjectCard = ({
   title,
   description,
   category,
-
+  creatorId,
   goalAmount,
   followCount,
   deadline,
@@ -39,12 +39,36 @@ const ProjectCard = ({
   const days: number = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
-
+  const { user } = useUserContext();
   // Convert buffer to Base64
   const imgUrl =
     images.length > 0
       ? `data:image/png;base64,${Buffer.from(images[0]).toString("base64")}`
       : "/path/to/placeholder-image.png";
+
+  async function followProject() {
+    const response = await fetch(
+      `http://localhost:2580/users/${user?.id}/follow/${_id}`,
+      {
+        method: "POST",
+
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // vem to z cookies
+      }
+    );
+
+    try {
+      if (!response.ok) {
+        const error = await response.json();
+        console.error("Error following project:", error);
+      } else {
+        const json = await response.json();
+        console.log("followed successfully:", json);
+      }
+    } catch (err) {
+      console.error("An error occurred:", err);
+    }
+  }
 
   return (
     <div
@@ -72,12 +96,13 @@ const ProjectCard = ({
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent click from triggering redirect
                   setIsLiked(!isLiked);
+                  followProject();
                 }}
               >
                 {isLiked ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
               </button>
             )}
-            {pathname === "/userAcc" && (
+            {pathname === "/userAcc" && creatorId._id === String(user?.id) && (
               <>
                 <button
                   onClick={(e) => {

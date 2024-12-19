@@ -26,17 +26,6 @@ export const DeleteWindow = forwardRef(
     }));
 
     async function handleSubmit() {
-      const urlparams = new URLSearchParams();
-      urlparams.append("projectId", projectId.toString());
-      const response = await fetch(
-        `http://localhost:2580/projects/{projectId}?` + urlparams,
-        {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include", // vem to z cookies
-        }
-      );
-      /* 
       const response = await fetch(
         `http://localhost:2580/projects/${projectId}`,
         {
@@ -46,9 +35,6 @@ export const DeleteWindow = forwardRef(
           credentials: "include", // vem to z cookies
         }
       );
-
-      
-      */
 
       try {
         if (!response.ok) {

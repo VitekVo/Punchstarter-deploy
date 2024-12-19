@@ -28,11 +28,21 @@ function ListConsumerComponent() {
     (list) => String(list.creatorId._id) === String(user?.id)
   );
 
+  const followedLists = listsData?.projects.filter((list) =>
+    list.followList.includes(String(user?.id))
+  );
+
   return (
-    <ProjectCarousel
-      title={`My Projects (${filteredLists?.length || 0})`}
-      listsData={{ projects: filteredLists || [] }}
-    />
+    <>
+      <ProjectCarousel
+        title={`My Projects (${filteredLists?.length || 0})`}
+        listsData={{ projects: filteredLists || [] }}
+      />
+      <ProjectCarousel
+        title={`Following Projects (${followedLists?.length || 0})`}
+        listsData={{ projects: followedLists || [] }}
+      />
+    </>
   );
 }
 

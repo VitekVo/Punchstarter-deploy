@@ -17,25 +17,32 @@ export default function Home() {
 function ListConsumerComponent() {
   const { listsData } = useListContext();
 
-  const ProjectsDateSort = (listsData?.projects || []).slice().sort((a, b) => {
-    const dateA = new Date(a.created_at).getTime();
-    const dateB = new Date(b.created_at).getTime();
-    return dateB - dateA;
-  });
+  const ProjectsDateSort = (listsData?.projects || [])
+    .slice()
+    .sort((a, b) => {
+      const dateA = new Date(a.created_at).getTime();
+      const dateB = new Date(b.created_at).getTime();
+      return dateB - dateA; // Newest first
+    })
+    .slice(0, 6); // Limit to 6 items
 
-  const ProjectFollowSort = (listsData?.projects || []).slice().sort((a, b) => {
-    const followA = a.followCount;
-    const followB = b.followCount;
-    return followB - followA;
-  });
+  const ProjectFollowSort = (listsData?.projects || [])
+    .slice()
+    .sort((a, b) => {
+      const followA = a.followCount;
+      const followB = b.followCount;
+      return followB - followA; // Most followed first
+    })
+    .slice(0, 6); // Limit to 6 items
 
   const ProjectsDeadlineSort = (listsData?.projects || [])
     .slice()
     .sort((a, b) => {
       const dateA = new Date(a.deadline).getTime();
       const dateB = new Date(b.deadline).getTime();
-      return dateA - dateB;
-    });
+      return dateA - dateB; // Closest deadline first
+    })
+    .slice(0, 6); // Limit to 6 items
 
   return (
     <>
