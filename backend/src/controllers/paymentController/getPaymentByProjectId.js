@@ -4,7 +4,7 @@ import { getPaymentByProjectIdDtoInSchema } from "../../validations/paymentValid
 const loadPaymentsByProjectId = async (req, res) => {
   try {
     const { error, value } = getPaymentByProjectIdDtoInSchema.validate(
-      req.query,
+      req.params,
       {
         abortEarly: false,
       }

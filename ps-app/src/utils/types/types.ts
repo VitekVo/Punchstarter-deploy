@@ -20,6 +20,7 @@ export interface IProject {
   donations: Array<Object>;
   followList: Array<Object>;
   creatorId: ICreator;
+  created_at: Date;
 }
 export enum ProjectCategory {
   Tech = "Tech",

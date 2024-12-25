@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  use,
-} from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 import { IUser } from "@/utils/types/types";
 import axiosInstance from "../../config/axiosInstance";
 import { useEffect } from "react";
@@ -44,7 +38,7 @@ export const useUserContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "useUserContext must be called from within a UserContextProvider"
+      "useUserContext must be called from within a UserContextProvider",
     );
   }
 

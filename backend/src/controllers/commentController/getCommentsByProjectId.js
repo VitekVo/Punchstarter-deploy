@@ -4,7 +4,7 @@ import { projectIdFromQuerySchema } from "../../validations/commentValidation/co
 // name of the file has to be the same as the name of the function
 const getCommentsByProjectId = async (req, res) => {
   try {
-    const { error, value } = projectIdFromQuerySchema.validate(req.query, {
+    const { error, value } = projectIdFromQuerySchema.validate(req.params, {
       abortEarly: false,
     });
 

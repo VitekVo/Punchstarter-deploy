@@ -5,7 +5,7 @@ import {
 import User from "../../models/user.model.js";
 
 const getUserById = async (req, res) => {
-  const { error, value } = getUserByIdDtoInSchema.validate(req.query);
+  const { error, value } = getUserByIdDtoInSchema.validate(req.params);
 
   if (error) {
     return res

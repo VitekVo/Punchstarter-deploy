@@ -6,7 +6,7 @@ import { uploadImages } from "../../services/uploadService.js";
 const updateProject = async (req, res) => {
     try {
         // Získání ID projektu z query
-        const { projectId } = req.query;
+        const { projectId } = req.params;
 
         // Validace ID projektu
         const { error: projectIdError, value: projectIdValue } = ProjectIdFromQuerySchema.validate({ projectId });

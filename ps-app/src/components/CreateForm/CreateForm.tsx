@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { ProjectCategory } from "@/utils/types/types";
 import Button from "../button/Button";
 import { useUserContext } from "@/context/UserContext";
+import { useRouter } from "next/navigation";
 
 interface FormState {
   name: string;
@@ -16,8 +17,10 @@ interface FormState {
 }
 
 export const CreateForm = () => {
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const { user } = useUserContext();
+
   console.log(user);
   const [formState, setFormState] = useState<FormState>({
     name: "",
@@ -81,7 +84,7 @@ export const CreateForm = () => {
     formState.img.forEach((file) => {
       formData.append("images", file, file.name);
     });
-
+    let json;
     try {
       const response = await fetch("http://localhost:2580/projects/", {
         method: "POST",
@@ -93,12 +96,13 @@ export const CreateForm = () => {
         const error = await response.json();
         console.error("Error creating project:", error);
       } else {
-        const json = await response.json();
+        json = await response.json();
         console.log("Project created successfully:", json);
       }
     } catch (err) {
       console.error("An error occurred:", err);
     }
+    router.push("/detail/" + json.project._id);
   }
 
   return (
@@ -186,9 +190,9 @@ export const CreateForm = () => {
                   <input
                     id="goal"
                     type="number"
-                    step={100}
-                    placeholder="5000"
-                    min={0}
+                    step={1000}
+                    placeholder="5000 Kč"
+                    min={1000}
                     max={10000000}
                     value={formState.goal || ""}
                     onChange={handleInputChange}
