@@ -191,7 +191,7 @@
 
 /**
  * @swagger
- * /users/follow:
+ * /users/{userId}/follow/{projectId}:
  *   post:
  *     tags: [Users]
  *     summary: Follow a project
