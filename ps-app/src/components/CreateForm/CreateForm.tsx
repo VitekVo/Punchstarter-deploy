@@ -34,7 +34,7 @@ export const CreateForm = () => {
   });
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div>Nejsi přihlášen!</div>;
   }
 
   function handleNextStep() {
