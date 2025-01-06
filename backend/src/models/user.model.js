@@ -17,6 +17,10 @@
             type: [Buffer],
             required: false,
         },
+        googleId: {
+            type: String,
+            required: false
+        }
     });
 
     // Před uložením hashuje heslo
