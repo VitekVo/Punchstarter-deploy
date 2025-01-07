@@ -61,6 +61,7 @@ const ProjectComments = ({ project }: { project: IProject }) => {
             text={"Add comment"}
             width={"fit"}
             onClick={() => setShowAddComment(!showAddComment)}
+            isDisabled={user ? false : true}
           ></Button>
         </div>
         <div>

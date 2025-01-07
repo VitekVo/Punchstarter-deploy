@@ -6,10 +6,12 @@ import { IProject } from "@/utils/types/types";
 import Button from "@/components/button/Button";
 import { useRef } from "react";
 import { DonateWindow } from "@/components/donateWindow/donateWindow";
+import { useUserContext } from "@/context/UserContext";
 const ProjectHeader = ({ project }: { project: IProject }) => {
   const modalRef = useRef<{ openModal: () => void; closeModal: () => void }>(
     null
   );
+  const { user } = useUserContext();
   const [projectData, setProjectData] = useState(project);
 
   const handleOpenModal = () => {
@@ -48,7 +50,11 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
             deadline={project.deadline}
           />
         </div>
-        <Button onClick={handleOpenModal} text={"PODPOŘIT"}></Button>
+        <Button
+          onClick={handleOpenModal}
+          text={"PODPOŘIT"}
+          isDisabled={user ? false : true}
+        ></Button>
         <DonateWindow
           ref={modalRef}
           projectId={project._id}
