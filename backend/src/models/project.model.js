@@ -15,6 +15,7 @@ const ProjectSchema = new Schema({
     enum: ["Tech", "Art", "Film", "Music", "Food", "Game", "Other"],
     required: false,
   },
+  /* backers */
   followCount: {
     type: Number,
     default: 0,

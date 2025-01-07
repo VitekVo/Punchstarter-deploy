@@ -1,6 +1,7 @@
 import Donation from "../../models/donation.model.js";
 import { createPaymentdtoInSchema } from "../../validations/paymentValidation/createPaymentValidation.js";
 import logger from "../../services/logger.js";
+import Project from "../../models/project.model.js";
 
 const createPayment = async (req, res) => {
   try {
@@ -23,6 +24,13 @@ const createPayment = async (req, res) => {
 
     const { projectId, amount } = value;
 
+    // Najít projekt
+    const project = await Project.findById(projectId);
+    if (!project) {
+      logger.warn('Project not found', { projectId });
+      return res.status(404).json({ message: 'Project not found' });
+    }
+
     const newPayment = new Donation({
       user_id: res.locals.user._id,
       project_id: projectId,
@@ -30,7 +38,8 @@ const createPayment = async (req, res) => {
     });
 
     const savedPayment = await newPayment.save();
-
+    project.followCount += 1;
+    await project.save();
     logger.info(`Payment created successfully for user ${res.locals.user._id}`, { payment: savedPayment });
 
     res.status(201).json({
