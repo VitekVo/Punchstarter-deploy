@@ -21,6 +21,7 @@ const app = express();
 
 const envFile = process.env.NODE_ENV === "production" ? ".env.production" : ".env";
 dotenv.config({ path: envFile });
+import "../src/services/passwordService.js";
 
 mongoose.set("strictQuery", false);
 
@@ -42,7 +43,7 @@ app.use(
     cors({
       origin: [
         "http://localhost:3000",
-        "https://punchstarter-deploy.onrender.com"
+        "https://uun-punchstarter.vercel.app"
       ],
       credentials: true,
     })
@@ -65,7 +66,6 @@ const CONNECTION = process.env.CONNECTION;
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use("*", checkUser);
 
 app.use("/auth", googleAuthRoutes);
