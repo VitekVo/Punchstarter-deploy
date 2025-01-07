@@ -54,13 +54,21 @@ logger.info(`Base URL: ${process.env.BASE_URL}`);
 const PORT = process.env.PORT || 3000;
 const CONNECTION = process.env.CONNECTION;
 
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("*", checkUser);
 
+app.use("/auth", googleAuthRoutes);
 app.use("/users", userRoutes);
 app.use("/projects", projectRoutes);
 app.use("/comments", commentRoutes);
 app.use("/payments", paymentRoutes);
-app.use("/auth", googleAuthRoutes);
+
+
+
+
 // Basic endpoint to verify app is running
 app.get("/", (req, res) => {
   res.send("API is running...");
