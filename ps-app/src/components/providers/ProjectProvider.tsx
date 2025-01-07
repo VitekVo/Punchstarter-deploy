@@ -13,6 +13,7 @@ interface ListContextType {
     message: string;
     projects: IProject[];
   } | null; // Může být null, pokud data ještě nejsou načtena
+  setListsData: React.Dispatch<React.SetStateAction<ListContextType>>;
 }
 
 // Create context with default value as `null`
@@ -28,7 +29,7 @@ export function ListProvider({ children }: ListProviderProps) {
   const fetchLists = async () => {
     try {
       const response = await fetch(
-        "http://localhost:2580/projects/load?limit=20"
+        "http://localhost:2580/projects/load?limit=20",
       );
       const json = await response.json();
       if (response.ok) {
@@ -49,7 +50,7 @@ export function ListProvider({ children }: ListProviderProps) {
   }, [listsData]);
 
   return (
-    <ListContext.Provider value={{ listsData }}>
+    <ListContext.Provider value={{ listsData, setListsData }}>
       {children}
     </ListContext.Provider>
   );

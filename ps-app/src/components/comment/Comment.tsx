@@ -4,13 +4,11 @@ import Avatar from "../navbar/navElements/avatar";
 
 export const Comment = ({ comment, username }: IComment) => {
   return (
-    <div className="mb-10">
-      <div className="chat chat-start">
-        <div />
-        <Avatar username={username} />{" "}
-        <div className="chat-header">{username}</div>
-        <div className="chat-bubble chat-bubble-primary">{comment}</div>
-      </div>
+    <div className="chat chat-start">
+      <div />
+      <Avatar username={username} />{" "}
+      <div className="chat-header">{username}</div>
+      <div className="chat-bubble chat-bubble-primary">{comment}</div>
     </div>
   );
 };

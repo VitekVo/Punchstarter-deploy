@@ -21,8 +21,8 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
 }) => {
   return (
     <div className={"flex flex-col gap-6"}>
-      <h1 className={"ml-16 text-4xl font-bold"}>{title}</h1>
-      <div className={"carousel flex gap-8 overflow-y-scroll px-16 pb-12"}>
+      <h1 className={"text-4xl font-bold"}>{title}</h1>
+      <div className={"carousel flex gap-8 overflow-y-scroll pb-12"}>
         {listsData.projects.map((project) => (
           <ProjectCard key={project._id} {...project} />
         ))}

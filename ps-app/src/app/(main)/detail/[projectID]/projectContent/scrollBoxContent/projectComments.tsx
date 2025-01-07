@@ -52,39 +52,41 @@ const ProjectComments = ({ project }: { project: IProject }) => {
     <div id={"comments"} className={"carousel-item w-full"}>
       <div
         className={
-          "w-full h-fit border rounded-lg flex flex-col p-8 px-12 text-gray-700"
+          "w-full h-fit border rounded-lg flex flex-col p-8 px-12 text-gray-700 gap-y-8"
         }
       >
-        <div className="grid grid-cols-7">
+        <div className="flex justify-between">
           <h2 className="text-lg uppercase font-bold">komentáře</h2>
-          <div className="col-start-7">
-            <Button
-              text={"Add comment"}
-              onClick={() => setShowAddComment(!showAddComment)}
-            ></Button>
-          </div>
+          <Button
+            text={"Add comment"}
+            width={"fit"}
+            onClick={() => setShowAddComment(!showAddComment)}
+          ></Button>
         </div>
         <div>
           {showAddComment && (
             <AddComment handleAddComment={handleAddComment}></AddComment>
           )}
-          {comments.length > 0 ? (
-            comments.map((comment) => (
-              <Comment
-                key={comment._id}
-                _id={comment._id}
-                projectId={comment._id}
-                user_id={comment.user_id}
-                comment={comment.comment}
-                username={comment.user_id.username}
-              ></Comment>
-            ))
-          ) : (
-            <h1 className="text-2xl black text-center mt-10">
-              Zatím se k projektu nikdo nevyjádřil. <br />
-              Nestyď se a buď první!
-            </h1>
-          )}
+
+          <div className={"flex flex-col gap-y-4"}>
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <Comment
+                  key={comment._id}
+                  _id={comment._id}
+                  projectId={comment._id}
+                  user_id={comment.user_id}
+                  comment={comment.comment}
+                  username={comment.user_id.username}
+                />
+              ))
+            ) : (
+              <h1 className="text-2xl black text-center">
+                Zatím se k projektu nikdo nevyjádřil. <br />
+                Nestyď se a buď první!
+              </h1>
+            )}
+          </div>
         </div>
       </div>
     </div>

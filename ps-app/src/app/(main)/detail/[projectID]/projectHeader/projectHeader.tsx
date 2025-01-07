@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { DonateWindow } from "@/components/donateWindow/donateWindow";
 const ProjectHeader = ({ project }: { project: IProject }) => {
   const modalRef = useRef<{ openModal: () => void; closeModal: () => void }>(
-    null
+    null,
   );
 
   const handleOpenModal = () => {
@@ -19,7 +19,7 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
   const imgUrl =
     project.images.length > 0
       ? `data:image/png;base64,${Buffer.from(project.images[0]).toString(
-          "base64"
+          "base64",
         )}`
       : "/path/to/placeholder-image.png";
   return (
@@ -42,12 +42,12 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
       <div className="rounded-lg overflow-clip flex-grow aspect-[16/9]">
         {project.images.length > 0 ? (
           <img
-            className="h-full w-full object-contain"
+            className="h-full w-full object-cover"
             src={imgUrl} // Dynamically display the image
           />
         ) : (
           <img
-            className="h-full w-full object-contain"
+            className="h-full w-full object-cover"
             src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
           />
         )}
