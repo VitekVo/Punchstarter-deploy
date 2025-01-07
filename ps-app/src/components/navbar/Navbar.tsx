@@ -13,37 +13,34 @@ const Navbar = () => {
   const { user } = useUserContext();
 
   return (
-    <div className="flex justify-between items-center bg-base-100 border-b px-16 py-4 mb-8">
-      <label className={"flex flex-col text-sm gap-2"}>
-        <div
-          className={`w-full flex rounded-md border pl-4 py-2 focus-within:border-neutral-400`}
-        >
+    <div className="flex flex-wrap items-center bg-base-100 border-b px-4 sm:px-8 py-4 mb-8">
+      {/* Search Bar */}
+      <label className="w-full sm:w-auto flex flex-col text-sm gap-2 mb-4 sm:mb-0 sm:mr-auto">
+        <div className="w-full flex rounded-md border pl-4 py-2 focus-within:border-neutral-400">
           <input
-            className={"w-full bg-transparent outline-0"}
+            className="w-full bg-transparent outline-0"
             name="username"
-            placeholder={"Vyhledat projekt"}
+            placeholder="Vyhledat projekt"
           />
-          <CiSearch size={24} className={"mx-3"} />
+          <CiSearch size={24} className="mx-3" />
         </div>
       </label>
 
-      <Link href={"/"} className="btn btn-ghost text-4xl font-bold ">
+      {/* Logo */}
+      <Link
+        href="/"
+        className="w-full sm:w-auto text-center btn btn-ghost text-2xl sm:text-4xl font-bold mb-4 sm:mb-0 sm:mr-auto"
+      >
         PunchStarter
       </Link>
 
-      <div className="flex items-stretch gap-4">
-        <LinkBtn
-          variant={"outlined"}
-          text={"Nový projekt"}
-          href={"/createProject"}
-        />
-        {!user ? (
-          <LinkButton text={"Přihlásit se"} href={"/login"} />
-        ) : (
-          <Avatar />
-        )}
+      {/* Buttons */}
+      <div className="flex w-full sm:w-auto justify-center sm:justify-end items-center gap-4">
+        <LinkBtn variant="outlined" text="Nový projekt" href="/createProject" />
+        {!user ? <LinkButton text="Přihlásit se" href="/login" /> : <Avatar />}
       </div>
     </div>
   );
 };
+
 export default Navbar;

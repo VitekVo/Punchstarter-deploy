@@ -36,6 +36,9 @@ app.use(cookieParser());
 const envFile =
   process.env.NODE_ENV === "production" ? ".env.production" : ".env";
 dotenv.config({ path: envFile });
+
+logger.info("-----------------------------------------------------------------------------------------");
+logger.info(`New instance started: ${new Date().toISOString()}`);
 logger.info(`Base URL: ${process.env.BASE_URL}`);
 
 const PORT = process.env.PORT || 3000;
