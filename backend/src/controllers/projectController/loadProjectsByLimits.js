@@ -48,7 +48,7 @@ const loadProjectsByLimit = async (req, res) => {
 
     res.status(200).json({
       message: `${projects.length} project(s) found.`,
-      projects: projects.map(project  => project.title),
+      projects
     });
   } catch (error) {
     logger.error("Error in loadProjectsByLimit:", { message: error.message, stack: error.stack });
