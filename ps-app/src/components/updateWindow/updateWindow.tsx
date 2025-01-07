@@ -10,6 +10,7 @@ import { useUserContext } from "@/context/UserContext";
 import { ProjectCategory } from "@/utils/types/types";
 
 import { useRouter } from "next/navigation";
+import { url } from "../../../config/axiosInstance";
 
 interface FormState {
   category: string;
@@ -34,7 +35,7 @@ export const UpdateWindow = forwardRef(
     const router = useRouter();
     console.log(formState);
     function handleInputChange(
-      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     ) {
       const { id, value } = e.target;
       setFormState((prev) => ({
@@ -63,15 +64,12 @@ export const UpdateWindow = forwardRef(
         category: formState.category,
         goalAmount: formState.goalAmount,
       };
-      const response = await fetch(
-        `http://localhost:2580/projects/${projectId}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(updateData),
-          headers: { "Content-Type": "application/json" },
-          credentials: "include", // vem to z cookies
-        }
-      );
+      const response = await fetch(`${url}/projects/${projectId}`, {
+        method: "PUT",
+        body: JSON.stringify(updateData),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // vem to z cookies
+      });
 
       try {
         if (!response.ok) {
@@ -214,5 +212,5 @@ export const UpdateWindow = forwardRef(
         </dialog>
       </>
     );
-  }
+  },
 );

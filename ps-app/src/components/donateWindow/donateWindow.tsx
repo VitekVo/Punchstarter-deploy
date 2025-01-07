@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import Button from "../button/Button";
 import { useUserContext } from "@/context/UserContext";
-
+import { url } from "../../../config/axiosInstance";
 export const DonateWindow = forwardRef(
   ({ projectId, refresh }: { projectId: number; refresh: () => void }, ref) => {
     const modalRef = useRef<HTMLDialogElement>(null);
@@ -31,7 +31,7 @@ export const DonateWindow = forwardRef(
       //event.preventDefault();
       const donationData = { amount, projectId: projectId, userId: user?.id };
       console.log(donationData);
-      const response = await fetch("http://localhost:2580/payments", {
+      const response = await fetch(`${url}/payments`, {
         method: "POST",
         body: JSON.stringify(donationData),
         headers: { "Content-Type": "application/json" },
@@ -103,5 +103,5 @@ export const DonateWindow = forwardRef(
         </dialog>
       </>
     );
-  }
+  },
 );

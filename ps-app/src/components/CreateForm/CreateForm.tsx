@@ -4,6 +4,7 @@ import { ProjectCategory } from "@/utils/types/types";
 import Button from "../button/Button";
 import { useUserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import { url } from "../../../config/axiosInstance";
 
 interface FormState {
   name: string;
@@ -139,7 +140,7 @@ export const CreateForm = () => {
     });
     let json;
     try {
-      const response = await fetch("http://localhost:2580/projects/", {
+      const response = await fetch(`${url}/projects/`, {
         method: "POST",
         body: formData,
         credentials: "include", // vem to z cookies

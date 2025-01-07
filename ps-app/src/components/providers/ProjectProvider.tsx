@@ -7,6 +7,7 @@ import React, {
   ReactNode,
 } from "react";
 import { IProject } from "@/utils/types/types";
+import { url } from "../../../config/axiosInstance";
 // Define the shape of your context value
 interface ListContextType {
   listsData: {
@@ -28,9 +29,7 @@ export function ListProvider({ children }: ListProviderProps) {
 
   const fetchLists = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:2580/projects/load?limit=20",
-      );
+      const response = await fetch(`${url}/projects/load?limit=20`);
       const json = await response.json();
       if (response.ok) {
         setListsData(json);

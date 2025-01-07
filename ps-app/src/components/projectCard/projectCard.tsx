@@ -10,6 +10,7 @@ import { DeleteWindow } from "../deleteWindow/deleteWindow";
 import { UpdateWindow } from "../updateWindow/updateWindow";
 import { useUserContext } from "@/context/UserContext";
 import ProjectProgress from "@/components/projectDetail/progress/projectProgress";
+import { url } from "../../../config/axiosInstance";
 
 const ProjectCard = ({
   _id,
@@ -58,15 +59,12 @@ const ProjectCard = ({
       : "/path/to/placeholder-image.png";
 
   async function followProject() {
-    const response = await fetch(
-      `http://localhost:2580/users/${user?.id}/follow/${_id}`,
-      {
-        method: "POST",
+    const response = await fetch(`${url}/users/${user?.id}/follow/${_id}`, {
+      method: "POST",
 
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // vem to z cookies
-      },
-    );
+      headers: { "Content-Type": "application/json" },
+      credentials: "include", // vem to z cookies
+    });
 
     try {
       if (!response.ok) {
