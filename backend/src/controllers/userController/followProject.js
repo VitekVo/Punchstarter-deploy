@@ -26,7 +26,6 @@ const followProject = async (req, res) => {
         // Pokud uživatel projekt ještě nesleduje, přidejte ho do seznamu sledovaných
         if (!project.followList.includes(userId)) {
             project.followList.push(userId);
-            project.followCount += 1;
 
             await project.save();
 

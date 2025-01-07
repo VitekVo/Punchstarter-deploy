@@ -16,7 +16,13 @@ export default function RootLayout({
   return (
     <main className={"flex flex-col min-h-screen w-screen"}>
       <Navbar />
-      <section className={"flex-grow"}>{children}</section>
+      <section
+        className={
+          "flex flex-col flex-grow px-4 sm:px-8 md:px-12 items-stretch"
+        }
+      >
+        {children}
+      </section>
       <Footer />
     </main>
   );

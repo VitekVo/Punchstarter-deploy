@@ -26,6 +26,7 @@ const ProjectCard = ({
 }: IProject) => {
   const today: Date = new Date();
   const pathname = usePathname();
+  const { user } = useUserContext();
 
   const updateModalRef = useRef<{
     openModal: () => void;
@@ -50,10 +51,9 @@ const ProjectCard = ({
   const days: number = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const { user } = useUserContext();
   // Convert buffer to Base64
   const imgUrl =
-    images.length > 0
+    images?.length > 0
       ? `data:image/png;base64,${Buffer.from(images[0]).toString("base64")}`
       : "/path/to/placeholder-image.png";
 
@@ -65,7 +65,7 @@ const ProjectCard = ({
 
         headers: { "Content-Type": "application/json" },
         credentials: "include", // vem to z cookies
-      }
+      },
     );
 
     try {
@@ -86,9 +86,9 @@ const ProjectCard = ({
       className={"cursor-pointer"}
       onClick={() => redirect(`/detail/${_id}`)}
     >
-      <div className="card bg-base-100 w-60 shadow-xl h-[400px] flex flex-col justify-between">
+      <div className="card bg-base-100 w-60 shadow-lg h-[400px] flex flex-col justify-between">
         <figure className="relative">
-          {images.length > 0 ? (
+          {images?.length > 0 ? (
             <img
               className="w-full h-[150px] object-cover"
               src={imgUrl}
@@ -102,7 +102,7 @@ const ProjectCard = ({
             />
           )}
           <div className="absolute top-0 right-0 p-2">
-            {pathname === "/" && (
+            {pathname === "/" && user && (
               <button
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent click from triggering redirect
@@ -113,42 +113,43 @@ const ProjectCard = ({
                 {isLiked ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
               </button>
             )}
-            {pathname === "/userAcc" && creatorId._id === String(user?.id) && (
-              <>
-                <button
-                  onClick={(e) => {
-                    handleOpenUpdateModal(e);
-                    e.stopPropagation();
-                  }}
-                >
-                  <FaPencilAlt
-                    size={40}
-                    className="bg-red-400 rounded p-2 mr-1"
+            {pathname.includes("user") &&
+              creatorId._id === String(user?.id) && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      handleOpenUpdateModal(e);
+                      e.stopPropagation();
+                    }}
+                  >
+                    <FaPencilAlt
+                      size={40}
+                      className="bg-red-400 rounded p-2 mr-1"
+                    />
+                  </button>
+                  <UpdateWindow
+                    ref={updateModalRef}
+                    projectId={_id}
+                    project={{
+                      title,
+                      category,
+                      goalAmount,
+                      deadline: String(deadline),
+                      description,
+                    }}
                   />
-                </button>
-                <UpdateWindow
-                  ref={updateModalRef}
-                  projectId={_id}
-                  project={{
-                    title,
-                    category,
-                    goalAmount,
-                    deadline: String(deadline),
-                    description,
-                  }}
-                />
 
-                <button
-                  onClick={(e) => {
-                    handleOpenDeleteModal(e);
-                    e.stopPropagation(); // Prevent click from triggering redirect
-                  }}
-                >
-                  <IoTrashBin size={40} className="bg-red-400 rounded p-2" />
-                </button>
-                <DeleteWindow ref={deleteModalRef} projectId={_id} />
-              </>
-            )}
+                  <button
+                    onClick={(e) => {
+                      handleOpenDeleteModal(e);
+                      e.stopPropagation(); // Prevent click from triggering redirect
+                    }}
+                  >
+                    <IoTrashBin size={40} className="bg-red-400 rounded p-2" />
+                  </button>
+                  <DeleteWindow ref={deleteModalRef} projectId={_id} />
+                </>
+              )}
           </div>
           <div className="absolute bottom-0 right-0 p-2">
             <div className="badge uppercase font-bold text-gray-500 px-2 py-1.5">
@@ -159,7 +160,7 @@ const ProjectCard = ({
         <div className="card-body p-4 flex flex-col justify-between">
           <h2 className="card-title text-2xl font-bold">{title}</h2>
           <p className="text-sm text-gray-600 max-h-[50px] overflow-hidden text-ellipsis">
-            {description.length > 50
+            {description?.length > 50
               ? `${description.slice(0, 50)}...`
               : description}
           </p>

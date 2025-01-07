@@ -18,9 +18,16 @@ const loadProjectsByLimit = async (req, res) => {
 
     logger.info('Validation passed for loadProjectsByLimit', { limit: value.limit });
 
-    const { limit } = value;
+    const { limit, query } = value;
+    let searchFilter = {};
+    if (query) {
+      searchFilter = {
+        title: { $regex: query, $options: 'i' }, // Použití regex pro necase-sensitive vyhledávání v názvu
+      };
+      logger.info(`Searching projects with title containing: ${query}`);
+    }
 
-    const projects = await Project.find()
+    const projects = await Project.find(searchFilter)
         .limit(limit)
         .populate("creatorId", "username")
         .populate({
@@ -33,15 +40,15 @@ const loadProjectsByLimit = async (req, res) => {
         .exec();
 
     if (!projects || projects.length === 0) {
-      logger.warn('No projects found for the given limit', { limit });
+      logger.warn('No projects found for the given limit or query', { limit, query });
       return res.status(404).json({ message: "No projects found." });
     }
 
-    logger.info(`${projects.length} project(s) found`, { limit });
+    logger.info(`${projects.length} project(s) found`, { limit, query });
 
     res.status(200).json({
       message: `${projects.length} project(s) found.`,
-      projects,
+      projects
     });
   } catch (error) {
     logger.error("Error in loadProjectsByLimit:", { message: error.message, stack: error.stack });

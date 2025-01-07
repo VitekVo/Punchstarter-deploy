@@ -43,7 +43,7 @@ const ScrollBox = ({
           <IoIosArrowForward size={28} />
         </div>
       </div>
-      <div ref={ref} className={"h-[600px] rounded-lg carousel gap-96"}>
+      <div ref={ref} className={"h-auto rounded-lg carousel gap-12"}>
         <ProjectContent project={project} />
         <ProjectComments project={project} />
       </div>

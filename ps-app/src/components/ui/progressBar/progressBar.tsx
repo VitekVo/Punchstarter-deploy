@@ -12,7 +12,7 @@ const ProgressBar = ({
   const progress = (currentBudget / goalAmount) * 100;
 
   return (
-    <div className={"flex-grow h-3 rounded-full bg-gray-200 relative"}>
+    <div className={"flex-grow h-3 rounded-full bg-gray-200 relative overflow-hidden    "}>
       <div
         style={{
           width: progress + "%",

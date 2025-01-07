@@ -23,7 +23,7 @@ export const CreateForm = () => {
 
   console.log(user);
   const [formState, setFormState] = useState<FormState>({
-    name: "",
+    name: user?.username || "",
     location: "",
     category: "Tech",
     goal: null,
@@ -48,7 +48,7 @@ export const CreateForm = () => {
   }
 
   function handleInputChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) {
     const { id, value } = e.target;
     setFormState((prev) => ({
@@ -107,7 +107,9 @@ export const CreateForm = () => {
 
   return (
     <>
-      <div>
+      <div
+        className={"flex flex-col items-center p-12 h-full max-md:text-white"}
+      >
         <div className="w-full text-center">
           <ul className="steps">
             <li className="step step-primary">O tobě</li>
@@ -119,8 +121,8 @@ export const CreateForm = () => {
             </li>
           </ul>
         </div>
-        <div className="max-w-lg mx-auto p-6">
-          <form onSubmit={handleSubmit}>
+        <div className={"max-w-3xl w-full h-full flex-1"}>
+          <form onSubmit={handleSubmit} className={"h-full flex flex-col"}>
             {step === 1 ? (
               <div>
                 <div className="mb-4">
@@ -131,6 +133,7 @@ export const CreateForm = () => {
                     Jak se jmenuješ?
                   </label>
                   <input
+                    required={true}
                     id="name"
                     type="text"
                     placeholder="Candice Ligma"
@@ -267,7 +270,7 @@ export const CreateForm = () => {
                 </div>
               </div>
             )}
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-2 gap-10 mt-auto">
               <div className="mt-8">
                 <div className="flex justify-center">
                   <Button

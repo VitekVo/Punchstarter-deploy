@@ -10,7 +10,7 @@ import googleAuthRoutes from "./routes/googleAuthRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { checkUser } from "./services/authService.js";
-
+import session from "express-session";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./services/swaggerService.js";
 import passport from "passport";
@@ -18,6 +18,14 @@ import logger from "./services/logger.js";
 
 const app = express();
 mongoose.set("strictQuery", false);
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "defaultSecret", // Nastavte tajný klíč pro session
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(
   cors({
@@ -37,7 +45,9 @@ const envFile =
   process.env.NODE_ENV === "production" ? ".env.production" : ".env";
 dotenv.config({ path: envFile });
 
-logger.info("-----------------------------------------------------------------------------------------");
+logger.info(
+  "-----------------------------------------------------------------------------------------"
+);
 logger.info(`New instance started: ${new Date().toISOString()}`);
 logger.info(`Base URL: ${process.env.BASE_URL}`);
 
