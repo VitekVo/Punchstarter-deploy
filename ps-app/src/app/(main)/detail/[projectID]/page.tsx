@@ -15,7 +15,7 @@ const PageContent = () => {
   const { listsData } = useListContext();
   console.log(listsData);
   const project = listsData?.projects.find(
-    (project) => String(project._id) === projectID
+    (project) => String(project._id) === projectID,
   );
 
   const [displayedContent, setDisplayedContent] = useState<
@@ -31,7 +31,7 @@ const PageContent = () => {
   }
 
   return (
-    <div className="flex flex-col pb-24 px-16 w-full">
+    <div className="flex flex-col pb-24 px-4 sm:px-8 lg:px-12 w-full">
       <ProjectHeader project={project} />
       <div className="h-[1px] w-full bg-gray-300 my-12" />
       <ScrollBox

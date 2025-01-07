@@ -4,8 +4,14 @@ import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../../config/axiosInstance";
 
-const Avatar = ({ username }: { username?: string }) => {
-  const { user, setUser } = useUserContext();
+const Avatar = ({
+  username,
+  size,
+}: {
+  username?: string;
+  size?: "small" | "large";
+}) => {
+  const { user } = useUserContext();
   const [letters, setLetters] = useState("");
   const name = username ?? user?.username;
 
@@ -52,9 +58,7 @@ const Avatar = ({ username }: { username?: string }) => {
         border: "1px",
         borderColor: getDarkColorFromUsername(),
       }}
-      className={
-        "text-[clamp(1rem, 10ch, 3rem)] overflow-hidden cursor-pointer w-10 h-10 rounded-full justify-center items-center flex text-white uppercase"
-      }
+      className={`overflow-hidden cursor-pointer aspect-square ${size === "large" ? "w-16 text-2xl" : "w-10"} rounded-full justify-center items-center flex text-white uppercase`}
     >
       {letters}
     </div>

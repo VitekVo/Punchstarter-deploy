@@ -14,15 +14,15 @@ export const AddComment: React.FC<{
   };
 
   return (
-    <div>
+    <div className={"relative w-full h-fit"}>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Přidej komentář"
-        className="textarea textarea-primary textarea-bordered textarea-xl h-40 w-full m-4"
+        className="textarea textarea-primary textarea-bordered textarea-xl w-full relative"
       ></textarea>
       <div className="flex justify-end">
-        <button onClick={handleSubmit}>
+        <button className={"absolute bottom-4 right-4"} onClick={handleSubmit}>
           <VscSend size={30} />
         </button>
       </div>

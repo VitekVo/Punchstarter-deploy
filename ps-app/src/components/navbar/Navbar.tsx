@@ -14,7 +14,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <div className="grid grid-rows-2 md:grid-rows-1 md:grid-cols-3 items-center bg-base-100 border-b px-4 py-2 sm:py-2 sm:px-8 mb-8 gap-y-2">
+    <div className="grid grid-rows-2 md:grid-rows-1 md:grid-cols-3 items-center bg-base-100 border-b px-4 py-2 sm:py-2 md:py-4 sm:px-8 md:px-12 mb-8 gap-y-2 gap-x-4">
       {/* Search Bar */}
       <label className="w-full max-md:col-span-2 h-fit md:w-auto flex flex-col text-md gap-2 md:mr-auto md:row-start-1">
         <div className="w-full flex rounded-md border pl-4 py-2 focus-within:border-neutral-400">
