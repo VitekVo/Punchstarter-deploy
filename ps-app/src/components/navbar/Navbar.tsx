@@ -40,6 +40,7 @@ const Navbar = () => {
             variant={"outlined"}
             text={"Nový projekt"}
             href={"/new-project"}
+            isDisabled={user ? false : true}
           />
           {!user ? (
             <LinkBtn text={"Přihlásit se"} href={"/login"} />
