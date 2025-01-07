@@ -26,6 +26,7 @@ const ProjectCard = ({
 }: IProject) => {
   const today: Date = new Date();
   const pathname = usePathname();
+  const {user} = useUserContext();
 
   const updateModalRef = useRef<{
     openModal: () => void;
@@ -50,7 +51,6 @@ const ProjectCard = ({
   const days: number = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const { user } = useUserContext();
   // Convert buffer to Base64
   const imgUrl =
     images.length > 0
@@ -102,7 +102,7 @@ const ProjectCard = ({
             />
           )}
           <div className="absolute top-0 right-0 p-2">
-            {pathname === "/" && (
+            {pathname === "/" && user && (
               <button
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent click from triggering redirect
@@ -113,7 +113,7 @@ const ProjectCard = ({
                 {isLiked ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
               </button>
             )}
-            {pathname === "/userAcc" && creatorId._id === String(user?.id) && (
+            {pathname === "/[username]" && creatorId._id === String(user?.id) && (
               <>
                 <button
                   onClick={(e) => {

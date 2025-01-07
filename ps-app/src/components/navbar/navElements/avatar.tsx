@@ -4,7 +4,7 @@ import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../../config/axiosInstance";
 
-const Avatar = ({ username }: { username: string }) => {
+const Avatar = ({ username }: { username?: string }) => {
   const { user, setUser } = useUserContext();
   const [letters, setLetters] = useState("");
   const name = username ?? user?.username;

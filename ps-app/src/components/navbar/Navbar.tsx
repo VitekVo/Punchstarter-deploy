@@ -8,6 +8,7 @@ import { useUserContext } from "@/context/UserContext";
 import Avatar from "@/components/navbar/navElements/avatar";
 import Button from "@/components/button/Button";
 import LinkBtn from "@/components/button/LinkButton";
+import UserDropdown from "@/components/navbar/navElements/userDropdown";
 
 const Navbar = () => {
   const { user } = useUserContext();
@@ -40,7 +41,10 @@ const Navbar = () => {
         {!user ? (
           <LinkButton text={"Přihlásit se"} href={"/login"} />
         ) : (
-          <Avatar />
+            <div className={'relative'}>
+                <Avatar />
+                <UserDropdown isOpen={true} />
+            </div>
         )}
       </div>
     </div>
