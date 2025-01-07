@@ -9,6 +9,7 @@ import Avatar from "@/components/navbar/navElements/avatar";
 import LinkBtn from "@/components/button/LinkButton";
 import UserDropdown from "@/components/navbar/navElements/userDropdown";
 
+import SearchBar from "../Search/Search";
 const Navbar = () => {
   const { user } = useUserContext();
   const [dropdownOpen, setDropdownOpen] = useState(false);

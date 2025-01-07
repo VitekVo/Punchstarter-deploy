@@ -53,7 +53,7 @@ const ProjectCard = ({
   const [isLiked, setIsLiked] = useState<boolean>(false);
   // Convert buffer to Base64
   const imgUrl =
-    images.length > 0
+    images?.length > 0
       ? `data:image/png;base64,${Buffer.from(images[0]).toString("base64")}`
       : "/path/to/placeholder-image.png";
 
@@ -88,7 +88,7 @@ const ProjectCard = ({
     >
       <div className="card bg-base-100 w-60 shadow-lg h-[400px] flex flex-col justify-between">
         <figure className="relative">
-          {images.length > 0 ? (
+          {images?.length > 0 ? (
             <img
               className="w-full h-[150px] object-cover"
               src={imgUrl}
@@ -160,7 +160,7 @@ const ProjectCard = ({
         <div className="card-body p-4 flex flex-col justify-between">
           <h2 className="card-title text-2xl font-bold">{title}</h2>
           <p className="text-sm text-gray-600 max-h-[50px] overflow-hidden text-ellipsis">
-            {description.length > 50
+            {description?.length > 50
               ? `${description.slice(0, 50)}...`
               : description}
           </p>
