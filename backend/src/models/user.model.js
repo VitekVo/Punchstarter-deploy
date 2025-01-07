@@ -17,6 +17,10 @@
             type: [Buffer],
             required: false,
         },
+        googleId: {
+            type: String,
+            required: false
+        }
     });
 
     // Před uložením hashuje heslo
@@ -41,12 +45,6 @@
         throw Error("incorrect username");
     };
 
-    // Virtuál pro followingProjects
-    UserSchema.virtual("followingProjects", {
-        ref: "Project",
-        localField: "_id",
-        foreignField: "followList",
-    });
 
     // Virtuál pro contributions
     UserSchema.virtual("contributions", {

@@ -1,6 +1,7 @@
 import Project from "../../models/project.model.js";
 import { createProjectDtoInSchema } from "../../validations/projectValidation/createProjectValidation.js";
 import { uploadImages } from "../../services/uploadService.js";
+import logger from "../../services/logger.js";
 
 const createNewProject = async (req, res) => {
   try {
@@ -9,6 +10,7 @@ const createNewProject = async (req, res) => {
     });
 
     if (error) {
+      logger.warn('Validation errors in createProject', { errors: error.details.map((err) => err.message) });
       return res.status(400).json({
         message: "Validation errors.",
         errors: error.details.map((err) => err.message),
@@ -16,6 +18,7 @@ const createNewProject = async (req, res) => {
     }
 
     if (!res.locals.user) {
+      logger.warn('Unauthorized access attempt in createProject');
       return res.status(401).json({ message: "Unauthorized. User not found." });
     }
 
@@ -36,12 +39,14 @@ const createNewProject = async (req, res) => {
 
     const savedProject = await newProject.save();
 
+    logger.info('Project created successfully', { projectId: savedProject._id, creatorId: res.locals.user._id });
+
     res.status(201).json({
       message: "Project created successfully",
       project: savedProject,
     });
   } catch (error) {
-    console.error("Error in createProject:", error.message);
+    logger.error("Error in createProject:", { message: error.message, stack: error.stack });
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
