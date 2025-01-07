@@ -22,8 +22,6 @@ const Page = () => {
 function ListConsumerComponent() {
   const { listsData } = useListContext();
   const { user } = useUserContext();
-  const params = useParams();
-  const { username } = params;
 
   const filteredLists = listsData?.projects.filter(
     (list) => String(list.creatorId._id) === String(user?.id),
@@ -35,7 +33,7 @@ function ListConsumerComponent() {
 
   return (
     <>
-      {user?.username === username && (
+      {user?.username && (
         <>
           <ProjectCarousel
             title={`My Projects (${filteredLists?.length || 0})`}

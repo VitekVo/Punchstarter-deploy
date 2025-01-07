@@ -112,3 +112,101 @@
 {"level":"info","time":"2025-01-07T13:11:34.030Z","msg":"Loading projects with limit"}
 {"level":"info","time":"2025-01-07T13:11:34.030Z","msg":"Validation passed for loadProjectsByLimit"}
 {"level":"info","time":"2025-01-07T13:11:35.074Z","msg":"10 project(s) found"}
+{"level":"info","time":"2025-01-07T13:14:50.236Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:14:50.237Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:14:51.422Z","msg":"10 project(s) found"}
+{"level":"info","time":"2025-01-07T13:14:51.550Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:14:51.550Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:14:52.651Z","msg":"10 project(s) found"}
+{"level":"info","time":"2025-01-07T13:15:02.285Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:15:02.286Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:15:02.369Z","msg":"Fetching current user"}
+{"level":"info","time":"2025-01-07T13:15:02.370Z","msg":"Fetching current user"}
+{"level":"info","time":"2025-01-07T13:15:02.433Z","msg":"User fetched successfully"}
+{"level":"info","time":"2025-01-07T13:15:03.254Z","msg":"10 project(s) found"}
+{"level":"info","time":"2025-01-07T13:16:42.570Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:16:42.579Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:16:43.652Z","msg":"10 project(s) found"}
+{"level":"info","time":"2025-01-07T13:16:43.779Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:16:43.779Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:16:44.765Z","msg":"10 project(s) found"}
+{"level":"info","time":"2025-01-07T13:17:02.249Z","msg":"Creating project initiated"}
+{"level":"warn","time":"2025-01-07T13:17:02.265Z","msg":"Validation errors in new-project"}
+{"level":"info","time":"2025-01-07T13:17:09.097Z","msg":"Creating project initiated"}
+{"level":"warn","time":"2025-01-07T13:17:09.110Z","msg":"Validation errors in new-project"}
+{"level":"info","time":"2025-01-07T13:17:12.255Z","msg":"Creating project initiated"}
+{"level":"warn","time":"2025-01-07T13:17:12.262Z","msg":"Validation errors in new-project"}
+{"level":"info","time":"2025-01-07T13:17:26.051Z","msg":"Creating project initiated"}
+{"level":"warn","time":"2025-01-07T13:17:26.062Z","msg":"Validation errors in new-project"}
+{"level":"info","time":"2025-01-07T13:17:45.911Z","msg":"Creating project initiated"}
+{"level":"warn","time":"2025-01-07T13:17:45.920Z","msg":"Validation errors in new-project"}
+{"level":"info","time":"2025-01-07T13:17:57.628Z","msg":"Creating project initiated"}
+{"level":"info","time":"2025-01-07T13:17:57.918Z","msg":"Project created successfully"}
+{"level":"info","time":"2025-01-07T13:17:58.978Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:17:58.978Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:18:00.146Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:18:00.294Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:18:00.294Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:18:01.428Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:18:18.566Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:18:18.567Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:18:19.644Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:18:19.777Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:18:19.777Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:18:20.856Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:21:13.947Z","msg":"User logout initiated"}
+{"level":"info","time":"2025-01-07T13:21:13.948Z","msg":"User logged out successfully"}
+{"level":"info","time":"2025-01-07T13:21:25.327Z","msg":"User login attempt"}
+{"level":"info","time":"2025-01-07T13:21:25.443Z","msg":"User logged in successfully"}
+{"level":"info","time":"2025-01-07T13:21:26.121Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:21:26.123Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:21:27.363Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:21:27.507Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:21:27.507Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:21:28.646Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:21:29.438Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:21:29.440Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:21:30.693Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:21:30.840Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:21:30.840Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:21:32.129Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:21:54.528Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:21:54.530Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:21:54.605Z","msg":"Fetching current user"}
+{"level":"info","time":"2025-01-07T13:21:54.605Z","msg":"Fetching current user"}
+{"level":"info","time":"2025-01-07T13:21:54.635Z","msg":"User fetched successfully"}
+{"level":"info","time":"2025-01-07T13:21:56.054Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:23:33.488Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:23:33.489Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:23:34.644Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:23:34.783Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:23:34.783Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:23:36.259Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:23:37.099Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:23:37.100Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:23:38.371Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:23:38.477Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:23:38.477Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:23:39.922Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:23:41.014Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:23:41.015Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:23:42.221Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:23:42.338Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:23:42.338Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:23:43.918Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:24:28.659Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:24:28.668Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:24:28.721Z","msg":"Fetching current user"}
+{"level":"info","time":"2025-01-07T13:24:28.721Z","msg":"Fetching current user"}
+{"level":"info","time":"2025-01-07T13:24:28.767Z","msg":"User fetched successfully"}
+{"level":"info","time":"2025-01-07T13:24:29.844Z","msg":"11 project(s) found"}
+{"level":"info","time":"2025-01-07T13:26:01.509Z","msg":"Deleting project"}
+{"level":"info","time":"2025-01-07T13:26:01.739Z","msg":"Project deleted successfully"}
+{"level":"info","time":"2025-01-07T13:26:24.304Z","msg":"Loading projects with limit"}
+{"level":"info","time":"2025-01-07T13:26:24.313Z","msg":"Validation passed for loadProjectsByLimit"}
+{"level":"info","time":"2025-01-07T13:26:24.378Z","msg":"Fetching current user"}
+{"level":"info","time":"2025-01-07T13:26:24.379Z","msg":"Fetching current user"}
+{"level":"info","time":"2025-01-07T13:26:24.421Z","msg":"User fetched successfully"}
+{"level":"info","time":"2025-01-07T13:26:25.734Z","msg":"10 project(s) found"}
+{"level":"info","time":"2025-01-07T13:28:22.655Z","msg":"Deleting project"}
+{"level":"info","time":"2025-01-07T13:28:22.857Z","msg":"Project deleted successfully"}
