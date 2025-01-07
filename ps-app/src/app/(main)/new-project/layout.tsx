@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import React from "react";
-import { useListContext } from "@/components/providers/ProjectProvider";
 
 export const metadata: Metadata = {
   title: "PunchStarter | Home",
@@ -14,4 +13,3 @@ export default function RootLayout({
 }>) {
   return <div className={"flex-1"}>{children}</div>;
 }
-useListContext();
