@@ -113,7 +113,7 @@ const ProjectCard = ({
                 {isLiked ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
               </button>
             )}
-            {pathname === "/[username]" &&
+            {pathname.includes("user") &&
               creatorId._id === String(user?.id) && (
                 <>
                   <button

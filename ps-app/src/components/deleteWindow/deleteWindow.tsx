@@ -7,11 +7,13 @@ import React, {
 } from "react";
 import Button from "../button/Button";
 import { useUserContext } from "@/context/UserContext";
+import { useListContext } from "@/components/providers/ProjectProvider";
 export const DeleteWindow = forwardRef(
   ({ projectId }: { projectId: number }, ref) => {
     const modalRef = useRef<HTMLDialogElement>(null);
-    const [amount, setAmount] = useState(0);
-    const { user } = useUserContext();
+
+    const { setListsData, listsData } = useListContext();
+
     useImperativeHandle(ref, () => ({
       openModal: () => {
         if (modalRef.current) {
@@ -33,7 +35,7 @@ export const DeleteWindow = forwardRef(
 
           headers: { "Content-Type": "application/json" },
           credentials: "include", // vem to z cookies
-        }
+        },
       );
 
       try {
@@ -42,6 +44,10 @@ export const DeleteWindow = forwardRef(
           console.error("Error deleting project:", error);
         } else {
           const json = await response.json();
+          const newLists = listsData?.projects.filter(
+            (project) => project._id != projectId,
+          );
+          setListsData((prevState) => ({ ...prevState, projects: newLists }));
           console.log("deleted successfully:", json);
         }
       } catch (err) {
@@ -113,5 +119,5 @@ export const DeleteWindow = forwardRef(
         </dialog>
       </>
     );
-  }
+  },
 );
