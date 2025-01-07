@@ -35,7 +35,7 @@ export const DeleteWindow = forwardRef(
 
           headers: { "Content-Type": "application/json" },
           credentials: "include", // vem to z cookies
-        },
+        }
       );
 
       try {
@@ -45,7 +45,7 @@ export const DeleteWindow = forwardRef(
         } else {
           const json = await response.json();
           const newLists = listsData?.projects.filter(
-            (project) => project._id != projectId,
+            (project) => project._id != projectId
           );
           setListsData((prevState) => ({ ...prevState, projects: newLists }));
           console.log("deleted successfully:", json);
@@ -64,53 +64,36 @@ export const DeleteWindow = forwardRef(
           onClick={(e) => e.stopPropagation()} // Stop clicks inside the modal from bubbling up
         >
           <div
-            className="modal-box w-8/12 max-w-5xl"
+            className="modal-box "
             onClick={(e) => e.stopPropagation()} // Prevent propagation within the modal box
           >
-            <div className="grid grid-cols-3 gap-4 h-24">
+            <div className="grid grid-cols-3 gap-4 h-26">
               <div className="col-start-2">
-                <h3 className="font-bold text-3xl text-center">
+                <h3 className="font-bold text-lg text-center">
                   Opravdu chcete trvale smazat projekt? 🙁{" "}
                 </h3>
               </div>
               <div className="flex justify-end">
                 <img
-                  className="relative h-auto w-56"
+                  className="relative h-auto w-96"
                   src="/delete.png"
                   alt="delete project"
                 />
               </div>
             </div>
             <div className="py-4 flex justify-center mt-4">
-              <p className="text-lg">
+              <p className="text-lg text-center ">
                 Tenhle projekt už fakt nikdy nevyhrabete!
               </p>
             </div>
-            <div className="modal-action">
+            <div className="modal-action flex justify-center">
               <form method="dialog">
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="w-56 flex">
-                    <button
-                      onClick={(e: React.MouseEvent) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (modalRef.current) modalRef.current.close();
-                      }}
-                    >
-                      Ne
-                    </button>
+                <div className="grid lg:grid-cols-2 xs:grid-cols-1 gap-4">
+                  <div className="w-56  ">
+                    <Button text={"Zavřít"} onClick={() => {}} />
                   </div>
                   <div className="w-56">
-                    <button
-                      onClick={(e: React.MouseEvent) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleSubmit();
-                        if (modalRef.current) modalRef.current.close();
-                      }}
-                    >
-                      Ano
-                    </button>
+                    <Button text={"Smazat"} onClick={handleSubmit} />
                   </div>
                 </div>
               </form>
@@ -119,5 +102,5 @@ export const DeleteWindow = forwardRef(
         </dialog>
       </>
     );
-  },
+  }
 );

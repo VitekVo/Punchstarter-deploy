@@ -92,11 +92,11 @@ export const UpdateWindow = forwardRef(
         <dialog
           ref={modalRef}
           id="my_modal_4"
-          className="modal"
+          className="modal modal-middle"
           onClick={(e) => e.stopPropagation()} // Stop clicks inside the modal from bubbling up
         >
           <div
-            className="modal-box w-8/12 max-w-5xl"
+            className="modal-box w-auto"
             onClick={(e) => e.stopPropagation()} // Prevent propagation within the modal box
           >
             <div className="grid grid-cols-3 gap-4 h-24">
@@ -111,7 +111,7 @@ export const UpdateWindow = forwardRef(
                 <div className="mb-4 w-96">
                   <label
                     htmlFor="title"
-                    className="block text-lg font-semibold mb-2"
+                    className="block text-lg font-semibold mb-2 pl-3"
                   >
                     Jméno projektu
                   </label>
@@ -120,14 +120,14 @@ export const UpdateWindow = forwardRef(
                     type="text"
                     value={formState.title}
                     onChange={handleInputChange}
-                    className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
+                    className="input input-bordered border-primary-dark w-5/6 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark justify-center mx-3"
                   />
                 </div>
 
                 <div className="mb-4 w-96">
                   <label
                     htmlFor="description"
-                    className="block text-lg font-semibold mb-2"
+                    className="block text-lg font-semibold mb-2 pl-3"
                   >
                     Popis
                   </label>
@@ -136,13 +136,13 @@ export const UpdateWindow = forwardRef(
                     type="text"
                     value={formState.description}
                     onChange={handleInputChange}
-                    className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
+                    className="input input-bordered border-primary-dark w-5/6 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark justify-center mx-3"
                   />
                 </div>
                 <div className="mb-4 w-96">
                   <label
                     htmlFor="goalAmount"
-                    className="block text-lg font-semibold mb-2"
+                    className="block text-lg font-semibold mb-2 pl-3"
                   >
                     Částka
                   </label>
@@ -154,13 +154,13 @@ export const UpdateWindow = forwardRef(
                     max={10000000}
                     value={formState.goalAmount}
                     onChange={handleInputChange}
-                    className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
+                    className="input input-bordered border-primary-dark w-5/6 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark justify-center mx-3"
                   />
                 </div>
                 <div className="mb-4">
                   <label
                     htmlFor="category"
-                    className="block text-lg font-semibold mb-2"
+                    className="block text-lg font-semibold mb-2 pl-3"
                   >
                     Kategorie
                   </label>
@@ -168,7 +168,7 @@ export const UpdateWindow = forwardRef(
                     id="category"
                     value={formState.category}
                     onChange={handleInputChange}
-                    className="select select-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
+                    className="input input-bordered border-primary-dark w-5/6 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark justify-center mx-3"
                   >
                     {Object.values(ProjectCategory).map((category) => (
                       <option key={category} value={category}>
@@ -181,7 +181,7 @@ export const UpdateWindow = forwardRef(
                 <div className="mb-4 w-96">
                   <label
                     htmlFor="deadline"
-                    className="block text-lg font-semibold mb-2"
+                    className="block text-lg font-semibold mb-2 pl-3"
                   >
                     Deadline
                   </label>
@@ -192,37 +192,20 @@ export const UpdateWindow = forwardRef(
                       new Date(formState.deadline).toISOString().split("T")[0]
                     }
                     onChange={handleInputChange}
-                    className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
+                    className="input input-bordered border-primary-dark w-5/6 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark justify-center mx-3"
                   />
                 </div>
               </form>
             </div>
 
-            <div className="modal-action">
+            <div className="modal-action flex justify-center">
               <form method="dialog">
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="w-56 flex">
-                    <button
-                      onClick={(e: React.MouseEvent) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (modalRef.current) modalRef.current.close();
-                      }}
-                    >
-                      Ne
-                    </button>
+                <div className="grid lg:grid-cols-2 xs:grid-cols-1 gap-4">
+                  <div className="w-56  ">
+                    <Button text={"Zavřít"} onClick={() => {}} />
                   </div>
                   <div className="w-56">
-                    <button
-                      onClick={(e: React.MouseEvent) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleSubmit();
-                        if (modalRef.current) modalRef.current.close();
-                      }}
-                    >
-                      Ano
-                    </button>
+                    <Button text={"Přispět"} onClick={handleSubmit} />
                   </div>
                 </div>
               </form>
