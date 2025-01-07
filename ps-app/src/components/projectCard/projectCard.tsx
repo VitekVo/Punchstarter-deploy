@@ -1,11 +1,10 @@
 "use client";
-import React, { useState, useRef } from "react";
-import { FaUserFriends } from "react-icons/fa";
+import React, { useRef, useState } from "react";
+import { FaPencilAlt, FaUserFriends } from "react-icons/fa";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import { IProject } from "@/utils/types/types";
 import { redirect, usePathname } from "next/navigation";
 import { IoTrashBin } from "react-icons/io5";
-import { FaPencilAlt } from "react-icons/fa";
 import { DeleteWindow } from "../deleteWindow/deleteWindow";
 import { UpdateWindow } from "../updateWindow/updateWindow";
 import { useUserContext } from "@/context/UserContext";
@@ -21,7 +20,6 @@ const ProjectCard = ({
   goalAmount,
   followCount,
   deadline,
-  comments,
   images,
   sum,
 }: IProject) => {

@@ -1,13 +1,11 @@
-import Image from "next/image";
 import ProjectProgress from "@/components/projectDetail/progress/projectProgress";
-import React from "react";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import { IProject } from "@/utils/types/types";
 import Button from "@/components/button/Button";
-import { useRef } from "react";
 import { DonateWindow } from "@/components/donateWindow/donateWindow";
 import { useUserContext } from "@/context/UserContext";
 import { url } from "../../../../../../config/axiosInstance";
+
 const ProjectHeader = ({ project }: { project: IProject }) => {
   const modalRef = useRef<{ openModal: () => void; closeModal: () => void }>(
     null,

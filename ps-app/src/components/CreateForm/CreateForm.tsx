@@ -44,6 +44,7 @@ export const CreateForm = () => {
 
   function handleNextStep() {
     if (step === 3) return;
+    if (!nameRef.current || !dateRef.current || !goalRef.current) return;
     if (step === 1) {
       if (!formState.name) {
         nameRef.current.classList.remove("opacity-0");
@@ -103,6 +104,8 @@ export const CreateForm = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    if (!titleRef.current || !descriptionRef.current) return;
 
     if (!formState.title || formState.about.length < 10) {
       if (!formState.title) {

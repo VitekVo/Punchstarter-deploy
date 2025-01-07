@@ -1,13 +1,11 @@
-import React, { use } from "react";
+import React, { useState } from "react";
 import { IProject } from "@/utils/types/types";
 import Button from "@/components/button/Button";
 import { Comment } from "@/components/comment/Comment";
 import { AddComment } from "@/components/comment/AddComment";
-import { useState } from "react";
-import { comment } from "postcss";
-import { RiH1 } from "react-icons/ri";
-import { UserContextProvider, useUserContext } from "@/context/UserContext";
+import { useUserContext } from "@/context/UserContext";
 import { url } from "../../../../../../../config/axiosInstance";
+
 const ProjectComments = ({ project }: { project: IProject }) => {
   const [showAddComment, setShowAddComment] = useState(false);
   const [comments, setComments] = useState(project.comments);

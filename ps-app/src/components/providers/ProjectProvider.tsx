@@ -1,20 +1,24 @@
 "use client";
 import React, {
   createContext,
-  useState,
-  useEffect,
-  useContext,
   ReactNode,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
 import { IProject } from "@/utils/types/types";
 import { url } from "../../../config/axiosInstance";
-// Define the shape of your context value
+
+// 1) Create a dedicated type for your data
+export type ListsDataType = {
+  message: string;
+  projects: IProject[];
+} | null;
+
+// 2) Your Context interface just handles listsData + setter for listsData
 interface ListContextType {
-  listsData: {
-    message: string;
-    projects: IProject[];
-  } | null; // Může být null, pokud data ještě nejsou načtena
-  setListsData: React.Dispatch<React.SetStateAction<ListContextType>>;
+  listsData: ListsDataType;
+  setListsData: React.Dispatch<React.SetStateAction<ListsDataType>>;
 }
 
 // Create context with default value as `null`
@@ -25,7 +29,7 @@ interface ListProviderProps {
 }
 
 export function ListProvider({ children }: ListProviderProps) {
-  const [listsData, setListsData] = useState<any>(null); // Replace `any` with your data type
+  const [listsData, setListsData] = useState<ListsDataType>(null);
 
   const fetchLists = async () => {
     try {

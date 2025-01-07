@@ -1,12 +1,10 @@
 import React, {
-  useRef,
   forwardRef,
   useImperativeHandle,
+  useRef,
   useState,
-  useContext,
 } from "react";
 import Button from "../button/Button";
-import { useUserContext } from "@/context/UserContext";
 import { ProjectCategory } from "@/utils/types/types";
 
 import { useRouter } from "next/navigation";
@@ -23,8 +21,6 @@ interface FormState {
 export const UpdateWindow = forwardRef(
   ({ projectId, project }: { projectId: number; project: FormState }, ref) => {
     const modalRef = useRef<HTMLDialogElement>(null);
-    const [amount, setAmount] = useState(0);
-    const { user } = useUserContext();
     const [formState, setFormState] = useState<FormState>({
       category: project.category,
       goalAmount: project.goalAmount,
@@ -214,3 +210,5 @@ export const UpdateWindow = forwardRef(
     );
   },
 );
+
+UpdateWindow.displayName = "UpdateWindow";

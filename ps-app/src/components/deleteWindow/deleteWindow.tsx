@@ -1,14 +1,8 @@
-import React, {
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-  useState,
-  useContext,
-} from "react";
-import Button from "../button/Button";
-import { useUserContext } from "@/context/UserContext";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import { useListContext } from "@/components/providers/ProjectProvider";
 import { url } from "../../../config/axiosInstance";
+import { IProject } from "@/utils/types/types";
+
 export const DeleteWindow = forwardRef(
   ({ projectId }: { projectId: number }, ref) => {
     const modalRef = useRef<HTMLDialogElement>(null);
@@ -42,10 +36,14 @@ export const DeleteWindow = forwardRef(
           console.error("Error deleting project:", error);
         } else {
           const json = await response.json();
-          const newLists = listsData?.projects.filter(
-            (project) => project._id != projectId,
-          );
-          setListsData((prevState) => ({ ...prevState, projects: newLists }));
+          const newLists: IProject[] =
+            listsData?.projects?.filter(
+              (project) => project._id !== projectId,
+            ) ?? [];
+          setListsData((prevState) => ({
+            message: prevState?.message ?? "",
+            projects: newLists,
+          }));
           console.log("deleted successfully:", json);
         }
       } catch (err) {
@@ -119,3 +117,5 @@ export const DeleteWindow = forwardRef(
     );
   },
 );
+
+DeleteWindow.displayName = "DeleteWindow";

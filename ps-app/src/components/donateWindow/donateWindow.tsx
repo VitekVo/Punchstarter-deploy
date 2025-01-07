@@ -1,13 +1,13 @@
 import React, {
-  useRef,
   forwardRef,
   useImperativeHandle,
+  useRef,
   useState,
-  useContext,
 } from "react";
 import Button from "../button/Button";
 import { useUserContext } from "@/context/UserContext";
 import { url } from "../../../config/axiosInstance";
+
 export const DonateWindow = forwardRef(
   ({ projectId, refresh }: { projectId: number; refresh: () => void }, ref) => {
     const modalRef = useRef<HTMLDialogElement>(null);
@@ -105,3 +105,5 @@ export const DonateWindow = forwardRef(
     );
   },
 );
+
+DonateWindow.displayName = "DonateWindow";
