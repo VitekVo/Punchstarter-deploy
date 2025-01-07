@@ -15,15 +15,26 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./services/swaggerService.js";
 import passport from "passport";
 import logger from "./services/logger.js";
+import MongoStore from "connect-mongo";
 
 const app = express();
+
+const envFile = process.env.NODE_ENV === "production" ? ".env.production" : ".env";
+dotenv.config({ path: envFile });
+
 mongoose.set("strictQuery", false);
 
+// Nastavení session s MongoDB
 app.use(
     session({
-        secret: process.env.SESSION_SECRET || "defaultSecret", // Nastavte tajný klíč pro session
+        secret: process.env.SESSION_SECRET || "defaultSecret",
         resave: false,
         saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: process.env.CONNECTION,
+            collectionName: "sessions",
+            ttl: 14 * 24 * 60 * 60
+        }),
     })
 );
 
@@ -42,8 +53,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const envFile = process.env.NODE_ENV === "production" ? ".env.production" : ".env";
-dotenv.config({ path: envFile });
 
 logger.info("-----------------------------------------------------------------------------------------");
 logger.info(`New instance started: ${new Date().toISOString()}`);
@@ -75,10 +84,6 @@ app.get("/test", (req, res) => {
 
 // swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 const start = async () => {
