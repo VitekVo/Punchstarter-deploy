@@ -54,6 +54,7 @@ const createPayment = async (req, res) => {
     res.status(201).json({
       message: "Payment created successfully.",
       payment: savedPayment,
+      project: project
     });
   } catch (error) {
     logger.error("Error in createPayment:", { message: error.message, stack: error.stack });
