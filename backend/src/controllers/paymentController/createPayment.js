@@ -31,6 +31,8 @@ const createPayment = async (req, res) => {
       return res.status(404).json({ message: 'Project not found' });
     }
 
+    const existingDonation = await Donation.findOne({ user_id: res.locals.user._id, project_id: projectId });
+
     const newPayment = new Donation({
       user_id: res.locals.user._id,
       project_id: projectId,
@@ -38,8 +40,15 @@ const createPayment = async (req, res) => {
     });
 
     const savedPayment = await newPayment.save();
-    project.followCount += 1;
-    await project.save();
+
+    if (!existingDonation) {
+      project.followCount += 1;
+      await project.save();
+    }else
+    {
+      logger.warn('User has already contributed to this project', { userId: res.locals.user._id, projectId });
+    }
+
     logger.info(`Payment created successfully for user ${res.locals.user._id}`, { payment: savedPayment });
 
     res.status(201).json({
