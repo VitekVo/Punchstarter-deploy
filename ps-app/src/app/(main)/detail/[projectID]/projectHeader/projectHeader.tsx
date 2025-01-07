@@ -39,7 +39,7 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
         <Button onClick={handleOpenModal} text={"PODPOŘIT"}></Button>
         <DonateWindow ref={modalRef} projectId={project._id} />
       </div>
-      <div className="rounded-lg overflow-clip flex-grow aspect-[16/9]">
+      <div className="rounded-lg overflow-clip flex-grow">
         {project.images.length > 0 ? (
           <img
             className="h-full w-full object-cover"

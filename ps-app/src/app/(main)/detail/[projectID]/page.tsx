@@ -8,12 +8,12 @@ import {
   useListContext,
   ListProvider,
 } from "@/components/providers/ProjectProvider";
+import ProjectHeaderSkeleton from "@/app/(main)/detail/[projectID]/projectHeader/projectHeaderSkeleton";
 
 const PageContent = () => {
   const params = useParams();
   const { projectID } = params;
   const { listsData } = useListContext();
-  console.log(listsData);
   const project = listsData?.projects.find(
     (project) => String(project._id) === projectID,
   );
@@ -22,25 +22,21 @@ const PageContent = () => {
     "campaign" | "comments"
   >("campaign");
 
-  if (!listsData) {
-    return <p>Loading...</p>; // Add a loading state for when data is null
-  }
-
-  if (!project) {
-    return <p>Project not found</p>; // Handle the case where the project is not found
-  }
-
-  console.dir(project, { depth: null });
-
   return (
     <div className="flex flex-col w-full">
-      <ProjectHeader project={project} />
-      <div className="h-[1px] w-full bg-gray-300 my-12" />
-      <ScrollBox
-        setDisplayedContent={setDisplayedContent}
-        displayedContent={displayedContent}
-        project={project}
-      />
+      {!project ? (
+        <ProjectHeaderSkeleton />
+      ) : (
+        <>
+          <ProjectHeader project={project} />
+          <div className="h-[1px] w-full bg-gray-300 my-12" />
+          <ScrollBox
+            setDisplayedContent={setDisplayedContent}
+            displayedContent={displayedContent}
+            project={project}
+          />
+        </>
+      )}
     </div>
   );
 };
