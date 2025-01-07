@@ -10,7 +10,9 @@ const createNewProject = async (req, res) => {
     });
 
     if (error) {
-      logger.warn('Validation errors in createProject', { errors: error.details.map((err) => err.message) });
+      logger.warn("Validation errors in new-project", {
+        errors: error.details.map((err) => err.message),
+      });
       return res.status(400).json({
         message: "Validation errors.",
         errors: error.details.map((err) => err.message),
@@ -18,7 +20,7 @@ const createNewProject = async (req, res) => {
     }
 
     if (!res.locals.user) {
-      logger.warn('Unauthorized access attempt in createProject');
+      logger.warn("Unauthorized access attempt in new-project");
       return res.status(401).json({ message: "Unauthorized. User not found." });
     }
 
@@ -39,14 +41,20 @@ const createNewProject = async (req, res) => {
 
     const savedProject = await newProject.save();
 
-    logger.info('Project created successfully', { projectId: savedProject._id, creatorId: res.locals.user._id });
+    logger.info("Project created successfully", {
+      projectId: savedProject._id,
+      creatorId: res.locals.user._id,
+    });
 
     res.status(201).json({
       message: "Project created successfully",
       project: savedProject,
     });
   } catch (error) {
-    logger.error("Error in createProject:", { message: error.message, stack: error.stack });
+    logger.error("Error in new-project:", {
+      message: error.message,
+      stack: error.stack,
+    });
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };

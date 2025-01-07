@@ -26,7 +26,7 @@ const ProjectCard = ({
 }: IProject) => {
   const today: Date = new Date();
   const pathname = usePathname();
-  const {user} = useUserContext();
+  const { user } = useUserContext();
 
   const updateModalRef = useRef<{
     openModal: () => void;
@@ -65,7 +65,7 @@ const ProjectCard = ({
 
         headers: { "Content-Type": "application/json" },
         credentials: "include", // vem to z cookies
-      }
+      },
     );
 
     try {
@@ -86,7 +86,7 @@ const ProjectCard = ({
       className={"cursor-pointer"}
       onClick={() => redirect(`/detail/${_id}`)}
     >
-      <div className="card bg-base-100 w-60 shadow-xl h-[400px] flex flex-col justify-between">
+      <div className="card bg-base-100 w-60 shadow-lg h-[400px] flex flex-col justify-between">
         <figure className="relative">
           {images.length > 0 ? (
             <img
@@ -113,42 +113,43 @@ const ProjectCard = ({
                 {isLiked ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
               </button>
             )}
-            {pathname === "/[username]" && creatorId._id === String(user?.id) && (
-              <>
-                <button
-                  onClick={(e) => {
-                    handleOpenUpdateModal(e);
-                    e.stopPropagation();
-                  }}
-                >
-                  <FaPencilAlt
-                    size={40}
-                    className="bg-red-400 rounded p-2 mr-1"
+            {pathname === "/[username]" &&
+              creatorId._id === String(user?.id) && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      handleOpenUpdateModal(e);
+                      e.stopPropagation();
+                    }}
+                  >
+                    <FaPencilAlt
+                      size={40}
+                      className="bg-red-400 rounded p-2 mr-1"
+                    />
+                  </button>
+                  <UpdateWindow
+                    ref={updateModalRef}
+                    projectId={_id}
+                    project={{
+                      title,
+                      category,
+                      goalAmount,
+                      deadline: String(deadline),
+                      description,
+                    }}
                   />
-                </button>
-                <UpdateWindow
-                  ref={updateModalRef}
-                  projectId={_id}
-                  project={{
-                    title,
-                    category,
-                    goalAmount,
-                    deadline: String(deadline),
-                    description,
-                  }}
-                />
 
-                <button
-                  onClick={(e) => {
-                    handleOpenDeleteModal(e);
-                    e.stopPropagation(); // Prevent click from triggering redirect
-                  }}
-                >
-                  <IoTrashBin size={40} className="bg-red-400 rounded p-2" />
-                </button>
-                <DeleteWindow ref={deleteModalRef} projectId={_id} />
-              </>
-            )}
+                  <button
+                    onClick={(e) => {
+                      handleOpenDeleteModal(e);
+                      e.stopPropagation(); // Prevent click from triggering redirect
+                    }}
+                  >
+                    <IoTrashBin size={40} className="bg-red-400 rounded p-2" />
+                  </button>
+                  <DeleteWindow ref={deleteModalRef} projectId={_id} />
+                </>
+              )}
           </div>
           <div className="absolute bottom-0 right-0 p-2">
             <div className="badge uppercase font-bold text-gray-500 px-2 py-1.5">

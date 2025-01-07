@@ -29,7 +29,7 @@ const Navbar = () => {
 
       <div
         className={
-          "flex justify-between md:grid grid-cols-2 cols-start-2 col-span-2 cols-end-4 h-10 md:justify  -end"
+          "flex justify-between md:grid grid-cols-2 cols-start-2 col-span-2 cols-end-4 h-10 max-md:row-start-1"
         }
       >
         {/* Logo */}
@@ -45,7 +45,7 @@ const Navbar = () => {
           <LinkBtn
             variant={"outlined"}
             text={"Nový projekt"}
-            href={"/createProject"}
+            href={"/new-project"}
           />
           {!user ? (
             <LinkBtn text={"Přihlásit se"} href={"/login"} />

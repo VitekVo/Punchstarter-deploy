@@ -18,7 +18,7 @@ const Button = ({
       onClick={onClick}
       disabled={isDisabled}
       type={type}
-      className={`${!isDisabled ? "hover:bg-primary-dark" : "bg-opacity-40"} transition ${width === "fit" ? "w-fit" : "w-full"} px-4 py-2 bg-primary text-white rounded-lg`}
+      className={`${!isDisabled ? "hover:bg-primary-dark" : "bg-opacity-40"} transition ${width === "fit" ? "w-fit px-4" : "w-full"} py-2 bg-primary text-white rounded-lg`}
     >
       {text}
     </button>

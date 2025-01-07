@@ -30,8 +30,10 @@ const PageContent = () => {
     return <p>Project not found</p>; // Handle the case where the project is not found
   }
 
+  console.dir(project, { depth: null });
+
   return (
-    <div className="flex flex-col pb-24 px-4 sm:px-8 lg:px-12 w-full">
+    <div className="flex flex-col w-full">
       <ProjectHeader project={project} />
       <div className="h-[1px] w-full bg-gray-300 my-12" />
       <ScrollBox

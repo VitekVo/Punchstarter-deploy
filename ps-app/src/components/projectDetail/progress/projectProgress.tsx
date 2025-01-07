@@ -34,13 +34,13 @@ const ProjectProgress = ({
           </div>
         ) : null}
       </div>
-      {backers ? (
+      {backers >= 0 && (
         <div className={"flex w-full gap-1 items-baseline"}>
           Tento projekt podpořilo již
           <h3 className={"font-bold text-primary text-xl"}>{backers}</h3>
           členů
         </div>
-      ) : null}
+      )}
       {deadline ? (
         <div className={"flex w-full gap-1 items-baseline"}>
           Do konce zbývá
