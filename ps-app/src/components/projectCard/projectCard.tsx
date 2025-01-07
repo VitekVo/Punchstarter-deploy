@@ -5,7 +5,9 @@ import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import { IProject } from "@/utils/types/types";
 import { redirect, usePathname } from "next/navigation";
 import { IoTrashBin } from "react-icons/io5";
+import { FaPencilAlt } from "react-icons/fa";
 import { DeleteWindow } from "../deleteWindow/deleteWindow";
+import { UpdateWindow } from "../updateWindow/updateWindow";
 import { useUserContext } from "@/context/UserContext";
 import ProjectProgress from "@/components/projectDetail/progress/projectProgress";
 
@@ -25,14 +27,23 @@ const ProjectCard = ({
   const today: Date = new Date();
   const pathname = usePathname();
 
-  const modalRef = useRef<{ openModal: () => void; closeModal: () => void }>(
-    null
-  );
+  const updateModalRef = useRef<{
+    openModal: () => void;
+    closeModal: () => void;
+  }>(null);
+  const deleteModalRef = useRef<{
+    openModal: () => void;
+    closeModal: () => void;
+  }>(null);
 
-  const handleOpenModal = () => {
-    if (modalRef.current) {
-      modalRef.current.openModal();
-    }
+  const handleOpenUpdateModal = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent click from triggering redirect
+    updateModalRef.current?.openModal();
+  };
+
+  const handleOpenDeleteModal = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent click from triggering redirect
+    deleteModalRef.current?.openModal();
   };
   // Calculate remaining days
   const timeDifference: number = new Date(deadline).getTime() - today.getTime();
@@ -106,13 +117,36 @@ const ProjectCard = ({
               <>
                 <button
                   onClick={(e) => {
-                    handleOpenModal();
+                    handleOpenUpdateModal(e);
+                    e.stopPropagation();
+                  }}
+                >
+                  <FaPencilAlt
+                    size={40}
+                    className="bg-red-400 rounded p-2 mr-1"
+                  />
+                </button>
+                <UpdateWindow
+                  ref={updateModalRef}
+                  projectId={_id}
+                  project={{
+                    title,
+                    category,
+                    goalAmount,
+                    deadline: String(deadline),
+                    description,
+                  }}
+                />
+
+                <button
+                  onClick={(e) => {
+                    handleOpenDeleteModal(e);
                     e.stopPropagation(); // Prevent click from triggering redirect
                   }}
                 >
                   <IoTrashBin size={40} className="bg-red-400 rounded p-2" />
                 </button>
-                <DeleteWindow ref={modalRef} projectId={_id} />
+                <DeleteWindow ref={deleteModalRef} projectId={_id} />
               </>
             )}
           </div>

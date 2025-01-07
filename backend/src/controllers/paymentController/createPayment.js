@@ -1,5 +1,6 @@
 import Donation from "../../models/donation.model.js";
 import { createPaymentdtoInSchema } from "../../validations/paymentValidation/createPaymentValidation.js";
+import logger from "../../services/logger.js";
 
 const createPayment = async (req, res) => {
   try {
@@ -8,6 +9,7 @@ const createPayment = async (req, res) => {
     });
 
     if (error) {
+      logger.warn('Validation errors in createPayment', { errors: error.details.map((err) => err.message) });
       return res.status(400).json({
         message: "Validation errors.",
         details: error.details.map((err) => err.message),
@@ -15,6 +17,7 @@ const createPayment = async (req, res) => {
     }
 
     if (!res.locals.user) {
+      logger.warn('Unauthorized access attempt', { user: res.locals.user });
       return res.status(401).json({ message: "Unauthorized. User not found." });
     }
 
@@ -28,12 +31,14 @@ const createPayment = async (req, res) => {
 
     const savedPayment = await newPayment.save();
 
+    logger.info(`Payment created successfully for user ${res.locals.user._id}`, { payment: savedPayment });
+
     res.status(201).json({
       message: "Payment created successfully.",
       payment: savedPayment,
     });
   } catch (error) {
-    console.error("Error in createProject:", error.message);
+    logger.error("Error in createPayment:", { message: error.message, stack: error.stack });
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
