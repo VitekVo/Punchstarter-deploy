@@ -35,12 +35,6 @@ const Avatar = ({ username }: { username?: string }) => {
     return `rgb(${r}, ${g}, ${b})`;
   }
 
-  const logout = () => {
-    axiosInstance.post("users/logout").then(() => {
-      setUser(null);
-    });
-  };
-
   useEffect(() => {
     if (!name || letters) return;
 
@@ -61,7 +55,6 @@ const Avatar = ({ username }: { username?: string }) => {
       className={
         "text-[clamp(1rem, 10ch, 3rem)] overflow-hidden cursor-pointer w-10 h-10 rounded-full justify-center items-center flex text-white uppercase"
       }
-      onClick={logout}
     >
       {letters}
     </div>
