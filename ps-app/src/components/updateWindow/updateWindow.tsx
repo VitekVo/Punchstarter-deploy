@@ -205,7 +205,7 @@ export const UpdateWindow = forwardRef(
                     <Button text={"Zavřít"} onClick={() => {}} />
                   </div>
                   <div className="w-56">
-                    <Button text={"Přispět"} onClick={handleSubmit} />
+                    <Button text={"Upravit"} onClick={handleSubmit} />
                   </div>
                 </div>
               </form>
