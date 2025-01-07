@@ -45,7 +45,7 @@ function ListConsumerComponent() {
     .slice(0, 6); // Limit to 6 items
 
   return (
-    <>
+    <div className={"flex-1 flex flex-col overflow-y-scroll"}>
       <ProjectCarousel
         title="Newest Projects"
         listsData={{ ...listsData, projects: ProjectsDateSort }}
@@ -64,6 +64,6 @@ function ListConsumerComponent() {
         title="All Projects"
         listsData={listsData || { message: "", projects: [] }}
       />
-    </>
+    </div>
   );
 }

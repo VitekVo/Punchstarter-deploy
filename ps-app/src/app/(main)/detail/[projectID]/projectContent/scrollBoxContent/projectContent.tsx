@@ -1,7 +1,7 @@
 import React from "react";
 import { IProject } from "@/utils/types/types";
-import Image from "next/image";
 import Avatar from "@/components/navbar/navElements/avatar";
+
 const ProjectContent = ({ project }: { project: IProject }) => {
   return (
     <div className="grid lg:grid-cols-3 grid-cols-1 grid-rows-2 lg:grid-rows-1 max-lg:gap-x-0 gap-8 h-full carousel-item w-full">

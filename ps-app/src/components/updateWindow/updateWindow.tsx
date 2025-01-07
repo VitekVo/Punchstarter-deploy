@@ -1,15 +1,14 @@
 import React, {
-  useRef,
   forwardRef,
   useImperativeHandle,
+  useRef,
   useState,
-  useContext,
 } from "react";
 import Button from "../button/Button";
-import { useUserContext } from "@/context/UserContext";
 import { ProjectCategory } from "@/utils/types/types";
 
 import { useRouter } from "next/navigation";
+import { url } from "../../../config/axiosInstance";
 
 interface FormState {
   category: string;
@@ -22,8 +21,6 @@ interface FormState {
 export const UpdateWindow = forwardRef(
   ({ projectId, project }: { projectId: number; project: FormState }, ref) => {
     const modalRef = useRef<HTMLDialogElement>(null);
-    const [amount, setAmount] = useState(0);
-    const { user } = useUserContext();
     const [formState, setFormState] = useState<FormState>({
       category: project.category,
       goalAmount: project.goalAmount,
@@ -34,7 +31,7 @@ export const UpdateWindow = forwardRef(
     const router = useRouter();
     console.log(formState);
     function handleInputChange(
-      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     ) {
       const { id, value } = e.target;
       setFormState((prev) => ({
@@ -63,15 +60,12 @@ export const UpdateWindow = forwardRef(
         category: formState.category,
         goalAmount: formState.goalAmount,
       };
-      const response = await fetch(
-        `http://localhost:2580/projects/${projectId}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(updateData),
-          headers: { "Content-Type": "application/json" },
-          credentials: "include", // vem to z cookies
-        }
-      );
+      const response = await fetch(`${url}/projects/${projectId}`, {
+        method: "PUT",
+        body: JSON.stringify(updateData),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // vem to z cookies
+      });
 
       try {
         if (!response.ok) {
@@ -205,7 +199,7 @@ export const UpdateWindow = forwardRef(
                     <Button text={"Zavřít"} onClick={() => {}} />
                   </div>
                   <div className="w-56">
-                    <Button text={"Přispět"} onClick={handleSubmit} />
+                    <Button text={"Upravit"} onClick={handleSubmit} />
                   </div>
                 </div>
               </form>
@@ -214,5 +208,7 @@ export const UpdateWindow = forwardRef(
         </dialog>
       </>
     );
-  }
+  },
 );
+
+UpdateWindow.displayName = "UpdateWindow";

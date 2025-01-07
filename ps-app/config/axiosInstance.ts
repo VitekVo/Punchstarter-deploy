@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const url = process.env.NEXT_PUBLIC_DB_URL;
+export const url = process.env.NEXT_PUBLIC_DB_URL;
 
 const axiosInstance = axios.create({
   withCredentials: true,
-  baseURL: "http://localhost:2580",
+  baseURL: url,
 });
 
 export default axiosInstance;

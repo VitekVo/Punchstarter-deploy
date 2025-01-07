@@ -17,8 +17,8 @@ export interface IProject {
   comments: IComment[];
   images: Buffer[];
   sum: number;
-  donations: Array<Object>;
-  followList: Array<Object>;
+  donations: Array<object>;
+  followList: string[];
   creatorId: ICreator;
   created_at: Date;
 }

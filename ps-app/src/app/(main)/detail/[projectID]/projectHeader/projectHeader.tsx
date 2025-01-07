@@ -1,15 +1,16 @@
-import Image from "next/image";
 import ProjectProgress from "@/components/projectDetail/progress/projectProgress";
-import React from "react";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import { IProject } from "@/utils/types/types";
 import Button from "@/components/button/Button";
-import { useRef } from "react";
 import { DonateWindow } from "@/components/donateWindow/donateWindow";
+import { useUserContext } from "@/context/UserContext";
+import { url } from "../../../../../../config/axiosInstance";
+
 const ProjectHeader = ({ project }: { project: IProject }) => {
   const modalRef = useRef<{ openModal: () => void; closeModal: () => void }>(
-    null
+    null,
   );
+  const { user } = useUserContext();
   const [projectData, setProjectData] = useState(project);
 
   const handleOpenModal = () => {
@@ -21,14 +22,12 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
   const imgUrl =
     project.images.length > 0
       ? `data:image/png;base64,${Buffer.from(project.images[0]).toString(
-          "base64"
+          "base64",
         )}`
       : "/path/to/placeholder-image.png";
 
   const refreshProjectProgress = async () => {
-    const response = await fetch(
-      `http://localhost:2580/projects/${project._id}`
-    );
+    const response = await fetch(`${url}/projects/${project._id}`);
     const updatedProject = await response.json();
 
     setProjectData(updatedProject);
@@ -48,14 +47,18 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
             deadline={project.deadline}
           />
         </div>
-        <Button onClick={handleOpenModal} text={"PODPOŘIT"}></Button>
+        <Button
+          onClick={handleOpenModal}
+          text={"PODPOŘIT"}
+          isDisabled={user ? false : true}
+        ></Button>
         <DonateWindow
           ref={modalRef}
           projectId={project._id}
           refresh={refreshProjectProgress}
         />
       </div>
-      <div className="rounded-lg overflow-clip flex-grow aspect-[16/9]">
+      <div className="rounded-lg overflow-clip flex-grow">
         {project.images.length > 0 ? (
           <img
             className="h-full w-full object-cover"

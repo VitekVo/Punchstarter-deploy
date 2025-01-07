@@ -1,7 +1,5 @@
 import ProgressBar from "@/components/ui/progressBar/progressBar";
 import React from "react";
-import { getFormattedNumber } from "@/utils/getFormattedNumber";
-import dayjs from "dayjs";
 
 const ProjectProgress = ({
   goalAmount,
@@ -34,7 +32,7 @@ const ProjectProgress = ({
           </div>
         ) : null}
       </div>
-      {backers >= 0 && (
+      {backers && backers >= 0 && (
         <div className={"flex w-full gap-1 items-baseline"}>
           Tento projekt podpořilo již
           <h3 className={"font-bold text-primary text-xl"}>{backers}</h3>

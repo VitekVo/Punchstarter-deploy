@@ -6,7 +6,6 @@ import {
   ListProvider,
   useListContext,
 } from "@/components/providers/ProjectProvider";
-import { useParams } from "next/navigation";
 
 const Page = () => {
   return (
