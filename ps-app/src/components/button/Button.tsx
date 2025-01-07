@@ -1,7 +1,6 @@
 const Button = ({
   text,
   onClick,
-  variant,
   isDisabled,
   type,
   width,

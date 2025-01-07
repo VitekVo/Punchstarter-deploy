@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ProjectCategory } from "@/utils/types/types";
 import Button from "../button/Button";
 import { useUserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import { url } from "../../../config/axiosInstance";
 
 interface FormState {
   name: string;
@@ -20,8 +21,12 @@ export const CreateForm = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const { user } = useUserContext();
+  const nameRef = useRef<HTMLInputElement>(null);
+  const goalRef = useRef<HTMLInputElement>(null);
+  const dateRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLInputElement>(null);
 
-  console.log(user);
   const [formState, setFormState] = useState<FormState>({
     name: user?.username || "",
     location: "",
@@ -39,6 +44,38 @@ export const CreateForm = () => {
 
   function handleNextStep() {
     if (step === 3) return;
+    if (!nameRef.current || !dateRef.current || !goalRef.current) return;
+    if (step === 1) {
+      if (!formState.name) {
+        nameRef.current.classList.remove("opacity-0");
+        nameRef.current.classList.add("opacity-100");
+        return;
+      }
+    } else if (step === 2) {
+      console.log(formState);
+
+      if (
+        Number(formState.goal) < 1000 ||
+        !formState.end ||
+        new Date(formState.end).getTime() < Date.now()
+      ) {
+        if (!formState.end || new Date(formState.end).getTime() < Date.now()) {
+          dateRef.current.classList.remove("opacity-0");
+          dateRef.current.classList.add("opacity-100");
+        } else {
+          dateRef.current.classList.remove("opacity-100");
+          dateRef.current.classList.add("opacity-0");
+        }
+        if (Number(formState.goal) < 1000) {
+          goalRef.current.classList.remove("opacity-0");
+          goalRef.current.classList.add("opacity-100");
+        } else {
+          goalRef.current.classList.remove("opacity-100");
+          goalRef.current.classList.add("opacity-0");
+        }
+        return;
+      }
+    }
     setStep(step + 1);
   }
 
@@ -68,6 +105,26 @@ export const CreateForm = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
+    if (!titleRef.current || !descriptionRef.current) return;
+
+    if (!formState.title || formState.about.length < 10) {
+      if (!formState.title) {
+        titleRef.current.classList.remove("opacity-0");
+        titleRef.current.classList.add("opacity-100");
+      } else {
+        titleRef.current.classList.remove("opacity-100");
+        titleRef.current.classList.add("opacity-0");
+      }
+      if (formState.about.length < 10) {
+        descriptionRef.current.classList.remove("opacity-0");
+        descriptionRef.current.classList.add("opacity-100");
+      } else {
+        descriptionRef.current.classList.remove("opacity-100");
+        descriptionRef.current.classList.add("opacity-0");
+      }
+      return;
+    }
+
     if (!user || !user.id) {
       console.error("User data is not available.");
       return;
@@ -86,7 +143,7 @@ export const CreateForm = () => {
     });
     let json;
     try {
-      const response = await fetch("http://localhost:2580/projects/", {
+      const response = await fetch(`${url}/projects/`, {
         method: "POST",
         body: formData,
         credentials: "include", // vem to z cookies
@@ -108,7 +165,7 @@ export const CreateForm = () => {
   return (
     <>
       <div
-        className={"flex flex-col items-center p-12 h-full max-md:text-white"}
+        className={"flex flex-col items-center p-8 h-full max-md:text-white"}
       >
         <div className="w-full text-center">
           <ul className="steps">
@@ -122,10 +179,13 @@ export const CreateForm = () => {
           </ul>
         </div>
         <div className={"max-w-3xl w-full h-full flex-1"}>
-          <form onSubmit={handleSubmit} className={"h-full flex flex-col"}>
+          <form
+            onSubmit={handleSubmit}
+            className={"h-full flex flex-col gap-y-2"}
+          >
             {step === 1 ? (
-              <div>
-                <div className="mb-4">
+              <>
+                <div>
                   <label
                     htmlFor="name"
                     className="block text-lg font-semibold mb-2"
@@ -141,12 +201,18 @@ export const CreateForm = () => {
                     onChange={handleInputChange}
                     className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
                   />
+                  <p
+                    ref={nameRef}
+                    className={"italic text-sm text-red-600 mt-1 opacity-0"}
+                  >
+                    Jméno nemůže být prázdné
+                  </p>
                 </div>
 
-                <div className="mb-4">
+                <div>
                   <label
                     htmlFor="location"
-                    className="block text-lg font-semibold mb-2"
+                    className="block text-lg font-semibold"
                   >
                     Kde žiješ?
                   </label>
@@ -158,6 +224,9 @@ export const CreateForm = () => {
                     onChange={handleInputChange}
                     className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
                   />
+                  <p className={"italic text-sm text-red-600 mt-1 opacity-0"}>
+                    Placeholder
+                  </p>
                 </div>
 
                 <div className="mb-4">
@@ -180,10 +249,10 @@ export const CreateForm = () => {
                     ))}
                   </select>
                 </div>
-              </div>
+              </>
             ) : step === 2 ? (
               <div>
-                <div className="mb-4">
+                <div>
                   <label
                     htmlFor="goal"
                     className="block text-lg font-semibold mb-2"
@@ -201,13 +270,19 @@ export const CreateForm = () => {
                     onChange={handleInputChange}
                     className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
                   />
+                  <p
+                    ref={goalRef}
+                    className={"italic text-sm text-red-600 mt-1 opacity-0"}
+                  >
+                    Minimální částka je 1000Kč
+                  </p>
                 </div>
                 <div className="mb-4">
                   <label
                     htmlFor="end"
                     className="block text-lg font-semibold mb-2"
                   >
-                    Do kdy??
+                    Do kdy?
                   </label>
                   <input
                     id="end"
@@ -217,11 +292,17 @@ export const CreateForm = () => {
                     onChange={handleInputChange}
                     className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
                   />
+                  <p
+                    ref={dateRef}
+                    className={"italic text-sm text-red-600 mt-1 opacity-0"}
+                  >
+                    Takové datum nemůžete použít
+                  </p>
                 </div>
               </div>
             ) : (
               <div>
-                <div className="mb-4">
+                <div>
                   <label
                     htmlFor="title"
                     className="block text-lg font-semibold mb-2"
@@ -236,8 +317,14 @@ export const CreateForm = () => {
                     onChange={handleInputChange}
                     className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
                   />
+                  <p
+                    ref={titleRef}
+                    className={"italic text-sm text-red-600 mt-1 opacity-0"}
+                  >
+                    Název projektu nemůže být prázdný
+                  </p>
                 </div>
-                <div className="mb-4">
+                <div>
                   <label
                     htmlFor="about"
                     className="block text-lg font-semibold mb-2"
@@ -252,6 +339,12 @@ export const CreateForm = () => {
                     onChange={handleInputChange}
                     className="input input-bordered border-primary-dark w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark"
                   />
+                  <p
+                    ref={descriptionRef}
+                    className={"italic text-sm text-red-600 mt-1 opacity-0"}
+                  >
+                    Minimální délka popisu je 10 znaků
+                  </p>
                 </div>
 
                 <div className="mb-4 text-center">

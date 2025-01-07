@@ -1,15 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import LinkButton from "@/components/button/LinkButton";
-import { CiSearch } from "react-icons/ci";
+import LinkBtn from "@/components/button/LinkButton";
 import Link from "next/link";
 import { useUserContext } from "@/context/UserContext";
 import Avatar from "@/components/navbar/navElements/avatar";
-import LinkBtn from "@/components/button/LinkButton";
 import UserDropdown from "@/components/navbar/navElements/userDropdown";
 
 import SearchBar from "../Search/Search";
+
 const Navbar = () => {
   const { user } = useUserContext();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -40,6 +39,7 @@ const Navbar = () => {
             variant={"outlined"}
             text={"Nový projekt"}
             href={"/new-project"}
+            isDisabled={!user}
           />
           {!user ? (
             <LinkBtn text={"Přihlásit se"} href={"/login"} />

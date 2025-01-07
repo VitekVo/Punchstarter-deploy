@@ -12,7 +12,7 @@ const page = () => {
 
       <div
         className={
-          "rounded-lg overflow-hidden bg-cover max-md:bg-[url(https://citygospelmovements.org/wp-content/uploads/2020/03/tim-mossholder-bo3SHP58C3g-unsplash.jpg)]"
+          "rounded-lg overflow-hidden bg-cover min-h-[550px] h-full max-md:bg-[url(https://citygospelmovements.org/wp-content/uploads/2020/03/tim-mossholder-bo3SHP58C3g-unsplash.jpg)]"
         }
       >
         <div

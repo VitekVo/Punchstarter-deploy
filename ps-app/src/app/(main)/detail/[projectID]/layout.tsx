@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "PunchStarter | Home",
+  title: "PunchStarter | Projekt",
   description: "The home page of PunchStarter",
 };
 
@@ -11,5 +11,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className={"flex-1 flex flex-col"}>{children}</div>;
+  return <section className={"w-full h-full"}>{children}</section>;
 }

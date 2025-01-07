@@ -1,17 +1,19 @@
 import React, {
-  useRef,
   forwardRef,
   useImperativeHandle,
+  useRef,
   useState,
-  useContext,
 } from "react";
 import Button from "../button/Button";
 import { useUserContext } from "@/context/UserContext";
+import { url } from "../../../config/axiosInstance";
+
 export const DonateWindow = forwardRef(
-  ({ projectId }: { projectId: number }, ref) => {
+  ({ projectId, refresh }: { projectId: number; refresh: () => void }, ref) => {
     const modalRef = useRef<HTMLDialogElement>(null);
     const [amount, setAmount] = useState(0);
     const { user } = useUserContext();
+
     useImperativeHandle(ref, () => ({
       openModal: () => {
         if (modalRef.current) {
@@ -26,9 +28,10 @@ export const DonateWindow = forwardRef(
     }));
 
     async function handleSubmit() {
+      //event.preventDefault();
       const donationData = { amount, projectId: projectId, userId: user?.id };
       console.log(donationData);
-      const response = await fetch("http://localhost:2580/payments", {
+      const response = await fetch(`${url}/payments`, {
         method: "POST",
         body: JSON.stringify(donationData),
         headers: { "Content-Type": "application/json" },
@@ -42,6 +45,9 @@ export const DonateWindow = forwardRef(
         } else {
           const json = await response.json();
           console.log("Donated successfully:", json);
+          //window.location.reload(); last resort
+          // Trigger the refresh of the project progress
+          await refresh();
         }
       } catch (err) {
         console.error("An error occurred:", err);
@@ -51,8 +57,8 @@ export const DonateWindow = forwardRef(
     return (
       <>
         <dialog ref={modalRef} id="my_modal_4" className="modal">
-          <div className="modal-box w-8/12 max-w-5xl">
-            <div className="grid grid-cols-3 gap-4 h-24">
+          <div className="modal-box ">
+            <div className="grid grid-cols-3 gap-4 h-26">
               <div className="col-start-2">
                 <h3 className="font-bold text-3xl text-center">
                   Kolik chcete přispět ❤️{" "}
@@ -60,7 +66,7 @@ export const DonateWindow = forwardRef(
               </div>
               <div className="flex justify-end">
                 <img
-                  className="relative h-auto w-52"
+                  className="relative h-auto w-full"
                   src="/donate.png"
                   alt="donate sign"
                 />
@@ -81,10 +87,10 @@ export const DonateWindow = forwardRef(
               </div>
             </div>
             <div className="text-center text-lg font-bold    ">KČ</div>
-            <div className="modal-action">
+            <div className="modal-action flex justify-center">
               <form method="dialog">
-                <div className="grid grid-cols-3 gap-4 ">
-                  <div className="w-56 flex ">
+                <div className="grid lg:grid-cols-2 xs:grid-cols-1 gap-4 ">
+                  <div className="w-56  ">
                     <Button text={"Zavřít"} onClick={() => {}} />
                   </div>
                   <div className="w-56">
@@ -97,5 +103,7 @@ export const DonateWindow = forwardRef(
         </dialog>
       </>
     );
-  }
+  },
 );
+
+DonateWindow.displayName = "DonateWindow";

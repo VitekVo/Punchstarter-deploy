@@ -15,24 +15,34 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./services/swaggerService.js";
 import passport from "passport";
 import logger from "./services/logger.js";
+import MongoStore from "connect-mongo";
 
 const app = express();
+
+const envFile =
+  process.env.NODE_ENV === "production" ? ".env.production" : ".env";
+dotenv.config({ path: envFile });
+import "../src/services/passwordService.js";
+
 mongoose.set("strictQuery", false);
 
+// Nastavení session s MongoDB
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "defaultSecret", // Nastavte tajný klíč pro session
+    secret: process.env.SESSION_SECRET || "defaultSecret",
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.CONNECTION,
+      collectionName: "sessions",
+      ttl: 14 * 24 * 60 * 60,
+    }),
   })
 );
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://punchstarter-deploy.onrender.com",
-    ],
+    origin: ["http://localhost:3000", "https://uun-punchstarter.vercel.app"],
     credentials: true,
   })
 );
@@ -40,10 +50,6 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-const envFile =
-  process.env.NODE_ENV === "production" ? ".env.production" : ".env";
-dotenv.config({ path: envFile });
 
 logger.info(
   "-----------------------------------------------------------------------------------------"
@@ -57,7 +63,6 @@ const CONNECTION = process.env.CONNECTION;
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use("*", checkUser);
 
 app.use("/auth", googleAuthRoutes);
@@ -66,9 +71,6 @@ app.use("/projects", projectRoutes);
 app.use("/comments", commentRoutes);
 app.use("/payments", paymentRoutes);
 
-
-
-
 // Basic endpoint to verify app is running
 app.get("/", (req, res) => {
   res.send("API is running...");
@@ -76,10 +78,6 @@ app.get("/", (req, res) => {
 
 // swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
 
 const start = async () => {
   try {

@@ -2,7 +2,6 @@
 
 import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
-import axiosInstance from "../../../../config/axiosInstance";
 
 const Avatar = ({
   username,
