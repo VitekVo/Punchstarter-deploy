@@ -1,14 +1,16 @@
 import Image from "next/image";
 import ProjectProgress from "@/components/projectDetail/progress/projectProgress";
 import React from "react";
+import { useState } from "react";
 import { IProject } from "@/utils/types/types";
 import Button from "@/components/button/Button";
 import { useRef } from "react";
 import { DonateWindow } from "@/components/donateWindow/donateWindow";
 const ProjectHeader = ({ project }: { project: IProject }) => {
   const modalRef = useRef<{ openModal: () => void; closeModal: () => void }>(
-    null,
+    null
   );
+  const [projectData, setProjectData] = useState(project);
 
   const handleOpenModal = () => {
     if (modalRef.current) {
@@ -19,9 +21,19 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
   const imgUrl =
     project.images.length > 0
       ? `data:image/png;base64,${Buffer.from(project.images[0]).toString(
-          "base64",
+          "base64"
         )}`
       : "/path/to/placeholder-image.png";
+
+  const refreshProjectProgress = async () => {
+    const response = await fetch(
+      `http://localhost:2580/projects/${project._id}`
+    );
+    const updatedProject = await response.json();
+
+    setProjectData(updatedProject);
+  };
+
   return (
     <div className="flex lg:flex-row flex-col gap-8 h-full">
       <div className="flex flex-col lg:w-1/3 border rounded-lg p-4 justify-between">
@@ -30,14 +42,18 @@ const ProjectHeader = ({ project }: { project: IProject }) => {
 
           <ProjectProgress
             variant={"detail"}
-            sum={project.sum}
+            sum={projectData.sum}
             goalAmount={project.goalAmount}
             backers={project.followCount}
             deadline={project.deadline}
           />
         </div>
         <Button onClick={handleOpenModal} text={"PODPOŘIT"}></Button>
-        <DonateWindow ref={modalRef} projectId={project._id} />
+        <DonateWindow
+          ref={modalRef}
+          projectId={project._id}
+          refresh={refreshProjectProgress}
+        />
       </div>
       <div className="rounded-lg overflow-clip flex-grow aspect-[16/9]">
         {project.images.length > 0 ? (
